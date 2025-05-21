@@ -3,6 +3,7 @@ from pynput.keyboard import Key, Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
 from PIL import ImageGrab
+from collections import Counter
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
 
@@ -32,31 +33,66 @@ class throne_script:
                     write_to = ''
                     print('dragging')
                     cast_bool = True
+                    left_button_hold = False
+                    right_button_hold = False
+                    time.sleep(0.2)
                     while self.do_fish:
                         temp_time = time.time()
-                        screen_shot = pyautogui.screenshot(region=(740, 78, 200, 1))
-                        # screen_shot = pyautogui.screenshot(region=(850, 0, 25, 270))
-                        # screen_shot.save('fish_test\\test2.png')
+                        screen_shot = pyautogui.screenshot(region=(760, 78, 200, 1))
                         img = cv2.cvtColor(np.array(screen_shot), cv2.COLOR_RGB2BGR)
                         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
                         thresh, im_bw = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
-                        for row in im_bw:
-                            if 255 in row:
-                                # print('\t'.join([str(g_r) for g_r in row]))
-                            # int_list = [int(g_r) for g_r in row]
-                                # print(int_list)
-                                write_to += '\t'.join([str(int(value)) for value in row]) + '\n'
+                        # print(im_bw)
+                        write_to += '\t'.join([str(int(value)) for value in im_bw[0]]) + '\n'
                         write_to += '\n'
-
-                        # screen_shot = pyautogui.screenshot(region=(30, 942, 165, 41))
-                        # chat_read = self.read_chat(screen_shot).lower()
-                        # if 'acquired' in chat_read or 'escaped' in chat_read:
-                        screen_shot = pyautogui.screenshot(region=(1117, 724, 1, 1))
-
-                        if self.check_dragging_status(screen_shot)[0] == 94:
+                        left_counter = Counter(im_bw[0][:75])[255]
+                        right_counter = Counter(im_bw[0][125:])[255]
+                        screen_shot = pyautogui.screenshot(region=(1138, 715, 1, 1))
+                        if self.check_stamina(screen_shot)[0] >= 39:
+                            # print('stamina ready')
+                            if left_counter > right_counter:
+                                if right_button_hold:
+                                    pass
+                                else:
+                                    print(f'{left_counter} {right_counter} pulling right')
+                                    self.keyboard.release('a')
+                                    left_button_hold = False
+                                    right_button_hold = True
+                                    self.keyboard.press('d')
+                            elif left_counter < right_counter:
+                                if left_button_hold :
+                                    pass
+                                else:
+                                    print(f'{left_counter} {right_counter} pulling left')
+                                    self.keyboard.release('d')
+                                    left_button_hold = True
+                                    right_button_hold = False
+                                    self.keyboard.press('a')
+                            else:
+                                print(f'{left_counter} {right_counter} staying idle')
+                                if left_button_hold:
+                                    self.keyboard.release('a')
+                                    left_button_hold = False
+                                if right_button_hold:
+                                    right_button_hold = False
+                                    self.keyboard.release('d')
+                        else:
+                            print('stamina depleted, resting')
+                            if left_button_hold:
+                                self.keyboard.release('a')
+                                left_button_hold = False
+                            if right_button_hold:
+                                right_button_hold = False
+                                self.keyboard.release('d')
+                            time.sleep(0.2)
+                        screen_shot = pyautogui.screenshot(region=(1138, 593, 1, 1))
+                        if self.check_dragging_status(screen_shot)[0] != 95:
+                            print('done_fishing')
                             drag_bool = False
+                            self.keyboard.release('a')
+                            self.keyboard.release('d')
                             break
-                        print(f'dragging {time.time() - temp_time}')
+                        # print(f'dragging {time.time() - temp_time}')
                     fish_test.write(write_to)
                     fish_test.close()
                 else:
@@ -69,13 +105,17 @@ class throne_script:
                         self.keyboard.release('f')
                         while self.do_fish:
                             temp_time = time.time()
-                            # screen_shot = pyautogui.screenshot(region=(0, 0, 1920, 1080))
-                            screen_shot = pyautogui.screenshot(region=(963, 714, 1, 1))
-                            if reel_bool and self.check_reel_in(screen_shot) == 137:
+                            screen_shot = pyautogui.screenshot(region=(939, 716, 1, 1))
+                            reel_check_one = self.check_reel_in(screen_shot)[0] == 159
+                            screen_shot = pyautogui.screenshot(region=(942, 716, 3, 1))
+                            reel_check_two = True
+                            for reel_value in self.check_reel_in(screen_shot):
+                                if reel_value != 4:
+                                    reel_check_two = False
+                            if reel_bool and reel_check_two and reel_check_one:
                                 print('reeling')
                                 reel_bool = False
                                 drag_bool = True
-                                # time.sleep(0.2)
                                 self.keyboard.press('q')
                                 self.keyboard.release('q')
                                 break
@@ -114,14 +154,12 @@ class throne_script:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         return gray[0]
     def check_stamina(self,ss):
-        pass
+        img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        # print(gray[0])
+        return gray[0]
     def check_cast_float(self,ss):
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        # party_box_x1 = 1200 # ------------------- require attention here -------------------
-        # party_box_y1 = 650 # ------------------- require attention here -------------------
-        # party_box_x2 = party_box_x1 + 75
-        # party_box_y2 = party_box_y1 + 20
-        # img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         return pytesseract.image_to_string(gray)
     def on_press(self, key):
@@ -138,7 +176,9 @@ class throne_script:
             self.static_bool = False
             return False
         if '+' in '{0}'.format(key):  # ------------------- require attention here -------------------
-            screen_shot = pyautogui.screenshot(region=(1117, 724, 1, 1))
+            # screen_shot = pyautogui.screenshot(region=(1117, 724, 1, 1))
+            # screen_shot = pyautogui.screenshot(region=(1138, 593, 1, 1))
+            screen_shot = pyautogui.screenshot(region=(942, 716, 3, 1))
 
             print(self.check_dragging_status(screen_shot))
 
