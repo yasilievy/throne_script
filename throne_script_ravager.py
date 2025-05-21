@@ -387,7 +387,7 @@ class throne_script:
 
             while self.do_bot:
                 screen_shot = pyautogui.screenshot(region=(0,0,1920,1080))
-                time_sleep = 0.2
+                time_sleep = 0.1
                 skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot)
                 if buff_status != 0:
                     print(f'casting buff {buff_status}')
@@ -422,14 +422,14 @@ class throne_script:
                                 unstuck_boolean = False
                                 break
                             time_sleep = 0
-                if truly_stuck_counter == 30:
-                    self.keyboard.press('s')
-                    time.sleep(1)
-                    self.keyboard.press(Key.space)
-                    self.keyboard.release(Key.space)
-                    time.sleep(1)
-                    self.keyboard.release('s')
-                    truly_stuck_counter= 0
+                # if truly_stuck_counter == 30:
+                #     self.keyboard.press('s')
+                #     time.sleep(1)
+                #     self.keyboard.press(Key.space)
+                #     self.keyboard.release(Key.space)
+                #     time.sleep(1)
+                #     self.keyboard.release('s')
+                #     truly_stuck_counter= 0
                 if next_target_counter == 2:
                     print('target next')
                     if alter_bool_two:
@@ -772,16 +772,17 @@ class throne_script:
         # distances = [9,10,11,12]
         # buffs = [1]
         #
-        # attacks_p1 = [6,5,2,3]
-        # attacks_p2 = [1,7]
-        # distances = [4,10,11,12]
+        attacks_p1 = [6,5,2,3]
+        attacks_p2 = [1,7]
+        distances = [4,10,11,12]
         # buffs = [8,9]
+        buffs = [8]
 
         # pve
-        attacks_p1 = [4,5,6,7,8,9]
-        attacks_p2 = [10,11,12]
-        distances = []
-        buffs = [1,2,3]
+        # attacks_p1 = [4,5,6,7,8,9]
+        # attacks_p2 = [10,11,12]
+        # distances = []
+        # buffs = [1,2,3]
 
         # pvp
         # attacks_p1 = [4,5,6,7,8,9]
