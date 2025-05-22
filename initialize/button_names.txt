@@ -1,0 +1,24 @@
+# action buttons
+slot_1
+slot_2
+slot_3
+slot_4
+slot_5
+slot_6
+slot_7
+slot_8
+slot_9
+slot_10
+slot_11
+slot_12
+guardian
+artifact
+block
+item_slot_1
+item_slot_2
+item_slot_3
+item_slot_4
+# dungeon buttons
+dungeon_menu
+enter_dungeon
+yes
