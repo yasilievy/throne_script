@@ -1,5 +1,5 @@
 import pytesseract, pyautogui, time, numpy as np, threading,cv2
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key,    Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
 from PIL import ImageGrab
@@ -386,52 +386,57 @@ class throne_script:
             alter_camera_bool = True
 
             while self.do_bot:
-                screen_shot = pyautogui.screenshot(region=(0,0,1920,1080))
                 time_sleep = 0.1
+                screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
                 skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot)
                 if buff_status != 0:
-                    print(f'casting buff {buff_status}')
+                    # print(f'casting buff {buff_status}')
                     self.keyboard.press(skill_dict[buff_status])
                     self.keyboard.release(skill_dict[buff_status])
                     time_sleep = 0
-                if 'sight' in self.check_target_out_sight(screen_shot):
-                    self.keyboard.press('w')
-                    self.keyboard.press(Key.shift)
-                    self.keyboard.release(Key.shift)
-                    self.keyboard.press(Key.space)
-                    self.keyboard.release(Key.space)
-                    unstuck_boolean = True
-                    while unstuck_boolean and self.do_bot:
-                        if unstuck_sequence_bool:
-                            unstuck_sequence_to_do = unstuck_sequence_one
-                            unstuck_sequence_bool = False
-                        else:
-                            unstuck_sequence_to_do = unstuck_sequence_two
-                            unstuck_sequence_bool = True
-                        for unstuck_move in unstuck_sequence_to_do:
-                            next_target_counter += 1
-                            self.keyboard.press(unstuck_move[0])
-                            time.sleep(0.2)
-                            self.keyboard.press(Key.space)
-                            self.keyboard.release(Key.space)
-                            time.sleep(unstuck_move[1])
-                            self.keyboard.release(unstuck_move[0])
-                            if 'sight' not in self.check_target_out_sight(
-                                    pyautogui.screenshot(region=(0, 0, 1920, 1080))):
-                                self.keyboard.release('w')
-                                unstuck_boolean = False
-                                break
-                            time_sleep = 0
-                # if truly_stuck_counter == 30:
-                #     self.keyboard.press('s')
-                #     time.sleep(1)
+                # time.sleep(0.1)
+                # print(self.check_target_out_sight(
+                #                     pyautogui.screenshot(region=(820, 250, 280, 20))))
+                # if 'sight' in self.check_target_out_sight(
+                #                     pyautogui.screenshot(region=(820, 250, 280, 20))):
+                #     self.keyboard.press('w')
+                #     self.keyboard.press(Key.shift)
+                #     self.keyboard.release(Key.shift)
                 #     self.keyboard.press(Key.space)
                 #     self.keyboard.release(Key.space)
-                #     time.sleep(1)
-                #     self.keyboard.release('s')
-                #     truly_stuck_counter= 0
+                #     unstuck_boolean = True
+                #     while unstuck_boolean and self.do_bot:
+                #         if unstuck_sequence_bool:
+                #             unstuck_sequence_to_do = unstuck_sequence_one
+                #             unstuck_sequence_bool = False
+                #         else:
+                #             unstuck_sequence_to_do = unstuck_sequence_two
+                #             unstuck_sequence_bool = True
+                #         for unstuck_move in unstuck_sequence_to_do:
+                #             next_target_counter += 1
+                #             self.keyboard.press(unstuck_move[0])
+                #             time.sleep(0.2)
+                #             self.keyboard.press(Key.space)
+                #             self.keyboard.release(Key.space)
+                #             time.sleep(unstuck_move[1])
+                #             self.keyboard.release(unstuck_move[0])
+                #
+                #             if 'sight' not in self.check_target_out_sight(
+                #                     pyautogui.screenshot(region=(820, 250, 280, 20))):
+                #                 self.keyboard.release('w')
+                #                 unstuck_boolean = False
+                #                 break
+                #             time_sleep = 0
+                if truly_stuck_counter == 50:
+                    self.keyboard.press('s')
+                    time.sleep(1)
+                    self.keyboard.press(Key.space)
+                    self.keyboard.release(Key.space)
+                    time.sleep(1)
+                    self.keyboard.release('s')
+                    truly_stuck_counter= 0
                 if next_target_counter == 2:
-                    print('target next')
+                    # print('target next')
                     if alter_bool_two:
                         self.keyboard.press(Key.right)
                         alter_bool_two = False
@@ -448,20 +453,18 @@ class throne_script:
                             self.keyboard.release(Key.tab)
                             alter_bool = True
                         self.mouse.click(Button.right)
-                        if self.check_target(pyautogui.screenshot(region=(0, 0, 1920, 1080))):
+                        if self.check_target(pyautogui.screenshot(region=(1064, 810, 9, 1))):
                             self.keyboard.release(Key.right)
                             self.keyboard.release(Key.left)
                             break
-                        time.sleep(0.1)
+                        # time.sleep(0.1)
                     next_target_counter = 0
-                screen_shot = pyautogui.screenshot(region=(0,0,1920,1080))
-                if self.check_target(screen_shot):
+                if self.check_target(pyautogui.screenshot(region=(1064, 810, 9, 1))):
                     truly_stuck_counter +=1
                     no_target_counter = 0
                     out_sight_counter +=1
-                    # screen_shot = pyautogui.screenshot(region=(0, 0, 1920, 1080))
-                    if self.check_target_health(screen_shot) < 20:
-                        print('damaged health, using attack skill')
+                    if self.check_target_health(pyautogui.screenshot(region=(1216, 802, 1, 1))) < 20:
+                        # print('damaged health, using attack skill')
                         if skill_status_p1 != 0:
 
                             skill_to_use = skill_dict[skill_status_p1]
@@ -482,14 +485,16 @@ class throne_script:
                             self.keyboard.release(Key.f5)
 
                     else:
-                        print('undamaged, using distance skill')
-                        distance_scan = self.check_distance(pyautogui.screenshot(region=(0, 0, 1920, 1080)))
-                        print(distance_scan)
+                        # print('undamaged, using distance skill')
+                        distance_scan = self.check_distance(pyautogui.screenshot(region=(1039, 827, 7, 1)))
+                        print(f'test distance {self.check_distance(pyautogui.screenshot(region=(1024, 830, 15, 1)))}')
+
+                        # print(f'test distance {self.check_distance(pyautogui.screenshot(region=(1024, 825, 22, 1)))}')
+                        print(f'target distance {distance_scan}')
                         if distance_scan == 3 and distance_status != 0:
                             skill_to_use = skill_dict[distance_status]
-                            print(f'casting distance skill {skill_to_use}')
+                            # print(f'casting distance skill {skill_to_use}')
                             if distance_status == 4:
-                                print('asdf')
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
                                 time.sleep(0.1)
@@ -502,14 +507,43 @@ class throne_script:
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
                         else:
-                            print('auto attacking')
+                            # print('auto attacking')
                             self.keyboard.press(Key.f5)
                             self.keyboard.release(Key.f5)
                         jump_counter += 1
-                    if jump_counter == 5:
-                        self.keyboard.press(Key.space)
-                        self.keyboard.release(Key.space)
-                        jump_counter = 0
+                        if 'sight' in self.check_target_out_sight(
+                                pyautogui.screenshot(region=(820, 250, 280, 20))):
+                            self.keyboard.press('w')
+                            self.keyboard.press(Key.shift)
+                            self.keyboard.release(Key.shift)
+                            self.keyboard.press(Key.space)
+                            self.keyboard.release(Key.space)
+                            unstuck_boolean = True
+                            while unstuck_boolean and self.do_bot:
+                                if unstuck_sequence_bool:
+                                    unstuck_sequence_to_do = unstuck_sequence_one
+                                    unstuck_sequence_bool = False
+                                else:
+                                    unstuck_sequence_to_do = unstuck_sequence_two
+                                    unstuck_sequence_bool = True
+                                for unstuck_move in unstuck_sequence_to_do:
+                                    next_target_counter += 1
+                                    self.keyboard.press(unstuck_move[0])
+                                    time.sleep(0.2)
+                                    self.keyboard.press(Key.space)
+                                    self.keyboard.release(Key.space)
+                                    time.sleep(unstuck_move[1])
+                                    self.keyboard.release(unstuck_move[0])
+
+                                    if 'sight' not in self.check_target_out_sight(
+                                            pyautogui.screenshot(region=(820, 250, 280, 20))):
+                                        self.keyboard.release('w')
+                                        unstuck_boolean = False
+                                        break
+                    # if jump_counter == 5:
+                    #     self.keyboard.press(Key.space)
+                    #     self.keyboard.release(Key.space)
+                    #     jump_counter = 0
                 else:
                     jump_counter = 0
                     no_target_counter +=1
@@ -517,7 +551,10 @@ class throne_script:
                     out_sight_counter = 0
                     self.keyboard.press(Key.tab)
                     self.keyboard.release(Key.tab)
-                    if no_target_counter > 1:
+                    time.sleep(0.05)
+
+                    if no_target_counter > 2:
+                        # print('asdf')
                         if alter_camera_bool:
                             self.keyboard.press(Key.right)
                             alter_camera_bool = False
@@ -533,16 +570,14 @@ class throne_script:
                                 self.keyboard.press(Key.tab)
                                 self.keyboard.release(Key.tab)
                                 alter_target_bool = True
-                            if self.check_target(pyautogui.screenshot(region=(0, 0, 1920, 1080))):
+                            if self.check_target(pyautogui.screenshot(region=(1064, 810, 9, 1))):
+                            # if self.check_target(pyautogui.screenshot(region=(1228, 795, 12, 1))):
                                 self.keyboard.release(Key.right)
                                 self.keyboard.release(Key.left)
                                 break
-                            time.sleep(0.1)
                     # self.mouse.position = (1200, 775)  # ------------------- require attention here -------------------
                     # self.mouse.click(Button.left)
-                    # self.mouse.position = (1250, 775)  # ------------------- require attention here -------------------
-                    # self.mouse.click(Button.left)
-                time.sleep(time_sleep)
+                # time.sleep(time_sleep)
 
 
 
@@ -648,34 +683,15 @@ class throne_script:
 
     def check_distance(self,ss):
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        party_box_x1 = 1039
-        party_box_y1 = 827
-        party_box_x2 = party_box_x1 + 7
-        party_box_y2 = party_box_y1 + 1
-        img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         thresh, im_bw = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
         # print(f'{im_bw[0]} lows: {self.count_bw(im_bw[0])}')
         return self.count_bw(im_bw[0])
 
-    # def check_target(self, ss):
-    #     temp_time = time.time()
-    #     img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-    #     party_box_x1 = 1033
-    #     party_box_y1 = 792
-    #     party_box_x2 = 1035
-    #     party_box_y2 = 793
-    #     img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
-    #     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #     # print(f'target time check {time.time()-temp_time}')
-    #     return gray[0]
 
     def check_target(self, ss):
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        party_box_x1 = 1228  # ------------------- require attention here -------------------
-        party_box_y1 = 795   # ------------------- require attention here -------------------
-        img = img[party_box_y1:party_box_y1+1, party_box_x1:party_box_x1 + 12]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         if self.initial_skill_list_scan:
             constant_value = gray[0][0]
@@ -686,7 +702,8 @@ class throne_script:
             return True
         else:
             for value in gray[0]:
-                if self.target_check_values != value:
+                if self.target_check_values != value and value != 116:
+                    # print(gray[0])
                     return False
             return True
 
@@ -756,10 +773,10 @@ class throne_script:
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         party_box_x1 = 605
-        party_box_y1 = 1045
-
-        party_box_x2 = party_box_x1 + 1
-        party_box_y2 = party_box_y1 + 1
+        # party_box_y1 = 1045
+        #
+        # party_box_x2 = party_box_x1 + 1
+        # party_box_y2 = party_box_y1 + 1
         first_inc = [0,58,57,58,58,59,0,58,58,58,58,57]
 
         # skip_skill_slot = [9,10,11,12]
@@ -772,8 +789,10 @@ class throne_script:
         # distances = [9,10,11,12]
         # buffs = [1]
         #
-        attacks_p1 = [6,5,2,3]
-        attacks_p2 = [1,7]
+        # attacks_p1 = [6,5,2,3]
+        # attacks_p2 = [1,7]
+        attacks_p1 = [1,7,6,5,2,3,9]
+        attacks_p2 = []
         distances = [4,10,11,12]
         # buffs = [8,9]
         buffs = [8]
@@ -825,8 +844,10 @@ class throne_script:
                 accum = 0
             if slot_count not in skip_skill_slot:
                 accum += inc
-                img_cropped = gray[party_box_y1:party_box_y2, party_box_x1 + accum:party_box_x2 + accum]
-                skill_value = int(img_cropped[0][0])
+                # img_cropped = gray[party_box_y1:party_box_y2, party_box_x1 + accum:party_box_x2 + accum]
+                # skill_value = int(img_cropped[0][0])
+                skill_value = gray[0][party_box_x1 + accum]
+                # print(skill_value)
                 temp_all.append((slot_count,skill_value))
                 # print(f'{slot_count} : {skill_value}')
                 if self.initial_skill_list_scan:
@@ -894,13 +915,7 @@ class throne_script:
 
     def check_target_health(self,ss):
         temp_time = time.time()
-
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        party_box_x1 = 1216
-        party_box_y1 = 802
-        party_box_x2 = party_box_x1 + 1
-        party_box_y2 = party_box_y1 + 1
-        img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # print(f'health time check {time.time()-temp_time}')
         return gray[0]
@@ -922,11 +937,6 @@ class throne_script:
     def check_target_out_sight(self,ss):
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        party_box_x1 = 820
-        party_box_y1 = 250
-        party_box_x2 = party_box_x1 + 280
-        party_box_y2 = party_box_y1 + 20
-        img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         return pytesseract.image_to_string(gray)
     def start_assist(self):

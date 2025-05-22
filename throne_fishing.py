@@ -47,7 +47,7 @@ class throne_script:
                         write_to += '\n'
                         left_counter = Counter(im_bw[0][:75])[255]
                         right_counter = Counter(im_bw[0][125:])[255]
-                        screen_shot = pyautogui.screenshot(region=(1138, 715, 1, 1))
+                        screen_shot = pyautogui.screenshot(region=(1138, 708, 1, 1))
                         if self.check_stamina(screen_shot)[0] >= 39:
                             # print('stamina ready')
                             if left_counter > right_counter:
@@ -86,7 +86,9 @@ class throne_script:
                                 self.keyboard.release('d')
                             time.sleep(0.2)
                         screen_shot = pyautogui.screenshot(region=(1138, 593, 1, 1))
-                        if self.check_dragging_status(screen_shot)[0] != 95:
+                        dragging_status = self.check_dragging_status(screen_shot)[0]
+                        print(dragging_status)
+                        if dragging_status != 95:
                             print('done_fishing')
                             drag_bool = False
                             self.keyboard.release('a')
