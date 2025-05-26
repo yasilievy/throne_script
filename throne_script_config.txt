@@ -1,2 +1,2 @@
-target_value=21
+target_value=115
 skill_values=59,59,59,59,59,10,61,61,59,59,59,59,0
