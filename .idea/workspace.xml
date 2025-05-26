@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="some more clean up, testing integration amongst other computers">
-      <change beforePath="$PROJECT_DIR$/yy_screenshot_example.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirementstest.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/skill_dict.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_cry_farm test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_cry_farm.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_dungeon_staff.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +56,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ravager_update" />
+        <entry key="$PROJECT_DIR$" value="main-alio" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,11 +115,12 @@
       <recent name="C:\Users\NOV20\PyCharmMiscProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\NOV20\PyCharmMiscProject\polish_crystal_dungeon_farm" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject\fish_examples" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.throne_script_ravager">
+  <component name="RunManager">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -224,11 +233,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.throne_fishing" />
         <item itemvalue="Python.throne_script_ravager" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
         <item itemvalue="Python.throne_script_dungeon_staff" />
+        <item itemvalue="Python.throne_fishing" />
+        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -352,7 +361,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748289340615</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="some more clean up, testing integration amongst other computers">
+      <option name="closed" value="true" />
+      <created>1748289515166</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1748289515166</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

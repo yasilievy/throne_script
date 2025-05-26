@@ -1,5 +1,5 @@
-10, # focused fire bombs
 12, # inject venom
+10, # focused fire bombs
 3, # hellfire rain
 1, # cleaving moonlight
 2, # inferno wave
@@ -11,5 +11,5 @@
 8, # judgment lightning
 1, # cleaving moonlight
 11, # fatal stigma
-10, # focused fire bombs
 9, # fireball barrage
+10, # focused fire bombs

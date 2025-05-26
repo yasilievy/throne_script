@@ -44,20 +44,6 @@ class throne_script:
             14: 'c'
         }
 
-        self.combo_sequence = [
-            12,  # inject venom
-            9, # umbral spirit
-            4,  # frenzied sword dance
-            11,  # willbreaker
-            1, # cleaving moonlight
-            2,  # death blow
-            6,  # cruel smite
-            10, # fatal stigma
-            8, # gaia crash
-            7,  # stunning blow
-            3, # guillotine blade
-        ]
-
         self.combo_sequence = []
 
         self.phase_counter = 0
@@ -181,38 +167,45 @@ class throne_script:
         time.sleep(4 * time_helper)
         self.keyboard.press(self.dodge_button)
         self.keyboard.release(self.dodge_button)
-        # time.sleep(0.57 * time_helper)
+        # time.sleep(0.57 * time_helper)`5
         self.keyboard.press(self.morph_button)
         self.keyboard.release(self.morph_button)
         time.sleep(8.5 * time_helper)
         self.keyboard.release('w')
 
     def move_to_boss_two_non_gs(self):
-        time_helper = 1.00
+        movement_speed = 630
+        # movement_speed = 797
+        time_helper = 1 - ((movement_speed - 600) / 600)
+        time_helper_two = 1 - ((movement_speed - 600) / 600 /2 )
+
         self.keyboard.press('a')
         self.keyboard.press(self.dodge_button)
         self.keyboard.release(self.dodge_button)
         self.keyboard.release('a')
-        # self.timer_boolean = True
-        # self.timer = time.time()`
 
+        # self.timer_boolean = True`
+
+        # self.timer = time.time()
         # self.do_dungeon = False
-        time.sleep(0.5)
+
+        time.sleep(0.2)
+        print('moving')
 
         self.keyboard.press('w')
         self.keyboard.press(self.morph_button)
         self.keyboard.release(self.morph_button)
-        time.sleep(5.5 * time_helper)
+        time.sleep(5 * time_helper_two)
         self.keyboard.press(self.stealth_button ) # need configuration
         self.keyboard.release(self.stealth_button ) # need configuration
         time.sleep(8 * time_helper)
         self.keyboard.press('d')
-        time.sleep(6.0 * time_helper)
+        time.sleep(5.7 * time_helper)
         self.keyboard.release('d')
-        time.sleep(3 * time_helper)
+        time.sleep(3)
         self.keyboard.press(self.morph_button)
         self.keyboard.release(self.morph_button)
-        time.sleep(8.5 * time_helper)
+        time.sleep(9.8 * time_helper_two)
         self.keyboard.release('w')
 
     def check_combo_sequence(self):
@@ -270,6 +263,22 @@ class throne_script:
                             self.keyboard.release(self.skill_dict[current_combo])
                         time.sleep(0.1)
             skill_counter += 1
+    def do_kill_confirm(self):
+        while self.do_dungeon:
+            screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
+            if self.check_target(screen_shot_check_target):
+                self.keyboard.press(self.skill_dict[2])
+                self.keyboard.release(self.skill_dict[2])
+                self.keyboard.press(self.skill_dict[1])
+                self.keyboard.release(self.skill_dict[1])
+                # self.keyboard.press(self.skill_dict[12])
+                # self.keyboard.release(self.skill_dict[12])
+                self.keyboard.press(self.skill_dict[6])
+                self.keyboard.release(self.skill_dict[6])
+                time.sleep(0.3)
+            else:
+                print('boss is dead')
+                break
 
     def do_exit_sequence(self, end_timer):
         self.keyboard.press(Key.enter)
@@ -293,13 +302,18 @@ class throne_script:
         self.phase_counter = -1
     def while_loop(self):
         pyautogui.hotkey('alt', 'tab')
-        start_boo = False
+
+        while self.do_combo:
+            self.do_combo_sequence()
+            self.do_combo = False
+            print('combo completed')
 
         while self.static_bool:
             time.sleep(0.1)
             while self.do_dungeon:
                 if self.phase_counter == 0:
                     timer = time.time()
+                    print('entering dungeon')
                     if self.start_bool:
                         pass
                     else:
@@ -308,12 +322,12 @@ class throne_script:
                         time.sleep(0.7)
                     self.move_to_boss_one()
 
-                if self.phase_counter == 1:
+                if self.phase_counter == 1: # ------------------------ enter dungeon
+                    print('moving to boss')
                     # self.move_to_boss_two()
                     self.move_to_boss_two_non_gs()
 
-
-                if self.phase_counter == 2:
+                if self.phase_counter == 2: # ------------------------ move to boss
                     self.keyboard.press(Key.tab)
                     self.keyboard.release(Key.tab)
                     time.sleep(0.5)
@@ -326,37 +340,21 @@ class throne_script:
                         self.do_exit_sequence(10)
                         print(f'raid time attempt: {time.time() - timer}')
                         self.phase_counter = -1
-                if self.phase_counter == 3:
+
+                if self.phase_counter == 3: # ------------------------ kill the boss
                     screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
                     if self.check_target(screen_shot_check_target):
                         print('boss is not dead yet, double tapping')
-                        while self.do_dungeon:
-                            screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
-                            if self.check_target(screen_shot_check_target):
-                                self.keyboard.press(self.skill_dict[2])
-                                self.keyboard.release(self.skill_dict[2])
-                                self.keyboard.press(self.skill_dict[1])
-                                self.keyboard.release(self.skill_dict[1])
-                                self.keyboard.press(self.skill_dict[12])
-                                self.keyboard.release(self.skill_dict[12])
-                                self.keyboard.press(self.skill_dict[6])
-                                self.keyboard.release(self.skill_dict[6])
-                                time.sleep(0.3)
-                            else:
-                                print('boss is dead')
-                                break
+                        self.do_kill_confirm()
                     else:
                         print('boss is dead')
                     time.sleep(2)
-                if self.phase_counter == 4:
+
+                if self.phase_counter == 4: # ------------------------ exit the dungeon
                     self.do_exit_sequence(3)
                     print(f'raid time complete: {time.time() - timer}')
                 self.phase_counter += 1
 
-            while self.do_combo:
-                self.do_combo_sequence()
-                self.do_combo = False
-                print('combo completed')
 
 
     def on_press(self,key):
@@ -404,6 +402,7 @@ class throne_script:
             self.static_bool = False
             return False
         if '`' in '{0}'.format(key):
+            self.phase_counter = 0
             if self.do_dungeon:
                 print('turning off dungeon')
                 self.do_dungeon = False
