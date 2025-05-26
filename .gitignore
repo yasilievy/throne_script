@@ -1,4 +1,5 @@
 # Default ignored files
 __pycache__
 fish_test
-ss
+.venv
+.idea
