@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="some more clean up, testing integration amongst other computers" />
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="some more clean up, testing integration amongst other computers">
+      <change beforePath="$PROJECT_DIR$/yy_screenshot_example.png" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +98,7 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/NOV20/PyCharmMiscProject",
+    "last_opened_file_path": "C:/Users/NOV20/PycharmProjects/throne_script-main",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
@@ -109,7 +111,7 @@
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.throne_script_ravager">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -342,7 +344,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748285410374</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="some more clean up, testing integration amongst other computers">
+      <option name="closed" value="true" />
+      <created>1748289340615</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1748289340615</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
