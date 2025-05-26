@@ -58,23 +58,7 @@ class throne_script:
             3, # guillotine blade
         ]
 
-        self.combo_sequence = [
-            12,  # inject venom
-            3, # hellfire rain
-            1, # cleaving moonlight
-            2,  # inferno wave
-            10, # focused fire bombs
-            4, # mad sword dance
-            2, # inferno wave
-            7, # ice spear bombardment
-            8, # judgment lightning
-            6, # chain lightning
-            8, # judgment lightning
-            1, # cleaving moonlight
-            11, # fatal stigma
-            9, # fireball barrage
-
-        ]
+        self.combo_sequence = []
 
         self.phase_counter = 0
 
@@ -231,10 +215,22 @@ class throne_script:
         time.sleep(8.5 * time_helper)
         self.keyboard.release('w')
 
+    def check_combo_sequence(self):
+        combo_sequence_open = open('combo_sequence\\combo_sequence.txt','r')
+        combo_sequence_read_split = combo_sequence_open.read().split('\n')
+        rendered_combo_sequence = []
+        try:
+            rendered_combo_sequence = [int(line.split(',')[0]) for line in combo_sequence_read_split]
+        except:
+            print('an issue occured - review the combo_sequence.txt')
+            self.keyboard.press(Key.esc)
+        return rendered_combo_sequence
     def do_combo_sequence(self):
         skill_counter = 0
+        self.combo_sequence = self.check_combo_sequence()
+
         while self.do_dungeon or self.do_combo:
-            print(skill_counter)
+            # print(skill_counter)
             if skill_counter == len(self.combo_sequence):
                 break
             else:

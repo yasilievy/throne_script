@@ -1,7 +1,7 @@
 import numpy as np,cv2
 from PIL import Image
 
-image_test = Image.open('alio_test.jpg')
+image_test = Image.open('clients/alio.jpg')
 cvt_img = cv2.cvtColor(np.array(image_test),cv2.COLOR_RGB2BGR)
 gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
 
