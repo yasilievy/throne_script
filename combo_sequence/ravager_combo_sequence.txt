@@ -1,0 +1,10 @@
+12,  # inject venom
+9, # umbral spirit
+4,  # frenzied sword dance
+11,  # willbreaker
+1, # cleaving moonlight
+2,  # death blow
+6,  # cruel smite
+8, # gaia crash
+7,  # stunning blow
+3, # guillotine blade

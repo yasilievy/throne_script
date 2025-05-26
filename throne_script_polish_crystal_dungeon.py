@@ -238,12 +238,12 @@ class throne_script:
         self.keyboard.release('w')
 
     def check_combo_sequence(self):
-        combo_sequence_open = open('combo_sequence\\combo_sequence.txt','r')
+        combo_sequence_open = open('combo_sequence\\ravager_combo_sequence.txt','r')
         combo_sequence_read_split = combo_sequence_open.read().split('\n')
         rendered_combo_sequence = []
         try:
             rendered_combo_sequence = [int(line.split(',')[0]) for line in combo_sequence_read_split]
-        except:
+        except Exception as e:
             print('an issue occured - review the combo_sequence.txt')
             self.keyboard.press(Key.esc)
         return rendered_combo_sequence
@@ -264,32 +264,30 @@ class throne_script:
                         rendered_skill_status_p1 = [s_s_p1[0] for s_s_p1 in skill_status_p1]
                         # if current_combo == 12:
                         #     self.skill_pause_counter = True
+                        current_button_to_press = self.skill_dict[current_combo]
                         if current_combo not in rendered_skill_status_p1:
                             break
-                        # elif current_combo == 2 or current_combo == 3:  #
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     time.sleep(1)
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        # elif current_combo == 4:
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        #     time.sleep(0.1)
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        # else:
-                        elif current_combo == 10:
-                            self.keyboard.press(self.skill_dict[current_combo])
-                            time.sleep(1.2)
-                            self.keyboard.release(self.skill_dict[current_combo])
-                        # elif current_combo == 8:
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        #     # time.sleep(1)
-                            # self.keyboard.press(self.skill_dict[current_combo])
-                            # self.keyboard.release(self.skill_dict[current_combo])
+                        elif current_combo == 2 or current_combo == 3:
+                            if isinstance(current_button_to_press, list):
+                                self.keyboard.press(self.skill_dict[current_combo][0])
+                                self.keyboard.press(self.skill_dict[current_combo][1])
+                                time.sleep(1)
+                                self.keyboard.release(self.skill_dict[current_combo][0])
+                                self.keyboard.release(self.skill_dict[current_combo][1])
+                            else:
+                                self.keyboard.press(self.skill_dict[current_combo])
+                                time.sleep(1)
+                                self.keyboard.release(self.skill_dict[current_combo])
                         else:
-                            self.keyboard.press(self.skill_dict[current_combo])
-                            self.keyboard.release(self.skill_dict[current_combo])
+                            if isinstance(current_button_to_press, list):
+                                self.keyboard.press(self.skill_dict[current_combo][0])
+                                self.keyboard.press(self.skill_dict[current_combo][1])
+                                time.sleep(1)
+                                self.keyboard.release(self.skill_dict[current_combo][0])
+                                self.keyboard.release(self.skill_dict[current_combo][1])
+                            else:
+                                self.keyboard.press(self.skill_dict[current_combo])
+                                self.keyboard.release(self.skill_dict[current_combo])
                         time.sleep(0.1)
             skill_counter += 1
     def do_kill_confirm(self):
