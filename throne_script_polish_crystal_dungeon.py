@@ -2,8 +2,9 @@ import pytesseract, pyautogui, time, numpy as np, threading,cv2
 from pynput.keyboard import Key,Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
+from PIL import Image
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = 'C:\\Tesseract-OCR\\tesseract.exe'
 
 class throne_script:
     def __init__(self):
@@ -28,18 +29,18 @@ class throne_script:
         # self.initialize_config()
 
         self.skill_dict = {
-            1: '1',
-            2: '2',
+            1: [Key.shift,'1'],
+            2: 'f',
             3: '3',
             4: '4',
-            5: '5',
-            6: Key.f7,
-            7: Key.f1,
-            8: Key.f2,
-            9: Key.f4,
-            10: 'e',
-            11: 'r',
-            12: 't',
+            5: 'r',
+            6: 'e',
+            7: [Key.shift,'4'],
+            8: [Key.shift,'v'],
+            9: 'v',
+            10: [Key.shift,'r'],
+            11: [Key.shift,'q'],
+            12: [Key.shift,'e'],
             13: 'x',
             14: 'c'
         }
@@ -48,32 +49,34 @@ class throne_script:
 
         self.phase_counter = 0
 
-        self.stealth_button = '5'
+        self.stealth_button = 'r'
         self.dodge_button = 'q'
         self.morph_button = Key.shift
+
+        self.cursor_button = [Key.shift,'g']
 
         self.start_bool = False
 
         # self.manage_party_button = None
-        self.manage_party_coord = (19, 12)
-        self.manage_party_leave_coord = (445, 330)
+        self.manage_party_coord = (879, 998)
+        self.manage_party_leave_coord = (536, 470)
 
         self.open_co_op_menu_button = Key.f11
-        self.enter_dungeon = (960, 1000)
+        self.enter_dungeon = (1716, 1352)
 
-        self.check_loading_screen_coord = (729, 781, 1, 1)
+        self.check_loading_screen_coord = (1318, 1008, 1, 1)
         self.check_loading_screen_value = 255 # need to scan a screenshot
 
-        self.check_target_coord = (1064, 810, 9, 1)
+        self.check_target_coord = (1503, 791, 9, 1)
         self.target_check_values = 115 # need to scan a screenshot
+        self.target_check_values_list = [0,0,0,0,0,0,0,0,0]
 
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.check_skill_coord = (0, 1045, 1920, 1)
 
         self.read_chat_coord = (30, 942, 165, 41)
 
-        self.loading_screen = None
-        self.exit_dungeon = (1870, 280)
+        self.exit_dungeon = (3378, 328)
         self.yes_button = 'y'
         self.initialize_config()
 
@@ -84,22 +87,46 @@ class throne_script:
         config_file_read = self.config_file.read()
         if len(config_file_read) == 0:
             self.initial_skill_list_scan = True
+
+            image_test = Image.open('clients/alio.jpg')
+            cvt_img = cv2.cvtColor(np.array(image_test), cv2.COLOR_RGB2BGR)
+            gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
+
+            y1 = 1273
+            x1 = 1279
+            x2 = 1367
+            x3 = 1436
+            x4 = 1505
+            x5 = 1574
+            x6 = 1642
+            x7 = 1758
+            x8 = 1827
+            x9 = 1915
+            x10 = 1964
+            x11 = 2033
+            x12 = 2102
+            pixel_list = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12]
+            skill_pixel_value = []
+            counter = 1
+            for x_p in pixel_list:
+                gray_cropped = gray[y1:y1 + 1, x_p:x_p + 1]
+                skill_pixel_value.append(gray_cropped[0])
+                self.skill_list_available[counter] = gray_cropped[0]
+                print(f'{counter}: {gray_cropped[0]}')
+                counter += 1
+
             write_to = ''
             print('config file is empty\nstarting initialization')
-            print('setting target values')
-            print('please target something')
-            # initial_screenshot = None
-            while True:
-                time.sleep(0.5)
-                initial_screenshot = pyautogui.screenshot(region=(0,1045,1920,1))
-                # screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
-                if self.check_target(initial_screenshot):
-                    print('setting target values completed')
-                    write_to += f'target_value={self.target_check_values}\n' # value is set in self.check_target()
-                    break
+            print('setting target values and available skill pixel values')
+            target_value_screenshot = pyautogui.screenshot(region=self.check_target_coord)
+            cvt_img = cv2.cvtColor(np.array(target_value_screenshot), cv2.COLOR_RGB2BGR)
+            gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
+            self.target_check_values_list = gray[0]
+            print('setting target values completed')
+            write_to += f'target_value={','.join(str(v) for v in self.target_check_values_list)}\n' # value is set in self.check_target()
+
             print('setting skill list values')
-            self.initialize_skill_list(initial_screenshot)
-            write_to += f'skill_values={','.join(str(v) for v in self.skill_list_available)}'  # value is set in self.initialize_skill_list_check()
+            write_to += f'skill_values={','.join(str(v) for v in skill_pixel_value)}'  # value is set in self.initialize_skill_list_check()
             print('setting skill list values completed')
 
             self.config_file.write(write_to)
@@ -107,7 +134,6 @@ class throne_script:
             self.initial_skill_list_scan = False
         else:
             self.initial_skill_list_scan = False
-
             print('config file exists, skipping initialization')
             self.config_file.close()
             config_file_read_split = config_file_read.split('\n')
@@ -115,7 +141,10 @@ class throne_script:
                 print(line)
                 setting,value = line.split('=')
                 if 'target' in setting:
-                    self.target_check_values = int(value)
+                    config_skill_counter = 0
+                    for target_value in value.split(','):
+                        self.target_check_values_list[config_skill_counter] = int(target_value)
+                        config_skill_counter += 1
                 if 'skill' in setting:
                     config_skill_counter = 0
                     for skill_value in value.split(','):
@@ -443,10 +472,10 @@ class throne_script:
             self.target_check_values = constant_value
             return True
         else:
-            for value in gray[0]:
-                if self.target_check_values != value and value != 116:
-                    return False
-            return True
+            # for value in gray[0]:
+            #     if self.target_check_values_list != value and value != 116:
+            #         return False
+            return self.target_check_values_list == gray[0]
 
     # polish crystal farm
     def check_available_skill_list(self, ss):
@@ -455,6 +484,21 @@ class throne_script:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         party_box_x1 = 605
         first_inc = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
+
+        x1 = 1279
+        x2 = 1367
+        x3 = 1436
+        x4 = 1505
+        x5 = 1574
+        x6 = 1642
+        x7 = 1758
+        x8 = 1827
+        x9 = 1915
+        x10 = 1964
+        x11 = 2033
+        x12 = 2102
+        pixel_list = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12]
+
         skip_skill_slot = []
         attacks_p1 = [1,2,3,4, 5, 6, 7, 8, 9,10,11,12]
         available_attacks_p1 = []
@@ -465,13 +509,13 @@ class throne_script:
         slot_count = 1
         accum = 0
         inc_counter = 0
-        for inc in first_inc:
+        for inc in pixel_list:
             if slot_count == 7:
                 party_box_x1 = 1009
-                accum = 0
+                # accum = 0
             if slot_count not in skip_skill_slot:
-                accum += inc
-                skill_value = gray[0][party_box_x1 + accum]
+                # accum += inc
+                skill_value = gray[0][inc]
                 temp_all.append((slot_count, skill_value))
                 # print(f'{slot_count} : {skill_value}')
                 if skill_value == self.skill_list_available[inc_counter]:
