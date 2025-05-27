@@ -366,13 +366,14 @@ class throne_script:
     def while_loop(self):
         pyautogui.hotkey('alt', 'tab')
 
-        while self.do_combo:
-            self.do_combo_sequence()
-            self.do_combo = False
-            print('combo completed')
-
         while self.static_bool:
             time.sleep(0.1)
+
+            while self.do_combo:
+                self.do_combo_sequence()
+                self.do_combo = False
+                print('combo completed')
+
             while self.do_dungeon:
                 if self.phase_counter == 0:
                     timer = time.time()
