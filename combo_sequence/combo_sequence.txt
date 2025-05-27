@@ -1,15 +1,10 @@
-12, # inject venom
-10, # focused fire bombs
-3, # hellfire rain
+12,  # inject venom
+9, # umbral spirit
+4,  # frenzied sword dance
+11,  # willbreaker
 1, # cleaving moonlight
-2, # inferno wave
-4, # mad sword dance
-2, # inferno wave
-7, # ice spear bombardment
-8, # judgment lightning
-6, # chain lightning
-8, # judgment lightning
-1, # cleaving moonlight
-11, # fatal stigma
-9, # fireball barrage
-10, # focused fire bombs
+2,  # death blow
+6,  # cruel smite
+8, # gaia crash
+7,  # stunning blow
+3, # guillotine blade

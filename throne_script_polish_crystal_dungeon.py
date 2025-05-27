@@ -223,7 +223,7 @@ class throne_script:
         self.combo_sequence = self.check_combo_sequence()
 
         while self.do_dungeon or self.do_combo:
-            # print(skill_counter)
+            print(skill_counter)
             if skill_counter == len(self.combo_sequence):
                 break
             else:
@@ -237,27 +237,32 @@ class throne_script:
                         #     self.skill_pause_counter = True
                         if current_combo not in rendered_skill_status_p1:
                             break
-                        # elif current_combo == 2 or current_combo == 3:  #
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     time.sleep(1)
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        # elif current_combo == 4:
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        #     time.sleep(0.1)
-                        #     self.keyboard.press(self.skill_dict[current_combo])
-                        #     self.keyboard.release(self.skill_dict[current_combo])
-                        # else:
-                        elif current_combo == 10:
+                        elif current_combo == 2 or current_combo == 3:  #
                             self.keyboard.press(self.skill_dict[current_combo])
-                            time.sleep(1.2)
+                            time.sleep(1)
                             self.keyboard.release(self.skill_dict[current_combo])
-                        # elif current_combo == 8:
+                        elif current_combo == 4:
+                            self.keyboard.press(self.skill_dict[current_combo])
+                            self.keyboard.release(self.skill_dict[current_combo])
+                            time.sleep(0.1)
+                            self.keyboard.press(self.skill_dict[current_combo])
+                            self.keyboard.release(self.skill_dict[current_combo])
+                        # elif current_combo == 1:
+                        #     self.keyboard.press(Key.shift)
                         #     self.keyboard.press(self.skill_dict[current_combo])
+                        #     time.sleep(0.1)
+                        #     self.keyboard.release(Key.shift)
                         #     self.keyboard.release(self.skill_dict[current_combo])
-                        #     # time.sleep(1)
-                            # self.keyboard.press(self.skill_dict[current_combo])
-                            # self.keyboard.release(self.skill_dict[current_combo])
+                        # elif current_combo == 10:
+                        #     self.keyboard.press(self.skill_dict[current_combo])
+                        #     time.sleep(1.2)
+                        #     self.keyboard.release(self.skill_dict[current_combo])
+                        # # elif current_combo == 8:
+                        # #     self.keyboard.press(self.skill_dict[current_combo])
+                        # #     self.keyboard.release(self.skill_dict[current_combo])
+                        # #     # time.sleep(1)
+                        #     # self.keyboard.press(self.skill_dict[current_combo])
+                        #     # self.keyboard.release(self.skill_dict[current_combo])
                         else:
                             self.keyboard.press(self.skill_dict[current_combo])
                             self.keyboard.release(self.skill_dict[current_combo])
@@ -283,7 +288,7 @@ class throne_script:
     def do_exit_sequence(self, end_timer):
         self.keyboard.press(Key.enter)
         self.keyboard.release(Key.enter)
-        while True:
+        while self.do_dungeon:
             time.sleep(0.1)
             screen_shot_read_chat = pyautogui.screenshot(region=self.read_chat_coord)
             chat_read = self.read_chat(screen_shot_read_chat)
@@ -302,13 +307,16 @@ class throne_script:
         self.phase_counter = -1
     def while_loop(self):
         pyautogui.hotkey('alt', 'tab')
-
-        while self.do_combo:
-            self.do_combo_sequence()
-            self.do_combo = False
-            print('combo completed')
+        print('asdf')
 
         while self.static_bool:
+            while self.do_combo:
+                print('asdf')
+
+                self.do_combo_sequence()
+                self.do_combo = False
+                print('combo completed')
+
             time.sleep(0.1)
             while self.do_dungeon:
                 if self.phase_counter == 0:
@@ -466,6 +474,14 @@ class throne_script:
         accum = 0
         inc_counter = 0
         for inc in first_inc:
+            # if slot_count == 1:
+            #     accum += inc
+            #     skill_value = gray[0][589]
+            #     temp_all.append((slot_count, skill_value))
+            #     print(f'{slot_count} : {skill_value}')
+            #     if skill_value == self.skill_list_available[inc_counter]:
+            #         if slot_count in attacks_p1:
+            #             available_attacks_p1.append((slot_count, skill_value))
             if slot_count == 7:
                 party_box_x1 = 1009
                 accum = 0
