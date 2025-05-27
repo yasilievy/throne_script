@@ -363,12 +363,12 @@ class throne_script:
                 self.keyboard.release('y')
                 time.sleep(end_timer)
         self.phase_counter = -1
+
+
     def while_loop(self):
         pyautogui.hotkey('alt', 'tab')
-
         while self.static_bool:
             time.sleep(0.1)
-
             while self.do_combo:
                 self.do_combo_sequence()
                 self.do_combo = False
@@ -385,12 +385,10 @@ class throne_script:
                         self.keyboard.release(Key.enter)
                         time.sleep(0.7)
                     self.move_to_boss_one()
-
                 if self.phase_counter == 1: # ------------------------ enter dungeon
                     print('moving to boss')
                     self.move_to_boss_two()
                     # self.move_to_boss_two_non_gs()
-
                 if self.phase_counter == 2: # ------------------------ move to boss
                     self.keyboard.press(Key.tab)
                     self.keyboard.release(Key.tab)
@@ -517,8 +515,6 @@ class throne_script:
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        party_box_x1 = 605
-        first_inc = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
 
         x1 = 1279
         x2 = 1367
@@ -542,14 +538,9 @@ class throne_script:
         available_buffs = []
         temp_all = []
         slot_count = 1
-        accum = 0
         inc_counter = 0
         for inc in pixel_list:
-            if slot_count == 7:
-                party_box_x1 = 1009
-                # accum = 0
             if slot_count not in skip_skill_slot:
-                # accum += inc
                 skill_value = gray[0][inc]
                 temp_all.append((slot_count, skill_value))
                 # print(f'{slot_count} : {skill_value}')
@@ -560,28 +551,6 @@ class throne_script:
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
         return return_command
-
-    def initialize_skill_list(self,ss):
-        temp_time = time.time()
-        img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        initialize_inc = [0,58,57,58,58,59,0,58,58,58,58,57]
-        skip_skill_slot = []
-        x1 = 605 # is a config
-        slot_count = 1
-        inc_counter = 0
-        x1_accum = 0
-        for inc in initialize_inc:
-            if slot_count == 7:
-                x1 = 1009 # is a config
-                x1_accum = 0
-            if slot_count not in skip_skill_slot:
-                x1_accum += inc
-                skill_pixel_value = gray[0][x1 + x1_accum]
-                self.skill_list_available[inc_counter] = skill_pixel_value
-            slot_count += 1
-            inc_counter += 1
-        self.initial_skill_list_scan = False
 
     def check_loading_screen(self,ss):
         temp_time = time.time()
