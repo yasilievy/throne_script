@@ -88,11 +88,13 @@ class throne_script:
         if len(config_file_read) == 0:
             self.initial_skill_list_scan = True
 
-            image_test = Image.open('clients/alio.jpg')
+            image_test = Image.open('clients\\test.JPG')
+            # print(self.check_available_skill_list(image_test))
             cvt_img = cv2.cvtColor(np.array(image_test), cv2.COLOR_RGB2BGR)
             gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
+            thresh, im_bw = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)  # | cv2.THRESH_OTSU)
 
-            y1 = 1273
+            y1 = 1268
             x1 = 1279
             x2 = 1367
             x3 = 1436
@@ -108,11 +110,12 @@ class throne_script:
             pixel_list = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12]
             skill_pixel_value = []
             counter = 1
+            gray_cropped = gray[y1:y1 + 1, 0:3440]
             for x_p in pixel_list:
-                gray_cropped = gray[y1:y1 + 1, x_p:x_p + 1]
-                skill_pixel_value.append(gray_cropped[0])
-                self.skill_list_available[counter] = gray_cropped[0]
-                print(f'{counter}: {gray_cropped[0]}')
+                # gray_cropped = gray[y1:y1 + 1, x_p:x_p + 1]
+                skill_pixel_value.append(gray_cropped[0][x_p])
+                self.skill_list_available[counter] = gray_cropped[0][x_p]
+                print(f'{counter}: {gray_cropped[0][x_p]}')
                 counter += 1
 
             write_to = ''
@@ -150,6 +153,7 @@ class throne_script:
                     for skill_value in value.split(','):
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
+
 
 
     def move_to_boss_one(self):
@@ -294,14 +298,46 @@ class throne_script:
         while self.do_dungeon:
             screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
             if self.check_target(screen_shot_check_target):
-                self.keyboard.press(self.skill_dict[2])
-                self.keyboard.release(self.skill_dict[2])
-                self.keyboard.press(self.skill_dict[1])
-                self.keyboard.release(self.skill_dict[1])
-                # self.keyboard.press(self.skill_dict[12])
-                # self.keyboard.release(self.skill_dict[12])
-                self.keyboard.press(self.skill_dict[6])
-                self.keyboard.release(self.skill_dict[6])
+                skill_to_use = self.skill_dict[2]
+                if isinstance(skill_to_use, list):
+                    self.keyboard.press(skill_to_use[0])
+                    self.keyboard.press(skill_to_use[1])
+                    self.keyboard.release(skill_to_use[0])
+                    self.keyboard.release(skill_to_use[1])
+                else:
+                    self.keyboard.press(skill_to_use)
+                    self.keyboard.release(skill_to_use)
+
+                skill_to_use = self.skill_dict[1]
+                if isinstance(skill_to_use, list):
+                    self.keyboard.press(skill_to_use[0])
+                    self.keyboard.press(skill_to_use[1])
+                    self.keyboard.release(skill_to_use[0])
+                    self.keyboard.release(skill_to_use[1])
+                else:
+                    self.keyboard.press(skill_to_use)
+                    self.keyboard.release(skill_to_use)
+
+                skill_to_use = self.skill_dict[6]
+                if isinstance(skill_to_use, list):
+                    self.keyboard.press(skill_to_use[0])
+                    self.keyboard.press(skill_to_use[1])
+                    self.keyboard.release(skill_to_use[0])
+                    self.keyboard.release(skill_to_use[1])
+                else:
+                    self.keyboard.press(skill_to_use)
+                    self.keyboard.release(skill_to_use)
+
+                skill_to_use = self.skill_dict[12]
+                if isinstance(skill_to_use, list):
+                    self.keyboard.press(skill_to_use[0])
+                    self.keyboard.press(skill_to_use[1])
+                    self.keyboard.release(skill_to_use[0])
+                    self.keyboard.release(skill_to_use[1])
+                else:
+                    self.keyboard.press(skill_to_use)
+                    self.keyboard.release(skill_to_use)
+
                 time.sleep(0.3)
             else:
                 print('boss is dead')
@@ -320,7 +356,7 @@ class throne_script:
                 break
             else:
                 time.sleep(0.3)
-                self.mouse.position = (1870, 280)
+                self.mouse.position = self.exit_dungeon
                 self.mouse.click(Button.left)
                 time.sleep(0.3)
                 self.keyboard.press('y')
@@ -351,8 +387,8 @@ class throne_script:
 
                 if self.phase_counter == 1: # ------------------------ enter dungeon
                     print('moving to boss')
-                    # self.move_to_boss_two()
-                    self.move_to_boss_two_non_gs()
+                    self.move_to_boss_two()
+                    # self.move_to_boss_two_non_gs()
 
                 if self.phase_counter == 2: # ------------------------ move to boss
                     self.keyboard.press(Key.tab)
@@ -443,20 +479,20 @@ class throne_script:
             else:
                 print('turning on combo two')
                 self.do_combo = True
-        if '-' in '{0}'.format(key): # keypad 2
-            if self.do_nav:
-                print('turning off combo two')
-                self.do_nav = False
-            else:
-                print('turning on combo two')
-                self.do_nav = True
-        if '/' in '{0}'.format(key): # keypad 2
-            if self.do_exit:
-                print('turning off combo two')
-                self.do_exit = False
-            else:
-                print('turning on combo two')
-                self.do_exit = True
+        # if '-' in '{0}'.format(key): # keypad 2
+        #     if self.do_nav:
+        #         print('turning off combo two')
+        #         self.do_nav = False
+        #     else:
+        #         print('turning on combo two')
+        #         self.do_nav = True
+        # if '/' in '{0}'.format(key): # keypad 2
+        #     if self.do_exit:
+        #         print('turning off combo two')
+        #         self.do_exit = False
+        #     else:
+        #         print('turning on combo two')
+        #         self.do_exit = True
 
     def check_target(self, ss):
         temp_time = time.time()
@@ -516,7 +552,7 @@ class throne_script:
                 skill_value = gray[0][inc]
                 temp_all.append((slot_count, skill_value))
                 # print(f'{slot_count} : {skill_value}')
-                if skill_value == self.skill_list_available[inc_counter]:
+                if skill_value >= self.skill_list_available[inc_counter] - 10 and skill_value <= self.skill_list_available[inc_counter] + 10:
                     if slot_count in attacks_p1:
                         available_attacks_p1.append((slot_count, skill_value))
             slot_count += 1
