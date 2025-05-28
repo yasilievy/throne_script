@@ -79,6 +79,7 @@ class throne_script:
         self.exit_dungeon = (3378, 328)
         self.yes_button = 'y'
         self.initialize_config()
+        self.diagnostic_write_to = ''
 
     def initialize_config(self):
         time.sleep(0.2)
@@ -268,6 +269,7 @@ class throne_script:
     def do_combo_sequence(self):
         skill_counter = 0
         self.combo_sequence = self.check_combo_sequence()
+        diagnostic_file = open('diagnostic.txt','w')
 
         while self.do_dungeon or self.do_combo:
             # print(skill_counter)
@@ -556,7 +558,7 @@ class throne_script:
         for inc in pixel_list:
             if slot_count not in skip_skill_slot:
                 skill_value = gray[0][inc]
-                temp_all.append((slot_count, skill_value))
+                temp_all.append((slot_count, int(skill_value)))
                 # print(f'{slot_count} : {skill_value}')
                 if skill_value >= self.skill_list_available[inc_counter] - 10 and skill_value <= self.skill_list_available[inc_counter] + 10:
                     if slot_count in attacks_p1:
@@ -564,6 +566,7 @@ class throne_script:
             slot_count += 1
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
+        write_to = str(temp_all) + '\n'
         return return_command
 
     def check_loading_screen(self,ss):
