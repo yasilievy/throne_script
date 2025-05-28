@@ -4,16 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="some more clean up, testing integration amongst other computers">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update combo issue">
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/active-target.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/chat-filter.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/co-op_dungeon_button.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/github.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/leave_dungeon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/leave_party.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/manage_party.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/pycharm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/python.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/quick_set_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/quick_set_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/target-setting.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/terminal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/readme_img/tesseract-ocr.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirementstest.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/skill_dict.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_cry_farm test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_cry_farm.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_dungeon_staff.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screenshot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/screenshot_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_ravager.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_ravager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,21 +117,24 @@
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/NOV20/PycharmProjects/throne_script-main",
+    "last_opened_file_path": "C:/Users/NOV20/PyCharmMiscProject/readme_img",
     "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\NOV20\PyCharmMiscProject\readme_img" />
+      <recent name="C:\Users\NOV20\PyCharmMiscProject\combo_sequence" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\NOV20\PyCharmMiscProject\readme_img" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject\polish_crystal_dungeon_farm" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject\fish_examples" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.throne_script_ravager">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -234,9 +248,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.throne_script_ravager" />
+        <item itemvalue="Python.throne_fishing" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
         <item itemvalue="Python.throne_script_dungeon_staff" />
-        <item itemvalue="Python.throne_fishing" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -369,7 +383,63 @@
       <option name="project" value="LOCAL" />
       <updated>1748289515166</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="alios updates">
+      <option name="closed" value="true" />
+      <created>1748299258591</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748299258591</updated>
+    </task>
+    <task id="LOCAL-00016" summary="alios updates">
+      <option name="closed" value="true" />
+      <created>1748300326048</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748300326048</updated>
+    </task>
+    <task id="LOCAL-00017" summary="alios updates">
+      <option name="closed" value="true" />
+      <created>1748305278443</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748305278443</updated>
+    </task>
+    <task id="LOCAL-00018" summary="updating spellblade">
+      <option name="closed" value="true" />
+      <created>1748305786462</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748305786462</updated>
+    </task>
+    <task id="LOCAL-00019" summary="updating main combo">
+      <option name="closed" value="true" />
+      <created>1748306583993</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1748306583993</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update combo issue">
+      <option name="closed" value="true" />
+      <created>1748306636003</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748306636003</updated>
+    </task>
+    <task id="LOCAL-00021" summary="update combo issue">
+      <option name="closed" value="true" />
+      <created>1748313530526</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1748313530526</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -381,6 +451,10 @@
     <MESSAGE value="updated fishing for delivery, and screenshot examples" />
     <MESSAGE value="major clean up, added polish crystal specific script, and screenshot_test" />
     <MESSAGE value="some more clean up, testing integration amongst other computers" />
-    <option name="LAST_COMMIT_MESSAGE" value="some more clean up, testing integration amongst other computers" />
+    <MESSAGE value="alios updates" />
+    <MESSAGE value="updating spellblade" />
+    <MESSAGE value="updating main combo" />
+    <MESSAGE value="update combo issue" />
+    <option name="LAST_COMMIT_MESSAGE" value="update combo issue" />
   </component>
 </project>

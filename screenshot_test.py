@@ -2,32 +2,31 @@ import numpy as np,cv2
 from PIL import Image
 
 image_test = Image.open('clients/alio.jpg')
+image_test = Image.open('combo_sequence/test.png')
+
 cvt_img = cv2.cvtColor(np.array(image_test),cv2.COLOR_RGB2BGR)
 gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
+first_inc = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
+y1 = 993
+second_skill_cast_x1 = 587
+slot_count = 1
+accum = 0
+for inc in first_inc:
+    if slot_count == 7:
+        # party_box_x1 = 1016
+        second_skill_cast_x1 = 990
+        accum = 0
+    accum += inc
+    x1_accum = second_skill_cast_x1 + accum
+    gray_cropped = gray[y1:y1 + 1, x1_accum:x1_accum + 1]
 
-y1 = 1273
-x1 = 1280
-x2 = 1367
-x3 = 1367
-x4 = 1505
-x5 = 1574
-x6 = 1642
-x7 = 1758
-x8 = 1827
-x9 = 1915
-x10 = 1964
-x11 = 2033
-x12 = 2102
-pixel_list = [x1,x2,x3,x4,x5,x6,x7,x8,x9,x10,x11,x12]
-
-counter = 1
-for x_p in pixel_list:
-    gray_cropped = gray[y1:y1+1,x_p:x_p+1]
-    print(f'{counter}: {gray_cropped[0]}')
-    counter+=1
+    print(f'{slot_count}: {gray_cropped[0][0]}')
+    slot_count+=1
 
 
-manage_party = (31,16)
-loading_screen = (1318,1008)
-enter_dungeon = ()
-exit_dungeon = ()
+
+# counter = 1
+# for x_p in pixel_list:
+#     gray_cropped = gray[y1:y1+1,x_p:x_p+1]
+#     print(f'{counter}: {gray_cropped[0][0]}')
+#     counter+=1
