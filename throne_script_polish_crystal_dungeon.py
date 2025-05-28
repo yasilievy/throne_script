@@ -72,7 +72,7 @@ class throne_script:
         self.target_check_values_list = [0,0,0,0,0,0,0,0,0]
 
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-        self.check_skill_coord = (0, 1045, 1920, 1)
+        self.check_skill_coord = (0, 1268, 3440, 1)
 
         self.read_chat_coord = (30, 942, 165, 41)
 
@@ -182,7 +182,7 @@ class throne_script:
         self.keyboard.release(self.dodge_button)
         self.keyboard.release('a')
         # self.timer_boolean = True
-        # self.timer = time.time()`
+        # self.timer = time.time()
 
         # self.do_dungeon = False
         time.sleep(0.5)
