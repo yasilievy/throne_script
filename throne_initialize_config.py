@@ -3,27 +3,71 @@ from pynput.keyboard import Key, Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Users\\yvyan\\OneDrive\\Documents\\Saint Thomas Courses\\SEIS739\\django_demo\\clicklate\\Tesseract-OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = 'C:\\Tesseract-OCR\\tesseract.exe'
 class Throne_Initialize_Config:
     def __init__(self):
         self.initialize_bool = True
         self.mouse = mouse.Controller()
         self.keyboard = keyboard.Controller()
         self.coordinate_dict = {}
+        self.initialize_counter = 0
+        self.coordinate_names = []
+        self.coordinate_values = []
+        self.select_bool = False
+        self.temp_coordinates = None
+    # def define_coordinates(self):
 
-    def define_coordinates(self):
-        coordinate_values_file = open('coordinate_values.txt','r')
-        coordinate_names_file = open('coordinate_names.txt','r')
-        coordinate_names = coordinate_names_file.read().split('\n')
-        coordinate_names_file.close()
+    def start_initialize(self):
+        coordinate_values_file = open('initialize\\coordinate_values.txt','r')
         if len(coordinate_values_file.read()) == 0:
             print('initiating coordinate setup')
-    #
-    def start_initialize(self):
+            # coordinate_values_file = open('coordinate_values.txt','r')
+            coordinate_names_file = open('initialize\\coordinate_names.txt','r')
+            coordinate_names_split = coordinate_names_file.read().split('\n')
+            coordinate_names_file.close()
+
+            for row in coordinate_names_split:
+                if len(row) != 0 and '#' not in row:
+                    self.coordinate_names.append(row)
+            # print(self.coordinate_names)
+
+        else:
+            self.initialize_bool = False
+            self.keyboard.press(Key.esc)
+            self.keyboard.release(Key.esc)
+
+        c1 = 0
 
         while self.initialize_bool:
-            pass
+            self.select_bool = True
+            print(f'select a coordinate for: {self.coordinate_names[self.initialize_counter]}')
+            while self.select_bool:
+                pass
+            self.initialize_counter += 1
+        print(self.coordinate_values)
 
+    def on_release(self, key):
+        if '+' in '{0}'.format(key):  # ------------------- require attention here -------------------
+            self.temp_coordinates = self.scan_coordinate()
+            print(f'found coordinate {self.temp_coordinates}')
+            print(f'proceed with setting this coordinate for:')
+            print(f'{self.coordinate_names[self.initialize_counter]}?')
+            print('press * to continue or press + with new coordinate')
+        if '*' in '{0}'.format(key):
+            print('coordinate was set')
+            self.coordinate_values.append(self.temp_coordinates)
+            self.select_bool = False
+        if key == keyboard.Key.esc:
+            # self.static_bool = False
+            return False
+
+
+    def coordinate_name_decoder(self,string):
+        coordinate_name, x_mag, y_mag = string.split(',')
+        if x_mag.isdigit() and y_mag.isdigit():
+            return [coordinate_name,int(x_mag),int(y_mag)]
+        else:
+            return False
 
 
     # def initialize_config(self):
@@ -67,20 +111,19 @@ class Throne_Initialize_Config:
     #                 for skill_value in value.split(','):
     #                     self.skill_list_available[config_skill_counter] = int(skill_value)
     #                     config_skill_counter += 1
-    def on_release(self,key):
-        if key == keyboard.Key.esc:
-            # self.static_bool = False
-            return False
-        if '+' in '{0}'.format(key):  # ------------------- require attention here -------------------
-            print(self.mouse.position)
-            print(self.scan_coordinate())
+
+
+
     def on_press(self, key):
         pass
 
     def scan_coordinate(self):
+        temp_time = time.time()
         screen_shot = pyautogui.screenshot(region=(25,1120,95,25))
-        screen_shot.save('test1.png')
-        return pytesseract.image_to_string(screen_shot)
+        # screen_shot.save('test1.png')
+        return_answer = pytesseract.image_to_string(screen_shot).replace('px','').strip()
+        print(round(time.time() - temp_time,2))
+        return return_answer
 
     def start_assist(self):
         print("started throne script")
