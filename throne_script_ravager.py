@@ -561,13 +561,8 @@ class throne_script:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         party_box_x1 = 605
         second_skill_cast_x1 = 595
-        party_box_y1 = 1045
 
-        # party_box_x2 = party_box_x1 + 1
-        # party_box_y2 = party_box_y1 + 1
         first_inc = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
-
-        # skip_skill_slot = [9,10,11,12]
 
         skip_skill_slot = []
 
@@ -589,15 +584,11 @@ class throne_script:
         for inc in first_inc:
 
             if slot_count == 7:
-                # party_box_x1 = 1016
                 party_box_x1 = 1009
                 second_skill_cast_x1 = 998
-                party_box_x2 = party_box_x1 + 1
                 accum = 0
             if slot_count not in skip_skill_slot:
                 accum += inc
-                # img_cropped = gray[party_box_y1:party_box_y2, party_box_x1 + accum:party_box_x2 + accum]
-                # skill_value = int(img_cropped[0][0])
                 skill_value = gray[0][party_box_x1 + accum]
                 temp_all.append((slot_count, skill_value))
                 # print(f'{slot_count} : {skill_value}')
@@ -772,17 +763,11 @@ class throne_script:
                     incre_list = first_inc
                     x1_accum = sum(incre_list[:skill])
                 skill_pixel_value = gray[0][x1+x1_accum]
-                # print(f'skill {skill} pixel value: {int(skill_pixel_value)}')
                 temp_skill_skill_value.append((skill,skill_pixel_value))
                 if int(skill_pixel_value) == self.skill_list_available[skill-1]:
-                    # available_skill_set_list[skill_set_counter].append((skill,skill_pixel_value))
-                    # available_skill_set_list[skill_set_counter] = (skill,skill_pixel_value)
                     available_skill_set_list[skill_set_counter] = skill
                     break
             skill_set_counter +=1
-            # print(temp_skill_skill_value)
-        # print(available_skill_set_list)
-        # print(time.time() - temp_time)
         return available_skill_set_list
 
     def check_mana(self,ss):
@@ -817,14 +802,9 @@ class throne_script:
         return gray[0]
 
     def check_target_out_sight(self,ss):
-        # temp_time = time.time()
-        # img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-        # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        # return pytesseract.image_to_string(gray)
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        print(gray[0])
         # print(f'health time check {time.time()-temp_time}')
         return gray[0]
 
