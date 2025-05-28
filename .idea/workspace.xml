@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="some more clean up, testing integration amongst other computers">
-      <change afterPath="$PROJECT_DIR$/throne_script_config1.txt" afterDir="false" />
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/screenshot_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -78,34 +75,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.screenshot_test.executor": "Run",
-    "Python.script.executor": "Run",
-    "Python.script_2.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.test_file.executor": "Run",
-    "Python.throne_fishing.executor": "Run",
-    "Python.throne_script.executor": "Run",
-    "Python.throne_script_cry_farm (1).executor": "Run",
-    "Python.throne_script_cry_farm test.executor": "Run",
-    "Python.throne_script_cry_farm.executor": "Run",
-    "Python.throne_script_dungeon.executor": "Run",
-    "Python.throne_script_dungeon_ravager.executor": "Run",
-    "Python.throne_script_dungeon_staff.executor": "Run",
-    "Python.throne_script_mob_farmv1.executor": "Run",
-    "Python.throne_script_polish_crystal_dungeon.executor": "Run",
-    "Python.throne_script_polish_crystal_dungeon_ravager.executor": "Run",
-    "Python.throne_script_ravager.executor": "Run",
-    "Python.throne_script_ravagerv1.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main-alio",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/NOV20/PyCharmMiscProject",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.screenshot_test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.script_2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_file.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_fishing.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_cry_farm (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_cry_farm test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_cry_farm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_dungeon.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_dungeon_ravager.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_dungeon_staff.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_mob_farmv1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_polish_crystal_dungeon.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_polish_crystal_dungeon_ravager.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_ravager.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_ravagerv1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main-alio&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/NOV20/PyCharmMiscProject&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\NOV20\PyCharmMiscProject" />
@@ -116,7 +113,7 @@
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.throne_script_polish_crystal_dungeon">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -131,28 +128,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="throne_fishing" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PyCharmMiscProject" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/throne_fishing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -205,6 +180,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="throne_script_polish_crystal_dungeon" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyCharmMiscProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="throne_script_ravager" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -229,11 +226,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_ravager" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
         <item itemvalue="Python.throne_script_dungeon_staff" />
-        <item itemvalue="Python.throne_fishing" />
-        <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
   </component>
@@ -365,7 +362,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748289515166</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update to alio">
+      <option name="closed" value="true" />
+      <created>1748411323634</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1748411323634</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -377,6 +382,7 @@
     <MESSAGE value="updated fishing for delivery, and screenshot examples" />
     <MESSAGE value="major clean up, added polish crystal specific script, and screenshot_test" />
     <MESSAGE value="some more clean up, testing integration amongst other computers" />
-    <option name="LAST_COMMIT_MESSAGE" value="some more clean up, testing integration amongst other computers" />
+    <MESSAGE value="update to alio" />
+    <option name="LAST_COMMIT_MESSAGE" value="update to alio" />
   </component>
 </project>

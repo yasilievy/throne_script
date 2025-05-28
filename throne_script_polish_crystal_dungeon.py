@@ -153,6 +153,20 @@ class throne_script:
                     for skill_value in value.split(','):
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
+        crop_values = (0, 1268, 3440, 1269)
+        image_test = Image.open('clients/test.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        print(self.check_available_skill_list(image_test_crop)[0])
+        image_test = Image.open('clients/test2.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        print(self.check_available_skill_list(image_test_crop)[0])
+        image_test = Image.open('clients/test3.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        print(self.check_available_skill_list(image_test_crop)[0])
+        image_test = Image.open('clients/test4.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        print(self.check_available_skill_list(image_test_crop)[0])
+
 
 
 
@@ -546,7 +560,7 @@ class throne_script:
                 # print(f'{slot_count} : {skill_value}')
                 if skill_value >= self.skill_list_available[inc_counter] - 10 and skill_value <= self.skill_list_available[inc_counter] + 10:
                     if slot_count in attacks_p1:
-                        available_attacks_p1.append((slot_count, skill_value))
+                        available_attacks_p1.append((slot_count, int(skill_value)))
             slot_count += 1
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
