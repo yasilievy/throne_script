@@ -112,7 +112,6 @@ class throne_script:
                 if self.counter == 11:
                     self.do_skill('frost cleaving')
                     self.do_skill('valiant brawl 1')
-
                 if self.counter == 12:
                     self.do_skill('ascending slash')
                 if self.counter == 13:

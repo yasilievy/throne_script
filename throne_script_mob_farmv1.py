@@ -130,41 +130,49 @@ class throne_script:
                         self.keyboard.press(Key.f5)
                         self.keyboard.release(Key.f5)
                     time.sleep(0.7)
-                else:
-                    no_target_counter +=1
-                    self.keyboard.press(Key.tab)
-                    self.keyboard.release(Key.tab)
-                    time.sleep(0.2)
-                    # press lock-on
-                    self.mouse.position = (1200, 775)  # ------------------- require attention here -------------------
-                    self.mouse.click(Button.left)
-                    # self.mouse.position = (1250, 775)  # ------------------- require attention here -------------------
-                    # self.mouse.click(Button.left)
-                    if no_target_counter > 2:
-                        if alter_camera_bool:
-                            self.keyboard.press(Key.right)
-                            alter_camera_bool = False
-                        else:
-                            self.keyboard.press(Key.left)
-                            alter_camera_bool = True
-                        alter_target_bool = True
-                        while self.do_bot:
-                            if alter_target_bool:
-                                self.mouse.click(Button.right)
-                                alter_target_bool = False
-                            else:
-                                self.keyboard.press(Key.tab)
-                                self.keyboard.release(Key.tab)
-                                alter_target_bool = True
-                            self.mouse.click(Button.right)
-                            if self.check_target(pyautogui.screenshot(region=(0, 0, 1920, 1080))):
-                                self.keyboard.release(Key.right)
-                                self.keyboard.release(Key.left)
-
-                                no_target_counter = 0
-                                break
-                            time.sleep(0.1)
-                counter += 1
+                # else:
+                no_target_counter +=1
+                self.keyboard.press(Key.tab)
+                self.keyboard.release(Key.tab)
+                time.sleep(0.2)
+                if no_target_counter == 5:
+                    if alter_camera_bool:
+                        self.keyboard.press(Key.right)
+                        alter_camera_bool = False
+                    else:
+                        self.keyboard.release(Key.right)
+                        alter_camera_bool = True
+                    no_target_counter = 0
+                # press lock-on
+                self.mouse.position = (1200, 775)  # ------------------- require attention here -------------------
+                self.mouse.click(Button.left)
+                # self.mouse.position = (1250, 775)  # ------------------- require attention here -------------------
+                # self.mouse.click(Button.left)
+                # if no_target_counter > 2:
+                #     if alter_camera_bool:
+                #         self.keyboard.press(Key.right)
+                #         alter_camera_bool = False
+                #     else:
+                #         self.keyboard.press(Key.left)
+                #         alter_camera_bool = True
+                #     alter_target_bool = True
+                #     while self.do_bot:
+                #         if alter_target_bool:
+                #             self.mouse.click(Button.right)
+                #             alter_target_bool = False
+                #         else:
+                #             self.keyboard.press(Key.tab)
+                #             self.keyboard.release(Key.tab)
+                #             alter_target_bool = True
+                #         self.mouse.click(Button.right)
+                #         if self.check_target(pyautogui.screenshot(region=(0, 0, 1920, 1080))):
+                #             self.keyboard.release(Key.right)
+                #             self.keyboard.release(Key.left)
+                #
+                #             no_target_counter = 0
+                #             break
+                #         time.sleep(0.1)
+                # counter += 1
 
     def on_press(self,key):
         pass
@@ -214,7 +222,8 @@ class throne_script:
         else:
             incorrect_value_counter = 0
             for value in gray[0]:
-                if self.target_check_values != value:
+                # if self.target_check_values != value:
+                if value != 21:
                     incorrect_value_counter +=1
             if incorrect_value_counter >3:
                 return False

@@ -1,8 +1,0 @@
-read_chat
-check_target_out_sight
-check_loading_screen
-check_target_health
-check_target
-initialize_skill_list_check
-initialize_skill_list_check_list
-check_distance
