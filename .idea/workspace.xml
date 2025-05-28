@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
-    </list>
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio to add diagnostics" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -370,7 +367,23 @@
       <option name="project" value="LOCAL" />
       <updated>1748411323634</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="update to alio">
+      <option name="closed" value="true" />
+      <created>1748446592227</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1748446592227</updated>
+    </task>
+    <task id="LOCAL-00017" summary="update to alio to add diagnostics">
+      <option name="closed" value="true" />
+      <created>1748446854022</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1748446854022</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -383,6 +396,7 @@
     <MESSAGE value="major clean up, added polish crystal specific script, and screenshot_test" />
     <MESSAGE value="some more clean up, testing integration amongst other computers" />
     <MESSAGE value="update to alio" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to alio" />
+    <MESSAGE value="update to alio to add diagnostics" />
+    <option name="LAST_COMMIT_MESSAGE" value="update to alio to add diagnostics" />
   </component>
 </project>

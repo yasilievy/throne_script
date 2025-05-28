@@ -78,8 +78,9 @@ class throne_script:
 
         self.exit_dungeon = (3378, 328)
         self.yes_button = 'y'
-        self.initialize_config()
         self.diagnostic_write_to = ''
+        self.initialize_config()
+
 
     def initialize_config(self):
         time.sleep(0.2)
@@ -154,20 +155,24 @@ class throne_script:
                     for skill_value in value.split(','):
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
-        crop_values = (0, 1268, 3440, 1269)
-        image_test = Image.open('clients/test.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        print(self.check_available_skill_list(image_test_crop)[0])
-        image_test = Image.open('clients/test2.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        print(self.check_available_skill_list(image_test_crop)[0])
-        image_test = Image.open('clients/test3.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        print(self.check_available_skill_list(image_test_crop)[0])
-        image_test = Image.open('clients/test4.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        print(self.check_available_skill_list(image_test_crop)[0])
+        diagnostic_file = open('diagnostic.txt','w')
 
+        # crop_values = (0, 1268, 3440, 1269)
+        # image_test = Image.open('clients/test.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # print(self.check_available_skill_list(image_test_crop)[0])
+        # image_test = Image.open('clients/test2.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # print(self.check_available_skill_list(image_test_crop)[0])
+        # image_test = Image.open('clients/test3.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # print(self.check_available_skill_list(image_test_crop)[0])
+        # image_test = Image.open('clients/test4.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # print(self.check_available_skill_list(image_test_crop)[0])
+
+        diagnostic_file.write(self.diagnostic_write_to)
+        diagnostic_file.close()
 
 
 
@@ -310,6 +315,8 @@ class throne_script:
                                 self.keyboard.release(self.skill_dict[current_combo])
                         time.sleep(0.1)
             skill_counter += 1
+            diagnostic_file.write(self.diagnostic_write_to)
+            diagnostic_file.close()
     def do_kill_confirm(self):
         while self.do_dungeon:
             screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
@@ -566,7 +573,7 @@ class throne_script:
             slot_count += 1
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
-        write_to = str(temp_all) + '\n'
+        self.diagnostic_write_to += str(temp_all) + '\n'
         return return_command
 
     def check_loading_screen(self,ss):
