@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio to add diagnostics" />
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio to add diagnostics">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -397,6 +400,7 @@
     <MESSAGE value="some more clean up, testing integration amongst other computers" />
     <MESSAGE value="update to alio" />
     <MESSAGE value="update to alio to add diagnostics" />
-    <option name="LAST_COMMIT_MESSAGE" value="update to alio to add diagnostics" />
+    <MESSAGE value="implemented the second cast appropriately" />
+    <option name="LAST_COMMIT_MESSAGE" value="implemented the second cast appropriately" />
   </component>
 </project>

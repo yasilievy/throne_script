@@ -207,24 +207,24 @@ class throne_script:
         # self.do_dungeon = False
         time.sleep(0.5)
 
-        self.keyboard.press('w')
-        self.keyboard.press(self.morph_button)
-        self.keyboard.release(self.morph_button)
-        time.sleep(3.24 * time_helper)
-        self.keyboard.press(self.stealth_button ) # need configuration
-        self.keyboard.release(self.stealth_button ) # need configuration
-        time.sleep(5.61 * time_helper)
-        self.keyboard.press('d')
-        time.sleep(5.0 * time_helper)
-        self.keyboard.release('d')
-        time.sleep(4 * time_helper)
-        self.keyboard.press(self.dodge_button)
-        self.keyboard.release(self.dodge_button)
-        # time.sleep(0.57 * time_helper)`5
-        self.keyboard.press(self.morph_button)
-        self.keyboard.release(self.morph_button)
-        time.sleep(8.5 * time_helper)
-        self.keyboard.release('w')
+        # self.keyboard.press('w')
+        # self.keyboard.press(self.morph_button)
+        # self.keyboard.release(self.morph_button)
+        # time.sleep(3.24 * time_helper)
+        # self.keyboard.press(self.stealth_button ) # need configuration
+        # self.keyboard.release(self.stealth_button ) # need configuration
+        # time.sleep(5.61 * time_helper)
+        # self.keyboard.press('d')
+        # time.sleep(5.0 * time_helper)
+        # self.keyboard.release('d')
+        # time.sleep(4 * time_helper)
+        # self.keyboard.press(self.dodge_button)
+        # self.keyboard.release(self.dodge_button)
+        # # time.sleep(0.57 * time_helper)`5
+        # self.keyboard.press(self.morph_button)
+        # self.keyboard.release(self.morph_button)
+        # time.sleep(8.5 * time_helper)
+        # self.keyboard.release('w')
 
     def move_to_boss_two_non_gs(self):
         movement_speed = 630
