@@ -117,14 +117,17 @@ class throne_script:
         self.combo_sequence = self.check_combo_sequence()
 
         while self.do_dungeon or self.do_combo:
-            print(skill_counter)
             if skill_counter == len(self.combo_sequence):
                 break
             else:
+                print(f'need to cast skill: {self.combo_sequence[skill_counter]}')
                 while self.do_dungeon or self.do_combo:
                     current_combo = self.combo_sequence[skill_counter]
                     screen_shot = pyautogui.screenshot(region=self.check_skill_coord)
-                    skill_status_p1 = self.check_available_skill_list(screen_shot)[0]
+                    # screen_shot_two = pyautogui.screenshot(region=(637,993,1329,1))
+                    screen_shot_two = pyautogui.screenshot(region=(0,993,1920,1))
+                    # screen_shot_two = pyautogui.screenshot(region=(587,993,1279,1))
+                    skill_status_p1 = self.check_available_skill_list(screen_shot,screen_shot_two)[0]
                     if len(skill_status_p1) != 0:
                         rendered_skill_status_p1 = [s_s_p1[0] for s_s_p1 in skill_status_p1]
                         # if current_combo == 12:
@@ -261,7 +264,7 @@ class throne_script:
                 #             break
                 #     next_target_counter = 0
                 screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
-                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,2)
+                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,0)
                 if buff_status != 0:
                     # print(f'casting buff {buff_status}')
                     self.keyboard.press(self.skill_dict[buff_status])
@@ -513,36 +516,36 @@ class throne_script:
             else:
                 print('turning on script')
                 self.do_bot = True
-        if '<101>' in '{0}'.format(key): # keypad 5
-            if self.do_coordinate_initialize:
-                self.clicked_coordinate = True
-            else:
-                self.do_coordinate_initialize = True
+        # if '<101>' in '{0}'.format(key): # keypad 5
+        #     if self.do_coordinate_initialize:
+        #         self.clicked_coordinate = True
+        #     else:
+        #         self.do_coordinate_initialize = True
             # print(self.mouse.position())
 
-        if '<100>' in '{0}'.format(key): # keypad 4
-            if self.do_dungeon:
-                print('turning off dungeon')
-                self.do_dungeon = False
-            else:
-                print('turning on dungeon')
-                self.do_dungeon = True
-        if '<99>' in '{0}'.format(key): # keypad 3
-            if self.do_combo:
-                print('turning off combo three')
-                self.do_combo = False
-            else:
-                print('turning on combo three')
-                self.combo_to_do = 3
-                self.do_combo = True
-        if '<98>' in '{0}'.format(key): # keypad 2
-            if self.do_combo:
-                print('turning off combo two')
-                self.do_combo = False
-            else:
-                print('turning on combo two')
-                self.combo_to_do = 2
-                self.do_combo = True
+        # if '<100>' in '{0}'.format(key): # keypad 4
+        #     if self.do_dungeon:
+        #         print('turning off dungeon')
+        #         self.do_dungeon = False
+        #     else:
+        #         print('turning on dungeon')
+        #         self.do_dungeon = True
+        # if '<99>' in '{0}'.format(key): # keypad 3
+        #     if self.do_combo:
+        #         print('turning off combo three')
+        #         self.do_combo = False
+        #     else:
+        #         print('turning on combo three')
+        #         self.combo_to_do = 3
+        #         self.do_combo = True
+        # if '<98>' in '{0}'.format(key): # keypad 2
+        #     if self.do_combo:
+        #         print('turning off combo two')
+        #         self.do_combo = False
+        #     else:
+        #         print('turning on combo two')
+        #         self.combo_to_do = 2
+        #         self.do_combo = True
         if '+' in '{0}'.format(key): # keypad 1
             if self.do_combo:
                 print('turning off combo one')
@@ -555,76 +558,50 @@ class throne_script:
 
 
     # polish crystal farm
-    def check_available_skill_list(self, ss):
+    def check_available_skill_list(self, ss,sst):
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        img_two = cv2.cvtColor(np.array(sst), cv2.COLOR_RGB2BGR)
+        gray_two = cv2.cvtColor(img_two, cv2.COLOR_BGR2GRAY)
         party_box_x1 = 605
-        second_skill_cast_x1 = 595
-
+        second_skill_cast_x1 = 620
         first_inc = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
-
         skip_skill_slot = []
-
-        attacks_p1 = [1,2,3,4, 5, 6, 7, 8, 9,10,11,12]
-        attacks_p2 = []
-        distances = []
-        buffs = []
-
         available_attacks_p1 = []
-        available_attacks_p2 = []
-        available_distances = []
-        available_buffs = []
-
         temp_all = []
         slot_count = 1
         accum = 0
-
         inc_counter = 0
         for inc in first_inc:
-
             if slot_count == 7:
                 party_box_x1 = 1009
-                second_skill_cast_x1 = 998
+                second_skill_cast_x1 = 1025
                 accum = 0
             if slot_count not in skip_skill_slot:
                 accum += inc
                 skill_value = gray[0][party_box_x1 + accum]
-                temp_all.append((slot_count, skill_value))
+                temp_all.append((slot_count,int(skill_value)))
                 # print(f'{slot_count} : {skill_value}')
-                if self.initial_skill_list_scan:
-                    self.skill_list_available[inc_counter] = skill_value
-                else:
-                    if skill_value == self.skill_list_available[inc_counter]:
-                        if slot_count in self.second_cast_skill:
-                            print(f'slot count: {slot_count}')
-                            second_skill_cast_value = gray[0][second_skill_cast_x1 + accum]
-                            print(f'cast value: {second_skill_cast_value}')
-                            if second_skill_cast_value >= 205 and second_skill_cast_value <= 225:
-                                pass
-                            else:
-                                if slot_count in attacks_p1:
-                                    available_attacks_p1.append((slot_count, skill_value))
-                                if slot_count in attacks_p2:
-                                    available_attacks_p2.append((slot_count, skill_value))
-                                if slot_count in distances:
-                                    available_distances.append((slot_count, skill_value))
-                                if slot_count in buffs:
-                                    available_buffs.append((slot_count, skill_value))
+                if skill_value == self.skill_list_available[inc_counter]:
+                    if slot_count in self.second_cast_skill:
+                        second_skill_cast_value = gray_two[0][second_skill_cast_x1 + accum]
+                        if second_skill_cast_value >= 200 and second_skill_cast_value <= 240:
+                            print(f'passed slot count: {slot_count}')
+                            print(f'passed cast value: {second_skill_cast_value}')
+                            # pass
                         else:
-                            if slot_count in attacks_p1:
-                                available_attacks_p1.append((slot_count, skill_value))
-                            if slot_count in attacks_p2:
-                                available_attacks_p2.append((slot_count, skill_value))
-                            if slot_count in distances:
-                                available_distances.append((slot_count, skill_value))
-                            if slot_count in buffs:
-                                available_buffs.append((slot_count, skill_value))
+                            print(f'use slot count: {slot_count}')
+                            print(f'use cast value: {second_skill_cast_value}')
+                            available_attacks_p1.append((slot_count, int(skill_value)))
+                    else:
+                        available_attacks_p1.append((slot_count, int(skill_value)))
+
             slot_count += 1
             inc_counter += 1
-
-        return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
-        self.initial_skill_list_scan = False
+        # print(temp_all)
+        return_command = [available_attacks_p1]#,available_attacks_p2, available_distances, available_buffs]
+        print(f'time: {round(time.time()-temp_time,6)}')
         return return_command
 
     def initialize_skill_list(self,ss):
