@@ -27,9 +27,9 @@ class throne_script:
         self.do_dungeon = False
         self.initial_skill_list_scan = True
         # self.initialize_config()
-
+        # 0.19 brightness
         self.skill_dict = {
-            1: [Key.shift,'1'],
+            1: [Key.shift,'f'],
             2: 'f',
             3: '3',
             4: '4',
@@ -90,7 +90,7 @@ class throne_script:
         if len(config_file_read) == 0:
             self.initial_skill_list_scan = True
 
-            image_test = Image.open('clients\\test.JPG')
+            image_test = Image.open('clients\\testt4.JPG')
             # print(self.check_available_skill_list(image_test))
             cvt_img = cv2.cvtColor(np.array(image_test), cv2.COLOR_RGB2BGR)
             gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
@@ -157,13 +157,23 @@ class throne_script:
                         config_skill_counter+=1
         diagnostic_file = open('diagnostic.txt','w')
 
-        # crop_values = (0, 1268, 3440, 1269)
-        # image_test = Image.open('clients/test.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # print(self.check_available_skill_list(image_test_crop)[0])
-        # image_test = Image.open('clients/test2.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # print(self.check_available_skill_list(image_test_crop)[0])
+        crop_values = (0, 1268, 3440, 1269)
+        print('testt1')
+        image_test = Image.open('clients/testt1.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        self.check_available_skill_list(image_test_crop)[0]
+        print('testt2')
+        image_test = Image.open('clients/testt2.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        self.check_available_skill_list(image_test_crop)[0]
+        print('testt3')
+        image_test = Image.open('clients/testt3.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        self.check_available_skill_list(image_test_crop)[0]
+        print('testt4')
+        image_test = Image.open('clients/testt4.jpg')
+        image_test_crop = image_test.crop(crop_values)
+        self.check_available_skill_list(image_test_crop)[0]
         # image_test = Image.open('clients/test3.jpg')
         # image_test_crop = image_test.crop(crop_values)
         # print(self.check_available_skill_list(image_test_crop)[0])
@@ -220,7 +230,7 @@ class throne_script:
         # time.sleep(4 * time_helper)
         # self.keyboard.press(self.dodge_button)
         # self.keyboard.release(self.dodge_button)
-        # # time.sleep(0.57 * time_helper)`5
+        # # time.sleep(0.57 * time_helper)
         # self.keyboard.press(self.morph_button)
         # self.keyboard.release(self.morph_button)
         # time.sleep(8.5 * time_helper)
@@ -237,8 +247,7 @@ class throne_script:
         self.keyboard.release(self.dodge_button)
         self.keyboard.release('a')
 
-        # self.timer_boolean = True`
-
+        # self.timer_boolean = True
         # self.timer = time.time()
         # self.do_dungeon = False
 
@@ -297,8 +306,8 @@ class throne_script:
                                 self.keyboard.press(self.skill_dict[current_combo][0])
                                 self.keyboard.press(self.skill_dict[current_combo][1])
                                 time.sleep(1)
-                                self.keyboard.release(self.skill_dict[current_combo][0])
                                 self.keyboard.release(self.skill_dict[current_combo][1])
+                                self.keyboard.release(self.skill_dict[current_combo][0])
                             else:
                                 self.keyboard.press(self.skill_dict[current_combo])
                                 time.sleep(1)
@@ -308,8 +317,8 @@ class throne_script:
                                 self.keyboard.press(self.skill_dict[current_combo][0])
                                 self.keyboard.press(self.skill_dict[current_combo][1])
                                 time.sleep(1)
-                                self.keyboard.release(self.skill_dict[current_combo][0])
                                 self.keyboard.release(self.skill_dict[current_combo][1])
+                                self.keyboard.release(self.skill_dict[current_combo][0])
                             else:
                                 self.keyboard.press(self.skill_dict[current_combo])
                                 self.keyboard.release(self.skill_dict[current_combo])
@@ -411,7 +420,7 @@ class throne_script:
                 if self.phase_counter == 1: # ------------------------ enter dungeon
                     print('moving to boss')
                     self.move_to_boss_two()
-                    # self.move_to_boss_two_non_gs()
+                    self.move_to_boss_two_non_gs()
                 if self.phase_counter == 2: # ------------------------ move to boss
                     self.keyboard.press(Key.tab)
                     self.keyboard.release(Key.tab)
@@ -528,10 +537,11 @@ class throne_script:
             self.target_check_values = constant_value
             return True
         else:
-            # for value in gray[0]:
-            #     if self.target_check_values_list != value and value != 116:
-            #         return False
-            return self.target_check_values_list == gray[0]
+
+            for value in gray[0]:
+                if self.target_check_values_list != value:
+                    return False
+            return True
 
     # polish crystal farm
     def check_available_skill_list(self, ss):
@@ -573,6 +583,8 @@ class throne_script:
             slot_count += 1
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
+        print(available_attacks_p1)
+        print('test')
         self.diagnostic_write_to += str(temp_all) + '\n'
         return return_command
 

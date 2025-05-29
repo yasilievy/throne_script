@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="update to alio to add diagnostics">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="commit be fore testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagnostic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/diagnostic.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config_backup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config_backup.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -386,7 +389,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748446854022</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="commit be fore testing">
+      <option name="closed" value="true" />
+      <created>1748482051857</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1748482051857</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -401,6 +412,7 @@
     <MESSAGE value="update to alio" />
     <MESSAGE value="update to alio to add diagnostics" />
     <MESSAGE value="implemented the second cast appropriately" />
-    <option name="LAST_COMMIT_MESSAGE" value="implemented the second cast appropriately" />
+    <MESSAGE value="commit be fore testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit be fore testing" />
   </component>
 </project>
