@@ -20,7 +20,7 @@ class throne_script:
         self.button_open_two = True
         self.timer = None
         self.timer_boolean = False
-        self.initial_skill_list_scan = False
+        self.initialize_config = False
 
         # skill keybinding dictionary
         self.skill_dict = {
@@ -69,9 +69,6 @@ class throne_script:
         self.skill_pixel_incres = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.check_skill_coord = (0, 1045, 1920, 1)
-
-
-
         self.initialize_config_recalibrate()
 
     def initialize_config_recalibrate(self):
@@ -80,7 +77,7 @@ class throne_script:
         self.config_file = open('throne_script_config.txt','r+')
         config_file_read = self.config_file.read()
         if len(config_file_read) == 0:
-            self.initial_skill_list_scan = True
+            self.initialize_config = True
             write_to = ''
             print('config file is empty\nstarting initialization')
             print('setting target values')
@@ -88,19 +85,23 @@ class throne_script:
             # initial_screenshot = None
             while True:
                 time.sleep(0.5)
-                initial_screenshot = pyautogui.screenshot(region=self.check_skill_coord)
-                if self.check_target(initial_screenshot):
+                initial_target_screenshot = pyautogui.screenshot(region=self.check_target_coord)
+                if self.check_target(initial_target_screenshot):
                     print('setting target values completed')
                     write_to += f'target_value={self.target_check_values}\n' # value is set in self.check_target()
                     break
             print('setting skill list values')
-            self.initialize_skill_list(initial_screenshot)
-            write_to += f'skill_values={','.join(str(v) for v in self.skill_list_available)}'  # value is set in self.initialize_skill_list_check()
+            initial_skill_screenshot = pyautogui.screenshot(region=self.check_skill_coord)
+            self.initialize_skill_list(initial_skill_screenshot)
+            write_to += f'skill_values={','.join(str(v) for v in self.skill_list_available)}\n'  # value is set in self.initialize_skill_list_check()
             print('setting skill list values completed')
 
+            initial_loading_screenshot = pyautogui.screenshot(region=self.check_loading_screen_coord)
+            self.check_loading_screen_value = self.check_loading_screen(initial_loading_screenshot)[0]
+            write_to += f'loading_screen_value={self.check_loading_screen_value}'
             self.config_file.write(write_to)
             self.config_file.close()
-            self.initial_skill_list_scan = False
+            self.initialize_config = False
         else:
             print('config file exists, skipping initialization')
             self.config_file.close()
@@ -115,6 +116,8 @@ class throne_script:
                     for skill_value in value.split(','):
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
+                if 'loading' in setting:
+                    self.check_loading_screen_value = int(value)
             # print('testt4')
             # image_test = Image.open('clients/testt4.jpg')
             # check_target_coord = (1064, 810, 1073, 811)
@@ -481,16 +484,16 @@ class throne_script:
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        if self.quick_scan:
+            print(gray[0])
         # print(f'check target {gray[0]}')
-        if self.initial_skill_list_scan:
+        if self.initialize_config:
             constant_value = gray[0][0]
             for value in gray[0]:
                 if constant_value != value:
                     return False
             self.target_check_values = constant_value
             return True
-        elif self.quick_scan:
-            print(gray[0])
         else:
             for value in gray[0]:
                 if self.target_check_values != value and value != 116:
@@ -501,7 +504,8 @@ class throne_script:
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        print(f'check loading screen: {gray[0]}')
+        if self.quick_scan:
+            print(f'check loading screen: {gray[0]}')
         return gray[0]
 
     def read_chat(self,ss):

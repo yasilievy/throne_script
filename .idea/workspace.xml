@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="got the script to work for alio. may need him to send his version to me">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="major clean up for polish crystal script">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screenshot_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/screenshot_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -404,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748530400671</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="major clean up for polish crystal script">
+      <option name="closed" value="true" />
+      <created>1748547664115</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1748547664115</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -421,6 +428,7 @@
     <MESSAGE value="implemented the second cast appropriately" />
     <MESSAGE value="commit be fore testing" />
     <MESSAGE value="got the script to work for alio. may need him to send his version to me" />
-    <option name="LAST_COMMIT_MESSAGE" value="got the script to work for alio. may need him to send his version to me" />
+    <MESSAGE value="major clean up for polish crystal script" />
+    <option name="LAST_COMMIT_MESSAGE" value="major clean up for polish crystal script" />
   </component>
 </project>
