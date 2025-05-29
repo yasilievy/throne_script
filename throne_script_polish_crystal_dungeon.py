@@ -118,6 +118,7 @@ class throne_script:
                         config_skill_counter+=1
                 if 'loading' in setting:
                     self.check_loading_screen_value = int(value)
+
             # print('testt4')
             # image_test = Image.open('clients/testt4.jpg')
             # check_target_coord = (1064, 810, 1073, 811)
@@ -449,7 +450,6 @@ class throne_script:
                 accum += inc
                 skill_value = gray[0][x1 + accum]
                 temp_all.append((slot_count, int(skill_value)))
-                # print(f'{slot_count} : {skill_value}')
                 if skill_value == self.skill_list_available[inc_counter]:
                     if slot_count in attacks_p1:
                         available_attacks.append((slot_count, int(skill_value)))
@@ -461,7 +461,6 @@ class throne_script:
         return available_attacks
 
     def initialize_skill_list(self,ss):
-        temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         skip_skill_slot = []
@@ -481,7 +480,6 @@ class throne_script:
             inc_counter += 1
 
     def check_target(self, ss):
-        temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         if self.quick_scan:
@@ -501,7 +499,6 @@ class throne_script:
             return True
 
     def check_loading_screen(self,ss):
-        temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         if self.quick_scan:
