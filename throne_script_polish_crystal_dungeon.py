@@ -66,7 +66,6 @@ class throne_script:
         self.skill_set_two_x1 = 1009
 
         self.skill_pixel_edge = [605,663,720,778,836,894,1009,1067,1125,1183,1241,1298]
-        self.skill_pixel_incres = [0, 58, 57, 58, 58, 59, 0, 58, 58, 58, 58, 57]
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.check_skill_coord = (0, 1045, 1920, 1)
         self.initialize_config_recalibrate()
@@ -196,7 +195,7 @@ class throne_script:
         skill_counter = 0
         self.combo_sequence = self.check_combo_sequence()
         while self.do_dungeon or self.do_combo:
-            print(skill_counter)
+            # print(skill_counter)
             if skill_counter == len(self.combo_sequence):
                 break
             else:
@@ -207,19 +206,31 @@ class throne_script:
                         screen_shot = pyautogui.screenshot(region=self.check_skill_coord)
                         skill_status_p1 = self.check_available_skill_list(screen_shot)
                         if len(skill_status_p1) != 0:
+                            current_button_to_press = self.skill_dict[current_combo]
                             rendered_skill_status_p1 = [s_s_p1[0] for s_s_p1 in skill_status_p1]
                             if current_combo not in rendered_skill_status_p1:
                                 break
-                            elif current_combo == 2 or current_combo == 3:  #
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                time.sleep(1)
-                                self.keyboard.release(self.skill_dict[current_combo])
-                            elif current_combo == 4:
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                self.keyboard.release(self.skill_dict[current_combo])
-                                time.sleep(0.1)
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                self.keyboard.release(self.skill_dict[current_combo])
+                            elif current_combo == 2 or current_combo == 3:
+                                if isinstance(current_button_to_press, list):
+                                    self.keyboard.press(self.skill_dict[current_combo][0])
+                                    self.keyboard.press(self.skill_dict[current_combo][1])
+                                    time.sleep(1)
+                                    self.keyboard.release(self.skill_dict[current_combo][0])
+                                    self.keyboard.release(self.skill_dict[current_combo][1])
+                                else:
+                                    self.keyboard.press(self.skill_dict[current_combo])
+                                    time.sleep(1)
+                                    self.keyboard.release(self.skill_dict[current_combo])
+                            else:
+                                if isinstance(current_button_to_press, list):
+                                    self.keyboard.press(self.skill_dict[current_combo][0])
+                                    self.keyboard.press(self.skill_dict[current_combo][1])
+                                    time.sleep(1)
+                                    self.keyboard.release(self.skill_dict[current_combo][0])
+                                    self.keyboard.release(self.skill_dict[current_combo][1])
+                                else:
+                                    self.keyboard.press(self.skill_dict[current_combo])
+                                    self.keyboard.release(self.skill_dict[current_combo])
 
                             # staff combo
                             # elif current_combo == 1:
@@ -239,16 +250,17 @@ class throne_script:
                             #     # self.keyboard.press(self.skill_dict[current_combo])
                             #     # self.keyboard.release(self.skill_dict[current_combo])
 
-                            else:
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                self.keyboard.release(self.skill_dict[current_combo])
+                            # else:
+                            #     self.keyboard.press(self.skill_dict[current_combo])
+                            #     self.keyboard.release(self.skill_dict[current_combo])
                             time.sleep(0.1)
                     else:
                         break
             skill_counter += 1
     def do_kill_confirm(self):
         while self.do_dungeon:
-            screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
+            while self.check_target(pyautogui.screenshot(region=self.check_target_coord))
+            # screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
             if self.check_target(screen_shot_check_target):
                 self.keyboard.press(self.skill_dict[2])
                 self.keyboard.release(self.skill_dict[2])
@@ -377,7 +389,6 @@ class throne_script:
                     print(f'self.keyboard.press({'{0}'.format(key)})')
                     self.timer = new_time
             # print(new_time - self.timer)
-        pass
 
     def on_release(self,key):
         # print('{0}'.format(key))
@@ -432,23 +443,15 @@ class throne_script:
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        x1 = self.skill_set_one_x1
-
         skip_skill_slot = []
         attacks_p1 = [1,2,3,4,5,6,7,8,9,10,11,12]
         available_attacks = []
-
         temp_all = []
         slot_count = 1
-        accum = 0
         inc_counter = 0
-        for inc in self.skill_pixel_incres:
-            if slot_count == 7:
-                x1 = self.skill_set_two_x1
-                accum = 0
+        for x_coord in self.skill_pixel_edge:
             if slot_count not in skip_skill_slot:
-                accum += inc
-                skill_value = gray[0][x1 + accum]
+                skill_value = gray[0][x_coord]
                 temp_all.append((slot_count, int(skill_value)))
                 if skill_value == self.skill_list_available[inc_counter]:
                     if slot_count in attacks_p1:
@@ -464,17 +467,11 @@ class throne_script:
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         skip_skill_slot = []
-        x1 = self.skill_set_one_x1
         slot_count = 1
         inc_counter = 0
-        x1_accum = 0
-        for inc in self.skill_pixel_incres:
-            if slot_count == 7:
-                x1 = self.skill_set_two_x1
-                x1_accum = 0
+        for x_coord in self.skill_pixel_edge:
             if slot_count not in skip_skill_slot:
-                x1_accum += inc
-                skill_pixel_value = gray[0][x1 + x1_accum]
+                skill_pixel_value = gray[0][x_coord]
                 self.skill_list_available[inc_counter] = skill_pixel_value
             slot_count += 1
             inc_counter += 1
