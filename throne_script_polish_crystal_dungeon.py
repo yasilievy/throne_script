@@ -186,18 +186,18 @@ class throne_script:
             self.do_dungeon = False
         elif path_number == 0:
             self.keyboard.press('w')
-            self.keyboard.press(Key.shift)
-            self.keyboard.release(Key.shift)
+            self.keyboard.press(self.morph_button)
+            self.keyboard.release(self.morph_button)
             time.sleep(5 * time_helper)
-            self.keyboard.press('5')
-            self.keyboard.release('5')
+            self.keyboard.press(self.stealth_button)
+            self.keyboard.release(self.stealth_button)
             time.sleep(15 * time_helper_two)
             self.keyboard.press('d')
-            self.keyboard.press(Key.shift)
-            self.keyboard.release(Key.shift)
+            self.keyboard.press(self.morph_button)
+            self.keyboard.release(self.morph_button)
             time.sleep(4.5 * time_helper)
             self.keyboard.release('d')
-            time.sleep(8.5 * time_helper)
+            time.sleep(8.2 * time_helper)
             self.keyboard.release('w')
         elif path_number == 1:
             time_helper = 1
