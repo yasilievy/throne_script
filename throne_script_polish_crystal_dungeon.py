@@ -22,7 +22,7 @@ class throne_script:
         self.movement_record_timer = None
         self.movement_record_bool = False
         self.initialize_config = False
-
+        self.diagnostic_write_to = ''
         self.active_duration = time.time()
 
 
@@ -32,41 +32,43 @@ class throne_script:
 
         # start ------- Configure variables
         self.skill_dict = {
-            1: '1',
-            2: '2',
+            1: [Key.shift,'f'],
+            2: 'f',
             3: '3',
             4: '4',
-            5: '5',
-            6: Key.f7,
-            7: Key.f1,
-            8: Key.f2,
-            9: Key.f4,
-            10: 'e',
-            11: 'r',
-            12: 't',
+            5: 'r',
+            6: 'e',
+            7: [Key.shift,'4'],
+            8: [Key.shift,'v'],
+            9: 'v',
+            10: [Key.shift,'r'],
+            11: [Key.shift,'q'],
+            12: [Key.shift,'e'],
             13: 'x',
             14: 'c'
         }
-        self.diagnostic_write_to = ''
+
         self.yes_button = 'y'
-        self.stealth_button = '5'
+        self.stealth_button = 'r'
         self.dodge_button = 'q'
-        self.morph_button = Key.shift
+        self.morph_button = 'y'
         self.open_co_op_menu_button = Key.f11
 
-        self.manage_party_coord = (19, 12)
-        self.manage_party_leave_coord = (445, 330)
-        self.exit_dungeon = (1870, 280)
+        self.manage_party_coord = (879, 998)
+        self.manage_party_leave_coord = (536, 470)
+        self.exit_dungeon = (3378, 328)
         self.read_chat_coord = (30, 942, 165, 41)
-        self.check_loading_screen_coord = (729, 781, 1, 1)
+        self.check_loading_screen_coord = (1318, 1008, 1, 1)
         self.check_loading_screen_value = 255 # need to scan a screenshot
-        self.check_target_coord = (1064, 810, 9, 1)
+        self.check_target_coord = (1503, 791, 9, 1)
         self.target_check_values = 115 # need to scan a screenshot
-        self.enter_dungeon_coord = (960, 1000)
+        self.enter_dungeon_coord = (1716, 1352)
 
-        self.skill_pixel_edge = [605,663,720,778,836,894,1009,1067,1125,1183,1241,1298]
+        self.skill_pixel_edge = [1279,1367,1436,1505,1574,1642,1758,1827,1915,1964,2033,2102]
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-        self.check_skill_coord = (0, 1045, 1920, 1)
+        self.check_skill_coord = (0, 1268, 3440, 1)
+
+        self.movement_speed = 687
 
         # end --------- Configure variables
 
@@ -164,7 +166,7 @@ class throne_script:
 
     def move_to_boss(self):
         self.get_diagnostic_write_to_string('moving to boss')
-        movement_speed = 630
+        movement_speed = self.movement_speed
         time_helper = 1 - ((movement_speed - 600) / 600)
         time_helper_two = 1 - ((movement_speed - 600) / 600 /2 )
 
@@ -197,7 +199,7 @@ class throne_script:
             self.keyboard.release(Key.shift)
             time.sleep(4.5 * time_helper)
             self.keyboard.release('d')
-            time.sleep(8.5 * time_helper)
+            time.sleep(8.2 * time_helper)
             self.keyboard.release('w')
         elif path_number == 1:
             time_helper = 1
