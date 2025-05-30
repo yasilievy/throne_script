@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="major clean up for polish crystal script">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="commit before improving polish crystal dungeon to accomodate for updates and new expectations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -117,7 +116,7 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.throne_script_polish_crystal_dungeon">
-    <configuration name="throne_script_dungeon_staff" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,7 +129,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/throne_script_dungeon_staff.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -230,10 +229,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_polish_crystal_dungeon alio-29MAY2025" />
         <item itemvalue="Python.throne_script_ravager" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
-        <item itemvalue="Python.throne_script_dungeon_staff" />
       </list>
     </recent_temporary>
   </component>
@@ -429,7 +428,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748549362912</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="commit before improving polish crystal dungeon to accomodate for updates and new expectations">
+      <option name="closed" value="true" />
+      <created>1748616150892</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1748616150892</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -447,6 +454,7 @@
     <MESSAGE value="commit be fore testing" />
     <MESSAGE value="got the script to work for alio. may need him to send his version to me" />
     <MESSAGE value="major clean up for polish crystal script" />
-    <option name="LAST_COMMIT_MESSAGE" value="major clean up for polish crystal script" />
+    <MESSAGE value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
   </component>
 </project>
