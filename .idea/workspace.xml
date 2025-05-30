@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="commit before improving polish crystal dungeon to accomodate for updates and new expectations">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +114,7 @@
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.throne_script_polish_crystal_dungeon">
+  <component name="RunManager" selected="Python.throne_script_ravager">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -228,10 +227,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.throne_script_ravager" />
         <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_polish_crystal_dungeon alio-29MAY2025" />
-        <item itemvalue="Python.throne_script_ravager" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
       </list>
     </recent_temporary>
