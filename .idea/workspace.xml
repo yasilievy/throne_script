@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="commit before improving polish crystal dungeon to accomodate for updates and new expectations">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="alio remaster commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +51,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main-alio" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,35 +77,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.screenshot_test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.script.executor&quot;: &quot;Run&quot;,
-    &quot;Python.script_2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_fishing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon_staff.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_mob_farmv1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon alio-29MAY2025.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_ravagerv1.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/NOV20/PyCharmMiscProject&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.screenshot_test.executor": "Run",
+    "Python.script.executor": "Run",
+    "Python.script_2.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test_file.executor": "Run",
+    "Python.throne_fishing.executor": "Run",
+    "Python.throne_script.executor": "Run",
+    "Python.throne_script_cry_farm (1).executor": "Run",
+    "Python.throne_script_cry_farm test.executor": "Run",
+    "Python.throne_script_cry_farm.executor": "Run",
+    "Python.throne_script_dungeon.executor": "Run",
+    "Python.throne_script_dungeon_ravager.executor": "Run",
+    "Python.throne_script_dungeon_staff.executor": "Run",
+    "Python.throne_script_mob_farmv1.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon alio-29MAY2025.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon_ravager.executor": "Run",
+    "Python.throne_script_ravager.executor": "Run",
+    "Python.throne_script_ravagerv1.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main-alio-remastered",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/NOV20/PyCharmMiscProject",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\NOV20\PyCharmMiscProject" />
@@ -436,7 +437,31 @@
       <option name="project" value="LOCAL" />
       <updated>1748616150892</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="big updates on polish crystal. ready for delivery">
+      <option name="closed" value="true" />
+      <created>1748635143731</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1748635143731</updated>
+    </task>
+    <task id="LOCAL-00025" summary="alio remaster commit">
+      <option name="closed" value="true" />
+      <created>1748635318036</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1748635318036</updated>
+    </task>
+    <task id="LOCAL-00026" summary="alio remaster commit">
+      <option name="closed" value="true" />
+      <created>1748636627692</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1748636627692</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -455,6 +480,8 @@
     <MESSAGE value="got the script to work for alio. may need him to send his version to me" />
     <MESSAGE value="major clean up for polish crystal script" />
     <MESSAGE value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
+    <MESSAGE value="big updates on polish crystal. ready for delivery" />
+    <MESSAGE value="alio remaster commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="alio remaster commit" />
   </component>
 </project>

@@ -47,6 +47,7 @@ class throne_script:
             13: 'x',
             14: 'c'
         }
+        self.charge_skills = [2, 3]
 
         self.yes_button = 'y'
         self.stealth_button = 'r'
@@ -124,16 +125,6 @@ class throne_script:
                 if 'loading' in setting:
                     self.check_loading_screen_value = int(value)
 
-            # print('testt4')
-            # image_test = Image.open('clients/testt4.jpg')
-            # check_target_coord = (1064, 810, 1073, 811)
-            # image_test_crop = image_test.crop(check_target_coord)
-            # print(self.check_target(image_test_crop))
-            #
-            # check_skill_coord = (0, 1045, 1920, 1046)
-            # image_test_crop = image_test.crop(check_skill_coord)
-            # print(self.check_available_skill_list(image_test_crop))
-
     def get_diagnostic_write_to_string(self,action):
         self.diagnostic_write_to += f'{round(time.time() - self.active_duration,5)} - {action}\n\n'
     def enter_dungeon(self):
@@ -157,13 +148,6 @@ class throne_script:
                 break
             time.sleep(0.5)
 
-    # def do_movements(self,movement_string):
-    #
-    #     movement_list = movement_string.split('\n')
-    #     for movement in movement_list:
-    #         command, action = movement.split(' ')
-    #         if 'hold' in movement:
-
     def move_to_boss(self):
         self.get_diagnostic_write_to_string('moving to boss')
         movement_speed = self.movement_speed
@@ -180,7 +164,7 @@ class throne_script:
         time.sleep(0.2)
         print('moving')
 
-        # path_number = 1
+        path_number = 0
 
         # self.movement_record_bool = True
         if self.movement_record_bool:
@@ -201,31 +185,29 @@ class throne_script:
             self.keyboard.release('d')
             time.sleep(8.2 * time_helper)
             self.keyboard.release('w')
-        elif path_number == 1:
-            time_helper = 1
-            self.keyboard.press('w')
-            self.keyboard.press(Key.shift)
-            self.keyboard.release(Key.shift)
-            time.sleep(4.56 * time_helper)
-            self.keyboard.press('5')
-            self.keyboard.release('5')
-            time.sleep(4.17 * time_helper)
-            self.keyboard.press('a')
-            time.sleep(1.24 * time_helper)
-            self.keyboard.release('a')
-            time.sleep(6.76 * time_helper)
-            self.keyboard.press(Key.shift)
-            self.keyboard.release(Key.shift)
-            time.sleep(2.76 * time_helper)
-            self.keyboard.press('d')
-            time.sleep(4.81 * time_helper)
-            self.keyboard.release('d')
-            time.sleep(5.43 * time_helper)
-            self.keyboard.release('w')
-        else:
-            time_helper = 1
-
-
+        # elif path_number == 1:
+        #     time_helper = 1
+        #     self.keyboard.press('w')
+        #     self.keyboard.press(Key.shift)
+        #     self.keyboard.release(Key.shift)
+        #     time.sleep(4.56 * time_helper)
+        #     self.keyboard.press('5')
+        #     self.keyboard.release('5')
+        #     time.sleep(4.17 * time_helper)
+        #     self.keyboard.press('a')
+        #     time.sleep(1.24 * time_helper)
+        #     self.keyboard.release('a')
+        #     time.sleep(6.76 * time_helper)
+        #     self.keyboard.press(Key.shift)
+        #     self.keyboard.release(Key.shift)
+        #     time.sleep(2.76 * time_helper)
+        #     self.keyboard.press('d')
+        #     time.sleep(4.81 * time_helper)
+        #     self.keyboard.release('d')
+        #     time.sleep(5.43 * time_helper)
+        #     self.keyboard.release('w')
+        # else:
+        #     time_helper = 1
 
     def check_combo_sequence(self):
         combo_sequence_open = open('combo_sequence\\ravager_combo_sequence.txt','r')
@@ -278,18 +260,17 @@ class throne_script:
             if idle_counter == 10:
                 break
     def do_skill(self,skill_slot_to_do):
-        charge_skills = [2,3] # need to config or possibly self.
         skill_key_to_do = self.skill_dict[skill_slot_to_do]
         if isinstance(skill_key_to_do, list):
             self.keyboard.press(skill_key_to_do[0])
             self.keyboard.press(skill_key_to_do[1])
-            if skill_slot_to_do in charge_skills:
+            if skill_slot_to_do in self.charge_skills:
                 time.sleep(1)
             self.keyboard.release(skill_key_to_do[0])
             self.keyboard.release(skill_key_to_do[1])
         else:
             self.keyboard.press(skill_key_to_do)
-            if skill_slot_to_do in charge_skills:
+            if skill_slot_to_do in self.charge_skills:
                 time.sleep(1)
             self.keyboard.release(skill_key_to_do)
     def do_exit_sequence(self, end_timer):

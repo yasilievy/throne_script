@@ -1,12 +1,11 @@
-11, inject venom
-12, umbral spirit
+12, inject venom
+9, umbral spirit
 4, frenzied sword dance
-10, willbreaker
 6, cruel smite
 8, gaia crash
-9, fatal stigma
+10, fatal stigma
+11, willbreaker
 7, stunning blow
-3, guillotine blade
-1, ascending slash
 2, death blow
-6, cruel smite
+1, ascending slash
+3, guillotine blade
