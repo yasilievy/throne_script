@@ -36,6 +36,7 @@ class throne_script:
 
         self.initialize_config()
 
+        self.script_to_do = 0
 
 
         self.skill_pause_counter = 0
@@ -56,6 +57,7 @@ class throne_script:
             13: 'x',
             14: 'c'
         }
+        self.skill_charge = [2,3]
         self.second_cast_skill = [1,4,11]
 
     def initialize_config(self):
@@ -264,7 +266,7 @@ class throne_script:
                 #             break
                 #     next_target_counter = 0
                 screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
-                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,0)
+                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,2)
                 if buff_status != 0:
                     # print(f'casting buff {buff_status}')
                     self.keyboard.press(self.skill_dict[buff_status])
@@ -279,8 +281,6 @@ class throne_script:
                         jump_counter = 0
                         if skill_status_p1 != 0:
                             skill_to_use = self.skill_dict[skill_status_p1]
-                            self.keyboard.press(skill_to_use)
-                            self.keyboard.release(skill_to_use)
                             if skill_status_p1 == 2 or skill_status_p1 == 3:
                                 self.keyboard.press(skill_to_use)
                                 time.sleep(1)
@@ -508,44 +508,26 @@ class throne_script:
             self.static_bool = False
             return False
         if '`' in '{0}'.format(key):
-            # if self.do_con
-            # tracts = True
-            if self.do_bot:
-                print('turning off script')
-                self.do_bot = False
+            if self.do_contracts:
+                print('turning off contracts')
+                self.do_contracts = False
             else:
-                print('turning on script')
-                self.do_bot = True
-        # if '<101>' in '{0}'.format(key): # keypad 5
-        #     if self.do_coordinate_initialize:
-        #         self.clicked_coordinate = True
-        #     else:
-        #         self.do_coordinate_initialize = True
-            # print(self.mouse.position())
+                print('turning on contracts')
+                self.do_contracts = True
+            # if self.do_bot:
+            #     print('turning off script')
+            #     self.do_bot = False
+            # else:
+            #     print('turning on script')
+            #     self.do_bot = True
 
-        # if '<100>' in '{0}'.format(key): # keypad 4
-        #     if self.do_dungeon:
-        #         print('turning off dungeon')
-        #         self.do_dungeon = False
-        #     else:
-        #         print('turning on dungeon')
-        #         self.do_dungeon = True
-        # if '<99>' in '{0}'.format(key): # keypad 3
-        #     if self.do_combo:
-        #         print('turning off combo three')
-        #         self.do_combo = False
-        #     else:
-        #         print('turning on combo three')
-        #         self.combo_to_do = 3
-        #         self.do_combo = True
-        # if '<98>' in '{0}'.format(key): # keypad 2
-        #     if self.do_combo:
-        #         print('turning off combo two')
-        #         self.do_combo = False
-        #     else:
-        #         print('turning on combo two')
-        #         self.combo_to_do = 2
-        #         self.do_combo = True
+        if '/' in '{0}'.format(key): # keypad 2
+            if self.do_contracts:
+                print('turning off contracts')
+                self.do_contracts = False
+            else:
+                print('turning on contracts')
+                self.do_contracts = True
         if '+' in '{0}'.format(key): # keypad 1
             if self.do_combo:
                 print('turning off combo one')
