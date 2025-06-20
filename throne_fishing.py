@@ -26,7 +26,7 @@ class throne_script:
             while self.do_fish:
                 if drag_bool:
                     # fish_test = open('fish_test\\fish_test.txt', 'w')
-                    # write_to = ''
+                    # write_to = ''W
                     print('dragging')
                     cast_bool = True
                     left_button_hold = False

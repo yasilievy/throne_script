@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="alio update">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="big updates since last. making some major changes">
+      <change afterPath="$PROJECT_DIR$/combo_sequence/archwizard.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/combo_sequence backup.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/dren.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/gate_of_infinity_combo_sequence.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/gate_of_infinity_combo_sequence_extended.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/nebula.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/pvp_combo_sequence.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/regular_dungeon_combo_sequence.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_ravager.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_ravager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/ravager_combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_fishing.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_fishing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_mob_farmv1.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_mob_farmv1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,16 +109,18 @@
     &quot;Python.throne_script_polish_crystal_dungeon_ravager.executor&quot;: &quot;Run&quot;,
     &quot;Python.throne_script_ravager.executor&quot;: &quot;Run&quot;,
     &quot;Python.throne_script_ravagerv1.executor&quot;: &quot;Run&quot;,
+    &quot;Python.throne_script_ravagerv2.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/NOV20/PyCharmMiscProject&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/NOV20/PyCharmMiscProject/combo_sequence&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\NOV20\PyCharmMiscProject\combo_sequence" />
       <recent name="C:\Users\NOV20\PyCharmMiscProject" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -114,7 +129,7 @@
       <recent name="C:\Users\NOV20\PyCharmMiscProject\clients" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.throne_script_ravager">
+  <component name="RunManager" selected="Python.throne_fishing">
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyCharmMiscProject" />
       <option name="ENV_FILES" value="" />
@@ -129,6 +144,29 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="throne_fishing" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="PyCharmMiscProject" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="SDK_NAME" value="Python 3.12 (PyCharmMiscProject)" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/throne_fishing.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -225,13 +263,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.throne_fishing" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.throne_script_mob_farmv1" />
+      <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
+      <item itemvalue="Python.throne_script_polish_crystal_dungeon alio-29MAY2025" />
+      <item itemvalue="Python.throne_script_ravager" />
+    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.throne_script_mob_farmv1" />
         <item itemvalue="Python.throne_script_ravager" />
         <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_polish_crystal_dungeon alio-29MAY2025" />
-        <item itemvalue="Python.throne_script_mob_farmv1" />
       </list>
     </recent_temporary>
   </component>
@@ -435,7 +481,15 @@
       <option name="project" value="LOCAL" />
       <updated>1748616150892</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="big updates since last. making some major changes">
+      <option name="closed" value="true" />
+      <created>1750387649761</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1750387649761</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -454,6 +508,7 @@
     <MESSAGE value="got the script to work for alio. may need him to send his version to me" />
     <MESSAGE value="major clean up for polish crystal script" />
     <MESSAGE value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit before improving polish crystal dungeon to accomodate for updates and new expectations" />
+    <MESSAGE value="big updates since last. making some major changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="big updates since last. making some major changes" />
   </component>
 </project>

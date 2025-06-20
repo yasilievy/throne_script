@@ -1,11 +1,10 @@
 11, inject venom
 12, umbral spirit
-4, precision dash
 10, willbreaker
 8, gaia crash
 1, mad sword dance
 6, cruel smite
-4, precision dash
 9, fatal stigmas
+4, precision dash
 7, stunning blow
 3, guillotine blade

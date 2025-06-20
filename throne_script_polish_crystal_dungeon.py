@@ -68,6 +68,9 @@ class throne_script:
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
         self.check_skill_coord = (0, 1045, 1920, 1)
 
+        self.charge_skills = [2,3]
+        self.charge_skill_delay = 0.8
+
         # end --------- Configure variables
 
         self.initialize_config_recalibrate()
@@ -122,20 +125,9 @@ class throne_script:
                 if 'loading' in setting:
                     self.check_loading_screen_value = int(value)
 
-            # print('testt4')
-            # image_test = Image.open('clients/testt4.jpg')
-            # check_target_coord = (1064, 810, 1073, 811)
-            # image_test_crop = image_test.crop(check_target_coord)
-            # print(self.check_target(image_test_crop))
-            #
-            # check_skill_coord = (0, 1045, 1920, 1046)
-            # image_test_crop = image_test.crop(check_skill_coord)
-            # print(self.check_available_skill_list(image_test_crop))
-
     def get_diagnostic_write_to_string(self,action):
         self.diagnostic_write_to += f'{round(time.time() - self.active_duration,5)} - {action}\n\n'
     def enter_dungeon(self):
-        print('entering dungeon')
         self.get_diagnostic_write_to_string('entering dungeon')
         self.mouse.position = self.manage_party_coord
         self.mouse.click(Button.left)
@@ -178,7 +170,7 @@ class throne_script:
         time.sleep(0.2)
         print('moving')
 
-        # path_number = 1
+        # path_number = 0
 
         # self.movement_record_bool = True
         if self.movement_record_bool:
@@ -195,9 +187,9 @@ class throne_script:
             self.keyboard.press('d')
             self.keyboard.press(self.morph_button)
             self.keyboard.release(self.morph_button)
-            time.sleep(4.5 * time_helper)
+            time.sleep(4.9 * time_helper)
             self.keyboard.release('d')
-            time.sleep(8.2 * time_helper)
+            time.sleep(7.4 * time_helper)
             self.keyboard.release('w')
         elif path_number == 1:
             time_helper = 1
@@ -216,14 +208,12 @@ class throne_script:
             self.keyboard.release(Key.shift)
             time.sleep(2.76 * time_helper)
             self.keyboard.press('d')
-            time.sleep(4.81 * time_helper)
+            time.sleep(5.1 * time_helper)
             self.keyboard.release('d')
             time.sleep(5.43 * time_helper)
             self.keyboard.release('w')
         else:
             time_helper = 1
-
-
 
     def check_combo_sequence(self):
         combo_sequence_open = open('combo_sequence\\ravager_combo_sequence.txt','r')
@@ -273,22 +263,21 @@ class throne_script:
                 self.keyboard.press(Key.tab)
                 self.keyboard.release(Key.tab)
                 idle_counter +=1
-            if idle_counter == 10:
+            if idle_counter == 20:
                 break
     def do_skill(self,skill_slot_to_do):
-        charge_skills = [2,3] # need to config or possibly self.
         skill_key_to_do = self.skill_dict[skill_slot_to_do]
         if isinstance(skill_key_to_do, list):
             self.keyboard.press(skill_key_to_do[0])
             self.keyboard.press(skill_key_to_do[1])
-            if skill_slot_to_do in charge_skills:
-                time.sleep(1)
+            if skill_slot_to_do in self.charge_skills:
+                time.sleep(self.charge_skill_delay)
             self.keyboard.release(skill_key_to_do[0])
             self.keyboard.release(skill_key_to_do[1])
         else:
             self.keyboard.press(skill_key_to_do)
-            if skill_slot_to_do in charge_skills:
-                time.sleep(1)
+            if skill_slot_to_do in self.charge_skills:
+                time.sleep(self.charge_skill_delay)
             self.keyboard.release(skill_key_to_do)
     def do_exit_sequence(self, end_timer):
         self.get_diagnostic_write_to_string('exiting dungeon')
@@ -308,15 +297,16 @@ class throne_script:
                     self.keyboard.release('b')
                     teleport_counter = 0
                     while self.do_dungeon:
+                        print('do_exit_sequence while loop')
                         teleport_counter +=1
                         if teleport_counter > 5:
                             break
                         self.keyboard.press(Key.tab)
                         self.keyboard.release(Key.tab)
                         if self.check_target(pyautogui.screenshot(region=self.check_target_coord)):
-                            self.phase_counter = 2
+                            self.phase_counter = 1
                             break
-                        time.sleep(1.02)
+                        time.sleep(1.01)
             else:
                 have_not_exited = False
                 screen_shot_check_loading_screen = pyautogui.screenshot(region=self.check_loading_screen_coord)
@@ -372,6 +362,7 @@ class throne_script:
                     if self.check_target(screen_shot_check_target):
                         print('boss is not dead yet, double tapping')
                         self.do_clear_monsters()
+                        print('boss is dead')
                     else:
                         print('boss is dead')
 
@@ -516,6 +507,8 @@ class throne_script:
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         if self.quick_scan:
             print(f'check loading screen: {gray[0]}')
+        self.get_diagnostic_write_to_string(f'check loading {gray[0]}')
+
         return gray[0]
 
     def start_assist(self):
