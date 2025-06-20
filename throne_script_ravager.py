@@ -1,5 +1,5 @@
 import pytesseract, pyautogui, time, numpy as np, threading,cv2
-from pynput.keyboard import Key,    Listener
+from pynput.keyboard import Key, Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
 from PIL import ImageGrab
@@ -8,12 +8,16 @@ pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
 
 class throne_script:
     def __init__(self):
+        self.esc_delay_bool = False
+        self.button_press = False
         self.static_bool = True
         self.mouse = mouse.Controller()
         self.keyboard = keyboard.Controller()
         self.button = mouse.Button
         self.do_combo = False
         self.combo_to_do = 0
+        self.do_option = False
+        self.second_esc_to_halt = False
         self.do_nav = False
         self.do_exit = False
         self.do_move = False
@@ -57,8 +61,10 @@ class throne_script:
             13: 'x',
             14: 'c'
         }
-        self.skill_charge = [2,3]
-        self.second_cast_skill = [1,4,11]
+        self.skill_charge = [3]
+        self.skill_charge_hold_time = 1
+        self.second_cast_skill = [11]
+        # self.second_cast_skill = []
 
     def initialize_config(self):
         time.sleep(0.2)
@@ -69,19 +75,21 @@ class throne_script:
             self.initial_skill_list_scan = True
             write_to = ''
             print('config file is empty\nstarting initialization')
-            print('setting target values')
-            print('please target something')
-            # initial_screenshot = None
-            while True:
-                time.sleep(0.5)
-                initial_screenshot = pyautogui.screenshot(region=(0,1045,1920,1))
-                # screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
-                if self.check_target(initial_screenshot):
-                    print('setting target values completed')
-                    write_to += f'target_value={self.target_check_values}\n' # value is set in self.check_target()
-                    break
+            # print('setting target values')
+            # print('please target something')
+            # # initial_screenshot = None
+            # while True:
+            #     time.sleep(0.5)
+            #     initial_screenshot = pyautogui.screenshot(region=self.check_target_coord)
+            #     # screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
+            #     if self.check_target(initial_screenshot):
+            #         print('setting target values completed')
+            #         write_to += f'target_value={self.target_check_values}\n' # value is set in self.check_target()
+            #         break
             print('setting skill list values')
-            self.initialize_skill_list_check(initial_screenshot,0)
+            initial_screenshot = pyautogui.screenshot(region=self.check_skill_coord)
+
+            self.initialize_skill_list(initial_screenshot,)
             write_to += f'skill_values={','.join(str(v) for v in self.skill_list_available)}'  # value is set in self.initialize_skill_list_check()
             print('setting skill list values completed')
 
@@ -136,20 +144,20 @@ class throne_script:
                         #     self.skill_pause_counter = True
                         if current_combo not in rendered_skill_status_p1:
                             break
-                        elif current_combo == 2 or current_combo == 3:  #
+                        elif current_combo in self.skill_charge:  #
                             self.keyboard.press(self.skill_dict[current_combo])
-                            time.sleep(1)
+                            time.sleep(self.skill_charge_hold_time)
                             self.keyboard.release(self.skill_dict[current_combo])
-                        elif current_combo == 4:
-                            self.keyboard.press(self.skill_dict[current_combo])
-                            self.keyboard.release(self.skill_dict[current_combo])
-                            time.sleep(0.1)
-                            self.keyboard.press(self.skill_dict[current_combo])
-                            self.keyboard.release(self.skill_dict[current_combo])
+                        # elif current_combo == 4:
+                        #     self.keyboard.press(self.skill_dict[current_combo])
+                        #     self.keyboard.release(self.skill_dict[current_combo])
+                        #     time.sleep(0.1)
+                        #     self.keyboard.press(self.skill_dict[current_combo])
+                        #     self.keyboard.release(self.skill_dict[current_combo])
                         else:
                             self.keyboard.press(self.skill_dict[current_combo])
                             self.keyboard.release(self.skill_dict[current_combo])
-                        time.sleep(0.1)
+                        # time.sleep(0.1)
             skill_counter += 1
 
 
@@ -158,6 +166,26 @@ class throne_script:
 
 
         while self.static_bool:
+            while self.do_nav:
+                self.keyboard.press(Key.f10)
+                self.keyboard.release(Key.f10)
+                time.sleep(0.2)
+                self.mouse.position = (554,132)
+                self.mouse.click(Button.left)
+                time.sleep(0.2)
+                self.mouse.position = (960,1005)
+                self.mouse.click(Button.left)
+                self.do_nav = False
+
+            while self.do_option:
+
+                print('esc - halt\n')
+                option_counter = 1
+                while self.do_option and option_counter <5:
+                    print(f'{option_counter} of 5 time lapsed')
+                    option_counter+=1
+                    time.sleep(1)
+                self.do_option = False
             while self.do_combo:
                 self.do_combo_sequence()
                 self.do_combo = False
@@ -281,7 +309,7 @@ class throne_script:
                         jump_counter = 0
                         if skill_status_p1 != 0:
                             skill_to_use = self.skill_dict[skill_status_p1]
-                            if skill_status_p1 == 2 or skill_status_p1 == 3:
+                            if skill_status_p1 == 20 or skill_status_p1 == 3:
                                 self.keyboard.press(skill_to_use)
                                 time.sleep(1)
                                 self.keyboard.release(skill_to_use)
@@ -414,8 +442,9 @@ class throne_script:
                 # print(time.time() - temp_time)
 
             while self.do_contracts:
+                skill_set = 1
                 screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
-                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,1)
+                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.initialize_skill_list_check(screen_shot,skill_set)
                 if buff_status != 0:
                     self.keyboard.press(self.skill_dict[buff_status])
                     self.keyboard.release(self.skill_dict[buff_status])
@@ -423,15 +452,21 @@ class throne_script:
                     truly_stuck_counter +=1
                     if skill_status_p1 != 0:
                         skill_to_use = self.skill_dict[skill_status_p1]
-                        self.keyboard.press(skill_to_use)
-                        self.keyboard.release(skill_to_use)
-                        # if skill_status_p1 == 2 or skill_status_p1 == 3:
-                        #     self.keyboard.press(skill_to_use)
-                        #     time.sleep(1)
-                        #     self.keyboard.release(skill_to_use)
-                        # else:
-                        #     self.keyboard.press(skill_to_use)
-                        #     self.keyboard.release(skill_to_use)
+                        # self.keyboard.press(skill_to_use)
+                        # self.keyboard.release(skill_to_use)
+                        if skill_status_p1 == 10: # or skill_status_p1 == 3:
+                            self.keyboard.press(skill_to_use)
+                            time.sleep(1.1)
+                            self.keyboard.release(skill_to_use)
+                        elif skill_status_p1 == 4:
+                            self.keyboard.press(skill_to_use)
+                            self.keyboard.release(skill_to_use)
+                            time.sleep(0.1)
+                            self.keyboard.press(skill_to_use)
+                            self.keyboard.release(skill_to_use)
+                        else:
+                            self.keyboard.press(skill_to_use)
+                            self.keyboard.release(skill_to_use)
                     elif skill_status_p2 != 0:
                         skill_to_use = self.skill_dict[skill_status_p2]
                         self.keyboard.press(skill_to_use)
@@ -486,6 +521,13 @@ class throne_script:
         pass
 
     def on_release(self,key):
+        # if '4' in '{0}'.format(key):
+        #     if self.button_press:
+        #         self.button_press = False
+        #     else:
+        #         self.button_press = True
+        #         self.keyboard.press('4')
+        #         self.keyboard.release('4')
         # print('{0}'.format(key))
         if self.timer_boolean and '{0}'.format(key) in ["'w'","'a'","'s'","'d'","'5'", 'Key.shift',"'q'"]:
         # if "'5'" == '{0}'.format(key) or "'a'" == '{0}'.format(key) or "'s'" == '{0}'.format(key) or "'d'" == '{0}'.format(key):
@@ -505,15 +547,24 @@ class throne_script:
                 print(f'self.keyboard.release({'{0}'.format(key)})')
                 self.timer = new_time
         if key == keyboard.Key.esc:
-            self.static_bool = False
-            return False
-        if '`' in '{0}'.format(key):
-            if self.do_contracts:
-                print('turning off contracts')
-                self.do_contracts = False
+            if self.do_option:
+                print('second esc pressed, halting script')
+                self.static_bool = False
+                self.do_option = False
+                return False
             else:
-                print('turning on contracts')
-                self.do_contracts = True
+                print('esc pressed, select option below:')
+                self.do_option = True
+
+
+
+        # if '`' in '{0}'.format(key):
+        #     if self.do_contracts:
+        #         print('turning off contracts')
+        #         self.do_contracts = False
+        #     else:
+        #         print('turning on contracts')
+        #         self.do_contracts = True
             # if self.do_bot:
             #     print('turning off script')
             #     self.do_bot = False
@@ -521,22 +572,23 @@ class throne_script:
             #     print('turning on script')
             #     self.do_bot = True
 
-        if '/' in '{0}'.format(key): # keypad 2
-            if self.do_contracts:
-                print('turning off contracts')
-                self.do_contracts = False
-            else:
-                print('turning on contracts')
-                self.do_contracts = True
-        if '+' in '{0}'.format(key): # keypad 1
+
+        if '`' in '{0}'.format(key):
+
             if self.do_combo:
-                print('turning off combo one')
+                print('turning off bot')
                 self.do_combo = False
             else:
-                print('turning on combo one')
-                self.combo_to_do = 1
+                print('turning on bot')
                 self.do_combo = True
+        if '/' in '{0}'.format(key):
 
+            if self.do_nav:
+                print('turning off nav')
+                self.do_nav = False
+            else:
+                print('turning on nav')
+                self.do_nav = True
 
 
     # polish crystal farm
@@ -568,7 +620,7 @@ class throne_script:
                 if skill_value == self.skill_list_available[inc_counter]:
                     if slot_count in self.second_cast_skill:
                         second_skill_cast_value = gray_two[0][second_skill_cast_x1 + accum]
-                        if second_skill_cast_value >= 200 and second_skill_cast_value <= 240:
+                        if second_skill_cast_value >= 100 and second_skill_cast_value <= 240:
                             print(f'passed slot count: {slot_count}')
                             print(f'passed cast value: {second_skill_cast_value}')
                             # pass
@@ -583,7 +635,7 @@ class throne_script:
             inc_counter += 1
         # print(temp_all)
         return_command = [available_attacks_p1]#,available_attacks_p2, available_distances, available_buffs]
-        print(f'time: {round(time.time()-temp_time,6)}')
+        # print(f'time: {round(time.time()-temp_time,6)}')
         return return_command
 
     def initialize_skill_list(self,ss):
@@ -635,7 +687,6 @@ class throne_script:
             self.target_check_values = constant_value
             return True
         else:
-            print(gray[0])
             for value in gray[0]:
                 if self.target_check_values != value and value != 116:
                 # if value != 42: #42:
@@ -659,6 +710,11 @@ class throne_script:
             # skill set 3 nebula pve manual solo
             attacks_p1 = [4,5,6,7,8,9]
             attacks_p2 = [10,11,12]
+            distances = []
+            buffs = [1,2,3]
+
+            attacks_p1 = [4,5,6,7,8,9,10,11,12]
+            attacks_p2 = []
             distances = []
             buffs = [1,2,3]
         else:
@@ -727,6 +783,7 @@ class throne_script:
                     available_skill_set_list[skill_set_counter] = skill
                     break
             skill_set_counter +=1
+        # print(temp_skill_skill_value)
         return available_skill_set_list
 
     def check_mana(self,ss):
