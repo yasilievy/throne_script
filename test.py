@@ -1,6 +1,7 @@
 
-import time
-print((729, 781, 1, 1))
+import time, datetime
+print(datetime.datetime.now().__str__().split('.')[0])
+# print((729, 781, 1, 1))
 # time_test = time.time()
 # # time.sleep(1.4)
 # print(time.time() - time_test)
