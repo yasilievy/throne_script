@@ -58,28 +58,30 @@ class throne_script:
         self.start_bool = False
 
         # self.manage_party_button = None
-        self.manage_party_coord = (879, 998)
-        self.manage_party_leave_coord = (536, 470)
+        self.manage_party_coord = (602, 734)
+        self.manage_party_leave_coord = (536, 470) # need
 
         self.open_co_op_menu_button = Key.f11
         self.enter_dungeon = (1716, 1352)
 
-        self.check_loading_screen_coord = (1318, 1008, 1, 1)
+        self.check_loading_screen_coord = (963, 743, 1, 1)
         self.check_loading_screen_value = 255 # need to scan a screenshot
 
-        self.check_target_coord = (1503, 791, 9, 1)
+        self.check_target_coord = (1109, 602, 9, 1)
         self.target_check_values = 115 # need to scan a screenshot
         self.target_check_values_list = [0,0,0,0,0,0,0,0,0]
 
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-        self.check_skill_coord = (0, 1268, 3440, 1)
+        self.check_skill_coord = (0, 917, 2560, 1)
+        self.skill_pixel_edge = [935,1004,1059,1113,1167,1222,1309,1363,1432,1472,1526,1581]
+        self.read_chat_coord = (10, 945, 430, 70)
 
-        self.read_chat_coord = (30, 942, 165, 41)
-
-        self.exit_dungeon = (3378, 328)
+        self.exit_dungeon = (3378, 328) # need
         self.yes_button = 'y'
         self.diagnostic_write_to = ''
         self.initialize_config()
+
+        self.hold_time = 1
 
 
     def initialize_config(self):
@@ -89,52 +91,28 @@ class throne_script:
         config_file_read = self.config_file.read()
         if len(config_file_read) == 0:
             self.initial_skill_list_scan = True
-
-            image_test = Image.open('clients\\testt4.JPG')
-            # print(self.check_available_skill_list(image_test))
-            cvt_img = cv2.cvtColor(np.array(image_test), cv2.COLOR_RGB2BGR)
-            gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
-            thresh, im_bw = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY)  # | cv2.THRESH_OTSU)
-
-            y1 = 1268
-            x1 = 1279
-            x2 = 1367
-            x3 = 1436
-            x4 = 1505
-            x5 = 1574
-            x6 = 1642
-            x7 = 1758
-            x8 = 1827
-            x9 = 1915
-            x10 = 1964
-            x11 = 2033
-            x12 = 2102
-            pixel_list = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12]
-            skill_pixel_value = []
-            counter = 1
-            gray_cropped = gray[y1:y1 + 1, 0:3440]
-            for x_p in pixel_list:
-                # gray_cropped = gray[y1:y1 + 1, x_p:x_p + 1]
-                skill_pixel_value.append(gray_cropped[0][x_p])
-                self.skill_list_available[counter] = gray_cropped[0][x_p]
-                print(f'{counter}: {gray_cropped[0][x_p]}')
-                counter += 1
-
             write_to = ''
-            print('config file is empty\nstarting initialization')
-            print('setting target values and available skill pixel values')
-            target_value_screenshot = pyautogui.screenshot(region=self.check_target_coord)
-            cvt_img = cv2.cvtColor(np.array(target_value_screenshot), cv2.COLOR_RGB2BGR)
-            gray = cv2.cvtColor(cvt_img, cv2.COLOR_BGR2GRAY)
-            self.target_check_values_list = gray[0]
-            print('setting target values completed')
-            write_to += f'target_value={','.join(str(v) for v in self.target_check_values_list)}\n' # value is set in self.check_target()
-
-            print('setting skill list values')
-            write_to += f'skill_values={','.join(str(v) for v in skill_pixel_value)}'  # value is set in self.initialize_skill_list_check()
-            print('setting skill list values completed')
-
+            print('config file is empty, starting configuration calibration')
+            print('setting {target values}')
+            print('please target something')
+            while True:
+                time.sleep(0.5)
+                initial_target_screenshot = pyautogui.screenshot(region=self.check_target_coord)
+                if self.check_target(initial_target_screenshot):
+                    print('setting {target values} completed')
+                    write_to += f'target_value={self.target_check_values}\n'  # value is set in self.check_target()
+                    break
+            print('setting {skill list values}')
+            initial_skill_screenshot = pyautogui.screenshot(region=self.check_skill_coord)
+            self.initialize_skill_list(initial_skill_screenshot)
+            write_to += f'skill_values={','.join(str(v) for v in self.skill_list_available)}\n'  # value is set in self.initialize_skill_list_check()
+            print('setting {skill list values} completed')
+            print('setting {loading screen value}')
+            initial_loading_screenshot = pyautogui.screenshot(region=self.check_loading_screen_coord)
+            self.check_loading_screen_value = self.check_loading_screen(initial_loading_screenshot)[0]
+            write_to += f'loading_screen_value={self.check_loading_screen_value}'
             self.config_file.write(write_to)
+            print('setting {loading screen value} completed ')
             self.config_file.close()
             self.initial_skill_list_scan = False
         else:
@@ -157,23 +135,23 @@ class throne_script:
                         config_skill_counter+=1
         diagnostic_file = open('diagnostic.txt','w')
 
-        crop_values = (0, 1268, 3440, 1269)
-        print('testt1')
-        image_test = Image.open('clients/testt1.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        self.check_available_skill_list(image_test_crop)[0]
-        print('testt2')
-        image_test = Image.open('clients/testt2.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        self.check_available_skill_list(image_test_crop)[0]
-        print('testt3')
-        image_test = Image.open('clients/testt3.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        self.check_available_skill_list(image_test_crop)[0]
-        print('testt4')
-        image_test = Image.open('clients/testt4.jpg')
-        image_test_crop = image_test.crop(crop_values)
-        self.check_available_skill_list(image_test_crop)[0]
+        # crop_values = (0, 1268, 3440, 1269)
+        # print('testt1')
+        # image_test = Image.open('clients/testt1.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # self.check_available_skill_list(image_test_crop)[0]
+        # print('testt2')
+        # image_test = Image.open('clients/testt2.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # self.check_available_skill_list(image_test_crop)[0]
+        # print('testt3')
+        # image_test = Image.open('clients/testt3.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # self.check_available_skill_list(image_test_crop)[0]
+        # print('testt4')
+        # image_test = Image.open('clients/testt4.jpg')
+        # image_test_crop = image_test.crop(crop_values)
+        # self.check_available_skill_list(image_test_crop)[0]
         # image_test = Image.open('clients/test3.jpg')
         # image_test_crop = image_test.crop(crop_values)
         # print(self.check_available_skill_list(image_test_crop)[0])
@@ -206,69 +184,15 @@ class throne_script:
             time.sleep(0.5)
 
     def move_to_boss_two(self):
-        time_helper = 1.07
-        self.keyboard.press('a')
-        self.keyboard.press(self.dodge_button)
-        self.keyboard.release(self.dodge_button)
-        self.keyboard.release('a')
-        # self.timer_boolean = True
-        # self.timer = time.time()
-
-        # self.do_dungeon = False
-        time.sleep(0.5)
-
-        # self.keyboard.press('w')
-        # self.keyboard.press(self.morph_button)
-        # self.keyboard.release(self.morph_button)
-        # time.sleep(3.24 * time_helper)
-        # self.keyboard.press(self.stealth_button ) # need configuration
-        # self.keyboard.release(self.stealth_button ) # need configuration
-        # time.sleep(5.61 * time_helper)
-        # self.keyboard.press('d')
-        # time.sleep(5.0 * time_helper)
-        # self.keyboard.release('d')
-        # time.sleep(4 * time_helper)
-        # self.keyboard.press(self.dodge_button)
-        # self.keyboard.release(self.dodge_button)
-        # # time.sleep(0.57 * time_helper)
-        # self.keyboard.press(self.morph_button)
-        # self.keyboard.release(self.morph_button)
-        # time.sleep(8.5 * time_helper)
-        # self.keyboard.release('w')
-
-    def move_to_boss_two_non_gs(self):
-        movement_speed = 630
-        # movement_speed = 797
-        time_helper = 1 - ((movement_speed - 600) / 600)
-        time_helper_two = 1 - ((movement_speed - 600) / 600 /2 )
-
         self.keyboard.press('a')
         self.keyboard.press(self.dodge_button)
         self.keyboard.release(self.dodge_button)
         self.keyboard.release('a')
 
-        # self.timer_boolean = True
-        # self.timer = time.time()
-        # self.do_dungeon = False
+        self.timer_boolean = True
+        self.timer = time.time()
+        self.do_dungeon = False
 
-        time.sleep(0.2)
-        print('moving')
-
-        self.keyboard.press('w')
-        self.keyboard.press(self.morph_button)
-        self.keyboard.release(self.morph_button)
-        time.sleep(5 * time_helper_two)
-        self.keyboard.press(self.stealth_button ) # need configuration
-        self.keyboard.release(self.stealth_button ) # need configuration
-        time.sleep(8 * time_helper)
-        self.keyboard.press('d')
-        time.sleep(5.7 * time_helper)
-        self.keyboard.release('d')
-        time.sleep(3)
-        self.keyboard.press(self.morph_button)
-        self.keyboard.release(self.morph_button)
-        time.sleep(9.8 * time_helper_two)
-        self.keyboard.release('w')
 
     def check_combo_sequence(self):
         combo_sequence_open = open('combo_sequence\\ravager_combo_sequence.txt','r')
@@ -305,18 +229,17 @@ class throne_script:
                             if isinstance(current_button_to_press, list):
                                 self.keyboard.press(self.skill_dict[current_combo][0])
                                 self.keyboard.press(self.skill_dict[current_combo][1])
-                                time.sleep(1)
+                                time.sleep(self.hold_time)
                                 self.keyboard.release(self.skill_dict[current_combo][1])
                                 self.keyboard.release(self.skill_dict[current_combo][0])
                             else:
                                 self.keyboard.press(self.skill_dict[current_combo])
-                                time.sleep(1)
+                                time.sleep(self.hold_time)
                                 self.keyboard.release(self.skill_dict[current_combo])
                         else:
                             if isinstance(current_button_to_press, list):
                                 self.keyboard.press(self.skill_dict[current_combo][0])
                                 self.keyboard.press(self.skill_dict[current_combo][1])
-                                time.sleep(1)
                                 self.keyboard.release(self.skill_dict[current_combo][1])
                                 self.keyboard.release(self.skill_dict[current_combo][0])
                             else:
@@ -396,6 +319,18 @@ class throne_script:
                 time.sleep(end_timer)
         self.phase_counter = -1
 
+    def initialize_skill_list(self,ss):
+        img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        skip_skill_slot = []
+        slot_count = 1
+        inc_counter = 0
+        for x_coord in self.skill_pixel_edge:
+            if slot_count not in skip_skill_slot:
+                skill_pixel_value = gray[0][x_coord]
+                self.skill_list_available[inc_counter] = skill_pixel_value
+            slot_count += 1
+            inc_counter += 1
 
     def while_loop(self):
         pyautogui.hotkey('alt', 'tab')
@@ -420,7 +355,7 @@ class throne_script:
                 if self.phase_counter == 1: # ------------------------ enter dungeon
                     print('moving to boss')
                     self.move_to_boss_two()
-                    self.move_to_boss_two_non_gs()
+                    # self.move_to_boss_two_non_gs()
                 if self.phase_counter == 2: # ------------------------ move to boss
                     self.keyboard.press(Key.tab)
                     self.keyboard.release(Key.tab)
@@ -458,37 +393,33 @@ class throne_script:
                 if '{0}'.format(key) in ["'w'","'a'","'s'","'d'","'5'", 'Key.shift', "'q'"]:
                     self.button_open = False
                     new_time = time.time()
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
+                    print(f'time.sleep({round(new_time - self.timer,2)})')
                     print(f'self.keyboard.press({'{0}'.format(key)})')
                     self.timer = new_time
             elif self.button_open_two:
                 if '{0}'.format(key) in ["'w'", "'a'", "'s'", "'d'", "'5'", 'Key.shift', "'q'"]:
                     self.button_open_two = False
                     new_time = time.time()
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
+                    print(f'time.sleep({round(new_time - self.timer,2)})')
                     print(f'self.keyboard.press({'{0}'.format(key)})')
                     self.timer = new_time
-            # self.timer_boolean = True
-            # print(new_time - self.timer)
         pass
 
     def on_release(self,key):
         # print('{0}'.format(key))
         if self.timer_boolean and '{0}'.format(key) in ["'w'","'a'","'s'","'d'","'5'", 'Key.shift',"'q'"]:
-        # if "'5'" == '{0}'.format(key) or "'a'" == '{0}'.format(key) or "'s'" == '{0}'.format(key) or "'d'" == '{0}'.format(key):
-        # if self.timer_boolean:
             if not self.button_open:
                 self.button_open = True
                 new_time = time.time()
                 if '{0}'.format(key) in ["'w'","'a'","'s'","'d'"]:
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
+                    print(f'time.sleep({round(new_time - self.timer,2)})')
                 print(f'self.keyboard.release({'{0}'.format(key)})')
                 self.timer = new_time
             elif not self.button_open_two:
                 self.button_open_two = True
                 new_time = time.time()
                 if '{0}'.format(key) in ["'w'","'a'","'s'","'d'"]:
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
+                    print(f'time.sleep({round(new_time - self.timer,2)})')
                 print(f'self.keyboard.release({'{0}'.format(key)})')
                 self.timer = new_time
 
@@ -510,20 +441,6 @@ class throne_script:
             else:
                 print('turning on combo two')
                 self.do_combo = True
-        # if '-' in '{0}'.format(key): # keypad 2
-        #     if self.do_nav:
-        #         print('turning off combo two')
-        #         self.do_nav = False
-        #     else:
-        #         print('turning on combo two')
-        #         self.do_nav = True
-        # if '/' in '{0}'.format(key): # keypad 2
-        #     if self.do_exit:
-        #         print('turning off combo two')
-        #         self.do_exit = False
-        #     else:
-        #         print('turning on combo two')
-        #         self.do_exit = True
 
     def check_target(self, ss):
         temp_time = time.time()
@@ -549,18 +466,18 @@ class throne_script:
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-        x1 = 1279
-        x2 = 1367
-        x3 = 1436
-        x4 = 1505
-        x5 = 1574
-        x6 = 1642
-        x7 = 1758
-        x8 = 1827
-        x9 = 1915
-        x10 = 1964
-        x11 = 2033
-        x12 = 2102
+        x1 = 935
+        x2 = 1004
+        x3 = 1059
+        x4 = 1113
+        x5 = 1167
+        x6 = 1222
+        x7 = 1309
+        x8 = 1363
+        x9 = 1432
+        x10 = 1472
+        x11 = 1526
+        x12 = 1581
         pixel_list = [x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12]
 
         skip_skill_slot = []
@@ -572,7 +489,7 @@ class throne_script:
         temp_all = []
         slot_count = 1
         inc_counter = 0
-        for inc in pixel_list:
+        for inc in self.skill_pixel_edge:
             if slot_count not in skip_skill_slot:
                 skill_value = gray[0][inc]
                 temp_all.append((slot_count, int(skill_value)))
@@ -584,7 +501,6 @@ class throne_script:
             inc_counter += 1
         return_command = [available_attacks_p1,available_attacks_p2, available_distances, available_buffs]
         print(available_attacks_p1)
-        print('test')
         self.diagnostic_write_to += str(temp_all) + '\n'
         return return_command
 

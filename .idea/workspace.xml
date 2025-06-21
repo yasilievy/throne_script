@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="commit be fore testing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagnostic.txt" beforeDir="false" afterPath="$PROJECT_DIR$/diagnostic.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/throne_script_config_backup.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config_backup.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_polish_crystal_dungeon.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,12 +224,19 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.throne_script_dungeon_staff" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.throne_script_mob_farmv1" />
+      <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
+      <item itemvalue="Python.throne_script_ravager" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_ravager" />
+        <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
         <item itemvalue="Python.throne_script_mob_farmv1" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.throne_script_dungeon_staff" />
       </list>
     </recent_temporary>
