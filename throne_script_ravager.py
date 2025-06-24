@@ -62,7 +62,7 @@ class throne_script:
             14: 'c'
         }
         self.skill_charge = [3]
-        self.skill_charge_hold_time = 1
+        self.skill_charge_hold_time = 1.2
         self.second_cast_skill = [11]
         # self.second_cast_skill = []
 

@@ -1,10 +1,9 @@
-import pytesseract, pyautogui, time, numpy as np, threading,cv2
+import pyautogui, time, numpy as np, threading,cv2 # pytesseract,
 from pynput.keyboard import Key, Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
-from PIL import ImageGrab
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
+# pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
 
 class throne_script:
     def __init__(self):
@@ -27,7 +26,6 @@ class throne_script:
 
         self.check_skill_coord = (0, 1045, 1920, 1)
 
-        self.initialize_config()
 
         self.skill_dict = {
             1: '1',
@@ -45,8 +43,6 @@ class throne_script:
             13: 'x',
             14: 'c'
         }
-
-
         self.skill_charges = [3]
         self.skill_charges_hold_time = 1
         self.second_cast_skills = [11]
@@ -56,6 +52,11 @@ class throne_script:
             2:'manual auto-fire'
         }
         self.selected_skill_set = 0
+        self.initialize_config()
+
+    def on_press(self,key):
+        if False:
+            pass
 
     def on_release(self,key):
         if self.double_click_bool and '4' in '{0}'.format(key):
@@ -65,12 +66,13 @@ class throne_script:
                 self.button_press = True
                 self.keyboard.press('4')
                 self.keyboard.release('4')
-        # print('{0}'.format(key))
         if self.do_option:
             if key == keyboard.Key.f5:
+                print(f'switching to {self.option_dict[1]}')
                 self.current_do_option = 1
                 self.do_option = False
             if key == keyboard.Key.f6:
+                print(f'switching to {self.option_dict[2]}')
                 self.current_do_option = 2
                 self.do_option = False
             if key == keyboard.Key.f7:
@@ -85,10 +87,11 @@ class throne_script:
                 self.do_option = False
                 return False
             else:
+                print(f'current option: {self.option_dict[1]}')
                 print('esc pressed, select option below:')
                 self.do_option = True
 
-        elif '/' in '{0}'.format(key):
+        if '/' in '{0}'.format(key):
             if self.do_nav:
                 print('turning off nav')
                 self.do_nav = False
@@ -96,7 +99,7 @@ class throne_script:
                 print('turning on nav')
                 self.do_nav = True
 
-        elif '`' in '{0}'.format(key):
+        if '`' in '{0}'.format(key):
             if self.current_do_option == 1:
                 if self.do_combo:
                     print('turning off combo sequence')
@@ -137,6 +140,7 @@ class throne_script:
                     option_counter+=1
                     time.sleep(1)
                 self.do_option = False
+
             while self.do_combo:
                 self.do_combo_sequence()
                 self.do_combo = False
@@ -173,10 +177,6 @@ class throne_script:
                         self.keyboard.press(Key.f5)
                         self.keyboard.release(Key.f5)
                     time.sleep(0.2)
-
-
-    def on_press(self,key):
-        pass
 
     def initialize_config(self):
         time.sleep(0.2)
