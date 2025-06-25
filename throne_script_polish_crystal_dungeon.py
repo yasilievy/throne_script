@@ -3,8 +3,9 @@ from pynput.keyboard import Key,Listener
 from pynput.mouse import Button
 from pynput import keyboard, mouse
 from PIL import Image
+# pytesseract.pytesseract.tesseract_cmd = 'C:\\Tesseract-OCR\\tesseract.exe'
 
-pytesseract.pytesseract.tesseract_cmd = 'C:\\Tesseract-OCR\\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = 'C:\\OCR\\tesseract.exe'
 
 class throne_script:
     def __init__(self):
@@ -49,39 +50,92 @@ class throne_script:
 
         self.phase_counter = 0
 
-        self.stealth_button = 'r'
-        self.dodge_button = 'q'
-        self.morph_button = Key.shift
 
-        self.cursor_button = [Key.shift,'g']
 
         self.start_bool = False
 
+        # self.stealth_button = 'r'
+        # self.dodge_button = 'q'
+        # self.morph_button = Key.shift
         # self.manage_party_button = None
-        self.manage_party_coord = (602, 734)
-        self.manage_party_leave_coord = (536, 470) # need
+        # self.manage_party_coord = (602, 734)
+        # self.manage_party_leave_coord = (419, 342) # need
+        #
+        # self.open_co_op_menu_button = Key.f11
+        # self.enter_dungeon = (1716, 1352)
+        #
+        # self.check_loading_screen_coord = (963, 743, 1, 1)
+        # self.check_loading_screen_value = 255 # need to scan a screenshot
+        #
+        # self.check_target_coord = (1109, 602, 9, 1)
+        # self.target_check_values = 115 # need to scan a screenshot
+        # self.target_check_values_list = [0,0,0,0,0,0,0,0,0]
+        #
+        # self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
+        # self.check_skill_coord = (0, 917, 2560, 1)
+        # self.skill_pixel_edge = [935,1004,1059,1113,1167,1222,1309,1363,1432,1472,1526,1581]
+        # self.read_chat_coord = (10, 945, 430, 70)
+        #
+        # self.exit_dungeon = (2512, 260) # need
+        # self.yes_button = 'y'
+        # self.diagnostic_write_to = ''
+        # self.initialize_config()
+        #
+        # self.hold_time = 1
+        # self.charge_skills = [2,3]
+        # self.charge_skill_hold = 1
+        #
+        # self.double_tap_skills = []
+
+        self.skill_dict = {
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            5: '5',
+            6: Key.f7,
+            7: Key.f1,
+            8: Key.f2,
+            9: Key.f4,
+            10: 'e',
+            11: 'r',
+            12: 't',
+            13: 'x',
+            14: 'c'
+        }
+        self.stealth_button = '5'
+        self.dodge_button = 'q'
+        self.morph_button = Key.shift
+
+        self.manage_party_coord = (19, 12)
+        self.manage_party_leave_coord = (444, 330) # need
 
         self.open_co_op_menu_button = Key.f11
-        self.enter_dungeon = (1716, 1352)
+        self.enter_dungeon = (960, 1000)
 
-        self.check_loading_screen_coord = (963, 743, 1, 1)
+        self.check_loading_screen_coord = (729, 781, 1, 1)
         self.check_loading_screen_value = 255 # need to scan a screenshot
 
-        self.check_target_coord = (1109, 602, 9, 1)
+        self.check_target_coord = (1227, 795, 9, 1)
         self.target_check_values = 115 # need to scan a screenshot
         self.target_check_values_list = [0,0,0,0,0,0,0,0,0]
 
         self.skill_list_available = [0,0,0,0,0,0,0,0,0,0,0,0,0]
-        self.check_skill_coord = (0, 917, 2560, 1)
-        self.skill_pixel_edge = [935,1004,1059,1113,1167,1222,1309,1363,1432,1472,1526,1581]
-        self.read_chat_coord = (10, 945, 430, 70)
+        self.check_skill_coord = (0, 1047, 1920, 1)
+        self.skill_pixel_edge_y = 1047
+        self.skill_pixel_edge = [605, 663,720,778,836,894,1009,1067,1125,1183,1241,1298]
+        self.read_chat_coord = (25, 930, 375, 50)
 
-        self.exit_dungeon = (3378, 328) # need
+        self.exit_dungeon = (1869, 274) # need
         self.yes_button = 'y'
         self.diagnostic_write_to = ''
         self.initialize_config()
 
         self.hold_time = 1
+        self.charge_skills = [2,3]
+        self.charge_skill_hold = 1
+
+        self.double_tap_skills = [2,6,11]
 
 
     def initialize_config(self):
@@ -125,42 +179,17 @@ class throne_script:
                 setting,value = line.split('=')
                 if 'target' in setting:
                     config_skill_counter = 0
-                    for target_value in value.split(','):
-                        self.target_check_values_list[config_skill_counter] = int(target_value)
-                        config_skill_counter += 1
+                    self.target_check_values = int(value)
+                    # for target_value in value.split(','):
+                    #     self.target_check_values_list[config_skill_counter] = int(target_value)
+                    #     config_skill_counter += 1
                 if 'skill' in setting:
                     config_skill_counter = 0
                     for skill_value in value.split(','):
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
-        diagnostic_file = open('diagnostic.txt','w')
+            print(self.target_check_values)
 
-        # crop_values = (0, 1268, 3440, 1269)
-        # print('testt1')
-        # image_test = Image.open('clients/testt1.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # self.check_available_skill_list(image_test_crop)[0]
-        # print('testt2')
-        # image_test = Image.open('clients/testt2.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # self.check_available_skill_list(image_test_crop)[0]
-        # print('testt3')
-        # image_test = Image.open('clients/testt3.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # self.check_available_skill_list(image_test_crop)[0]
-        # print('testt4')
-        # image_test = Image.open('clients/testt4.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # self.check_available_skill_list(image_test_crop)[0]
-        # image_test = Image.open('clients/test3.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # print(self.check_available_skill_list(image_test_crop)[0])
-        # image_test = Image.open('clients/test4.jpg')
-        # image_test_crop = image_test.crop(crop_values)
-        # print(self.check_available_skill_list(image_test_crop)[0])
-
-        diagnostic_file.write(self.diagnostic_write_to)
-        diagnostic_file.close()
 
 
 
@@ -184,14 +213,62 @@ class throne_script:
             time.sleep(0.5)
 
     def move_to_boss_two(self):
+        # self.keyboard.press('a')
+        # self.keyboard.press(self.dodge_button)
+        # self.keyboard.release(self.dodge_button)
+        # self.keyboard.release('a')
+        #
+        # self.timer_boolean = True
+        # self.timer = time.time()
+        # self.do_dungeon = False
+
+        movement_speed = 710
+        time_helper = 1 - ((movement_speed - 600) / 600)
+        time_helper_two = 1 - ((movement_speed - 600) / 600 /2 )
+
         self.keyboard.press('a')
         self.keyboard.press(self.dodge_button)
         self.keyboard.release(self.dodge_button)
         self.keyboard.release('a')
+        self.keyboard.press('w')
+        self.keyboard.press(self.morph_button)
+        self.keyboard.release(self.morph_button)
+        time.sleep(5 * time_helper)
+        self.keyboard.press(self.stealth_button)
+        self.keyboard.release(self.stealth_button)
+        time.sleep(15 * time_helper_two)
+        self.keyboard.press('d')
+        self.keyboard.press(self.morph_button)
+        self.keyboard.release(self.morph_button)
+        time.sleep(4.9 * time_helper)
+        self.keyboard.release('d')
+        time.sleep(7.4 * time_helper)
+        self.keyboard.release('w')
 
-        self.timer_boolean = True
-        self.timer = time.time()
-        self.do_dungeon = False
+        # movement_speed = 710
+        # time_helper = 1 - ((movement_speed - 600) / 600)
+        # time_helper_two = 1 - ((movement_speed - 600) / 600 /2 )
+        # self.keyboard.press('a')
+        # self.keyboard.press(self.dodge_button)
+        # self.keyboard.release(self.dodge_button)
+        # self.keyboard.release('a')
+        # time.sleep(0.2)
+        # print('moving')
+        # self.keyboard.press('w')
+        # self.keyboard.press(self.morph_button)
+        # self.keyboard.release(self.morph_button)
+        # time.sleep(5 * time_helper_two)
+        # self.keyboard.press(self.stealth_button ) # need configuration
+        # self.keyboard.release(self.stealth_button ) # need configuration
+        # time.sleep(8 * time_helper)
+        # self.keyboard.press('d')
+        # time.sleep(5.7 * time_helper)
+        # self.keyboard.release('d')
+        # time.sleep(3)
+        # self.keyboard.press(self.morph_button)
+        # self.keyboard.release(self.morph_button)
+        # time.sleep(9.8 * time_helper_two)
+        # self.keyboard.release('w')
 
 
     def check_combo_sequence(self):
@@ -207,92 +284,81 @@ class throne_script:
     def do_combo_sequence(self):
         skill_counter = 0
         self.combo_sequence = self.check_combo_sequence()
-        diagnostic_file = open('diagnostic.txt','w')
+        # diagnostic_file = open('diagnostic.txt','w')
 
         while self.do_dungeon or self.do_combo:
             # print(skill_counter)
             if skill_counter == len(self.combo_sequence):
                 break
             else:
+
                 while self.do_dungeon or self.do_combo:
-                    current_combo = self.combo_sequence[skill_counter]
-                    screen_shot = pyautogui.screenshot(region=self.check_skill_coord)
-                    skill_status_p1 = self.check_available_skill_list(screen_shot)[0]
-                    if len(skill_status_p1) != 0:
-                        rendered_skill_status_p1 = [s_s_p1[0] for s_s_p1 in skill_status_p1]
-                        # if current_combo == 12:
-                        #     self.skill_pause_counter = True
-                        current_button_to_press = self.skill_dict[current_combo]
-                        if current_combo not in rendered_skill_status_p1:
-                            break
-                        elif current_combo == 2 or current_combo == 3:
-                            if isinstance(current_button_to_press, list):
-                                self.keyboard.press(self.skill_dict[current_combo][0])
-                                self.keyboard.press(self.skill_dict[current_combo][1])
-                                time.sleep(self.hold_time)
-                                self.keyboard.release(self.skill_dict[current_combo][1])
-                                self.keyboard.release(self.skill_dict[current_combo][0])
+                    screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
+                    if self.check_target(screen_shot_check_target):
+                        current_combo = self.combo_sequence[skill_counter]
+                        screen_shot = pyautogui.screenshot(region=self.check_skill_coord)
+                        skill_status_p1 = self.check_available_skill_list(screen_shot)[0]
+                        print(skill_status_p1)
+                        if len(skill_status_p1) != 0:
+                            rendered_skill_status_p1 = [s_s_p1[0] for s_s_p1 in skill_status_p1]
+                            # if current_combo == 12:
+                            #     self.skill_pause_counter = True
+                            if current_combo not in rendered_skill_status_p1:
+                                break
                             else:
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                time.sleep(self.hold_time)
-                                self.keyboard.release(self.skill_dict[current_combo])
-                        else:
-                            if isinstance(current_button_to_press, list):
-                                self.keyboard.press(self.skill_dict[current_combo][0])
-                                self.keyboard.press(self.skill_dict[current_combo][1])
-                                self.keyboard.release(self.skill_dict[current_combo][1])
-                                self.keyboard.release(self.skill_dict[current_combo][0])
-                            else:
-                                self.keyboard.press(self.skill_dict[current_combo])
-                                self.keyboard.release(self.skill_dict[current_combo])
+                                skill_key_to_do = self.skill_dict[current_combo]
+                                if isinstance(skill_key_to_do, list):
+                                    self.keyboard.press(skill_key_to_do[0])
+                                    self.keyboard.press(skill_key_to_do[1])
+                                    if current_combo in self.charge_skills:
+                                        time.sleep(self.charge_skill_hold)
+                                    self.keyboard.release(skill_key_to_do[0])
+                                    self.keyboard.release(skill_key_to_do[1])
+                                else:
+                                    self.keyboard.press(skill_key_to_do)
+                                    if current_combo in self.charge_skills:
+                                        time.sleep(self.charge_skill_hold)
+                                    self.keyboard.release(skill_key_to_do)
+                    else:
+                        break
+                        # elif current_combo == 2 or current_combo == 3:
+                        #     if isinstance(current_button_to_press, list):
+                        #         self.keyboard.press(self.skill_dict[current_combo][0])
+                        #         self.keyboard.press(self.skill_dict[current_combo][1])
+                        #         time.sleep(self.hold_time)
+                        #         self.keyboard.release(self.skill_dict[current_combo][1])
+                        #         self.keyboard.release(self.skill_dict[current_combo][0])
+                        #     else:
+                        #         self.keyboard.press(self.skill_dict[current_combo])
+                        #         time.sleep(self.hold_time)
+                        #         self.keyboard.release(self.skill_dict[current_combo])
+                        # else:
+                        #     if isinstance(current_button_to_press, list):
+                        #         self.keyboard.press(self.skill_dict[current_combo][0])
+                        #         self.keyboard.press(self.skill_dict[current_combo][1])
+                        #         self.keyboard.release(self.skill_dict[current_combo][1])
+                        #         self.keyboard.release(self.skill_dict[current_combo][0])
+                        #     else:
+                        #         self.keyboard.press(self.skill_dict[current_combo])
+                        #         self.keyboard.release(self.skill_dict[current_combo])
                         time.sleep(0.1)
             skill_counter += 1
-            diagnostic_file.write(self.diagnostic_write_to)
-            diagnostic_file.close()
+            # diagnostic_file.write(self.diagnostic_write_to)
+            # diagnostic_file.close()
     def do_kill_confirm(self):
         while self.do_dungeon:
             screen_shot_check_target = pyautogui.screenshot(region=self.check_target_coord)
             if self.check_target(screen_shot_check_target):
-                skill_to_use = self.skill_dict[2]
-                if isinstance(skill_to_use, list):
-                    self.keyboard.press(skill_to_use[0])
-                    self.keyboard.press(skill_to_use[1])
-                    self.keyboard.release(skill_to_use[0])
-                    self.keyboard.release(skill_to_use[1])
-                else:
-                    self.keyboard.press(skill_to_use)
-                    self.keyboard.release(skill_to_use)
-
-                skill_to_use = self.skill_dict[1]
-                if isinstance(skill_to_use, list):
-                    self.keyboard.press(skill_to_use[0])
-                    self.keyboard.press(skill_to_use[1])
-                    self.keyboard.release(skill_to_use[0])
-                    self.keyboard.release(skill_to_use[1])
-                else:
-                    self.keyboard.press(skill_to_use)
-                    self.keyboard.release(skill_to_use)
-
-                skill_to_use = self.skill_dict[6]
-                if isinstance(skill_to_use, list):
-                    self.keyboard.press(skill_to_use[0])
-                    self.keyboard.press(skill_to_use[1])
-                    self.keyboard.release(skill_to_use[0])
-                    self.keyboard.release(skill_to_use[1])
-                else:
-                    self.keyboard.press(skill_to_use)
-                    self.keyboard.release(skill_to_use)
-
-                skill_to_use = self.skill_dict[12]
-                if isinstance(skill_to_use, list):
-                    self.keyboard.press(skill_to_use[0])
-                    self.keyboard.press(skill_to_use[1])
-                    self.keyboard.release(skill_to_use[0])
-                    self.keyboard.release(skill_to_use[1])
-                else:
-                    self.keyboard.press(skill_to_use)
-                    self.keyboard.release(skill_to_use)
-
+                for double_tap_skill in self.double_tap_skills:
+                    skill_to_use = self.skill_dict[double_tap_skill]
+                    if isinstance(skill_to_use, list):
+                        self.keyboard.press(skill_to_use[0])
+                        self.keyboard.press(skill_to_use[1])
+                        self.keyboard.release(skill_to_use[0])
+                        self.keyboard.release(skill_to_use[1])
+                    else:
+                        self.keyboard.press(skill_to_use)
+                        self.keyboard.release(skill_to_use)
                 time.sleep(0.3)
             else:
                 print('boss is dead')
@@ -454,9 +520,8 @@ class throne_script:
             self.target_check_values = constant_value
             return True
         else:
-
             for value in gray[0]:
-                if self.target_check_values_list != value:
+                if self.target_check_values != value:
                     return False
             return True
 
