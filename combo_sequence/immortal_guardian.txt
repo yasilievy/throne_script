@@ -7,6 +7,6 @@
 6, ankle strike
 1, mad sword dance
 7, stunning blow
-3, guillotine blade
-11, ascending slash
-2, death blow
+3,
+11,
+2,

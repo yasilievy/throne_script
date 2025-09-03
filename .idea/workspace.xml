@@ -4,8 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="new updates for alio 6/20">
+    <list default="true" id="6c89ef78-e6c8-4744-9900-5f4339eb3461" name="Changes" comment="good updates on alio, almost good to test deliver">
+      <change afterPath="$PROJECT_DIR$/combo_sequence/group_abyss_dungeon" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/immortal_guardian.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/lightning_jump_attacker.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/combo_sequence/umbrance.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/palworld_incubator.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/gate_of_infinity_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/gate_of_infinity_combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/nebula.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/nebula.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/combo_sequence/regular_dungeon_combo_sequence.txt" beforeDir="false" afterPath="$PROJECT_DIR$/combo_sequence/regular_dungeon_combo_sequence.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_fishing.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_fishing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/throne_script_mob_farmv1.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_mob_farmv1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_ravager.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_ravager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/throne_script_ravagerv2.py" beforeDir="false" afterPath="$PROJECT_DIR$/throne_script_ravagerv2.py" afterDir="false" />
     </list>
@@ -50,7 +62,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main-alio" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,36 +88,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.screenshot_test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.script.executor&quot;: &quot;Run&quot;,
-    &quot;Python.script_2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_file.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_fishing.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_cry_farm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_dungeon_staff.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_mob_farmv1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon alio-29MAY2025.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_polish_crystal_dungeon_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_ravager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_ravagerv1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.throne_script_ravagerv2.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/NOV20/PyCharmMiscProject&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.l2tes.executor": "Run",
+    "Python.screenshot_test.executor": "Run",
+    "Python.script.executor": "Run",
+    "Python.script_2.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test_file.executor": "Run",
+    "Python.throne_fishing.executor": "Run",
+    "Python.throne_script.executor": "Run",
+    "Python.throne_script_cry_farm (1).executor": "Run",
+    "Python.throne_script_cry_farm test.executor": "Run",
+    "Python.throne_script_cry_farm.executor": "Run",
+    "Python.throne_script_dungeon.executor": "Run",
+    "Python.throne_script_dungeon_ravager.executor": "Run",
+    "Python.throne_script_dungeon_staff.executor": "Run",
+    "Python.throne_script_mob_farmv1.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon alio-29MAY2025.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon.executor": "Run",
+    "Python.throne_script_polish_crystal_dungeon_ravager.executor": "Run",
+    "Python.throne_script_ravager.executor": "Run",
+    "Python.throne_script_ravagerv1.executor": "Run",
+    "Python.throne_script_ravagerv2.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "palworld",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/NOV20/PyCharmMiscProject",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\NOV20\PyCharmMiscProject\combo_sequence" />
@@ -274,13 +287,13 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.throne_fishing" />
+      <item itemvalue="Python.throne_script_ravagerv2" />
+      <item itemvalue="Python.test" />
       <item itemvalue="Python.throne_script_mob_farmv1" />
       <item itemvalue="Python.throne_script_polish_crystal_dungeon alio-29MAY2025" />
       <item itemvalue="Python.throne_script_polish_crystal_dungeon" />
       <item itemvalue="Python.throne_script_ravager" />
-      <item itemvalue="Python.throne_script_ravagerv2" />
     </list>
     <recent_temporary>
       <list>

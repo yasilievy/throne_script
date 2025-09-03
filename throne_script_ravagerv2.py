@@ -16,6 +16,7 @@ class throne_script:
         self.do_combo = False
         self.do_option = False
         self.do_nav = False
+        self.do_bot = False
         self.do_contracts = False
         self.timer = time.time()
         self.initial_skill_list_scan = True
@@ -43,20 +44,20 @@ class throne_script:
             13: 'x',
             14: 'c'
         }
-        self.skill_charges = [3]
-        self.skill_charges_hold_time = 1
-        self.second_cast_skills = [11]
+        self.skill_charges = [3] # 2,3
+        self.skill_charges_hold_time = 1.2
+        self.second_cast_skills = [] # 11
         self.current_do_option = 1
         self.option_dict = {
             1:'combo sequence',
-            2:'manual auto-fire'
+            2:'manual auto-fire',
+            3:'full auto-farm'
         }
         self.selected_skill_set = 0
         self.initialize_config()
 
     def on_press(self,key):
-        if False:
-            pass
+        pass
 
     def on_release(self,key):
         if self.double_click_bool and '4' in '{0}'.format(key):
@@ -67,19 +68,25 @@ class throne_script:
                 self.keyboard.press('4')
                 self.keyboard.release('4')
         if self.do_option:
-            if key == keyboard.Key.f5:
+            if '<97>' in '{0}'.format(key):
                 print(f'switching to {self.option_dict[1]}')
                 self.current_do_option = 1
                 self.do_option = False
-            if key == keyboard.Key.f6:
+            if '<98>' in '{0}'.format(key):
                 print(f'switching to {self.option_dict[2]}')
                 self.current_do_option = 2
                 self.do_option = False
-            if key == keyboard.Key.f7:
+            if '<99>' in '{0}'.format(key):
+                print(f'switching to {self.option_dict[3]}')
+                self.current_do_option = 3
+                self.do_option = False
+            if '<100>' in '{0}'.format(key):
+                print('turning on double click target skills')
                 if self.double_click_bool:
                     self.double_click_bool = False
                 else:
                     self.double_click_bool = True
+                self.do_option = False
         if key == keyboard.Key.esc:
             if self.do_option:
                 print('second esc pressed, halting script')
@@ -114,6 +121,13 @@ class throne_script:
                 else:
                     print('turning on manual auto-fire')
                     self.do_contracts = True
+            elif self.current_do_option == 3:
+                if self.do_bot:
+                    print('turning off bot')
+                    self.do_bot = False
+                else:
+                    print('turning on bot')
+                    self.do_bot = True
 
 
     def while_loop(self):
@@ -132,6 +146,50 @@ class throne_script:
                 self.mouse.click(Button.left)
                 self.do_nav = False
 
+            bot_has_target = 0
+            bot_no_target = 0
+            alter_camera_bool = True
+
+            while self.do_bot:
+                screen_shot = pyautogui.screenshot(region=(0,1045,1920,1))
+                skill_status_p1,  skill_status_p2, distance_status, buff_status,  = self.check_available_skills(screen_shot,3)
+                if buff_status != 0:
+                    self.keyboard.press(self.skill_dict[buff_status])
+                    self.keyboard.release(self.skill_dict[buff_status])
+                screen_shot_target = pyautogui.screenshot(region=(1064, 810, 9, 1))
+                if self.check_target(screen_shot_target):
+                    bot_has_target +=1
+                    bot_no_target = 0
+                    screen_shot_target = pyautogui.screenshot(region=(1216, 802, 1, 1))
+                    if skill_status_p1 != 0:
+                        # skill_to_use = self.skill_dict[skill_status_p1]
+                        self.do_skill(skill_status_p1)
+                    elif skill_status_p2 != 0:
+                        self.do_skill(skill_status_p2)
+                    else:
+                        self.keyboard.press(Key.f5)
+                        self.keyboard.release(Key.f5)
+                else:
+                    camera_turn = None
+                    bot_has_target = 0
+                    bot_no_target += 1
+                    self.keyboard.press(Key.tab)
+                    self.keyboard.release(Key.tab)
+                    if bot_no_target > 3:
+                        if alter_camera_bool:
+                            camera_turn = Key.right
+                            alter_camera_bool = False
+                        else:
+                            camera_turn = Key.left
+                            alter_camera_bool = True
+                        self.keyboard.press(camera_turn)
+                        while self.do_bot:
+                            self.keyboard.press(Key.tab)
+                            self.keyboard.release(Key.tab)
+                            if self.check_target(pyautogui.screenshot(region=(1064, 810, 9, 1))):
+                                self.keyboard.release(camera_turn)
+                                break
+                            time.sleep(0.3)
             while self.do_option:
                 print('esc - halt\nf5 - perform skill combo\nf6 - manual auto-fire\nf7 - enable double click')
                 option_counter = 1
@@ -268,6 +326,20 @@ class throne_script:
                             self.keyboard.release(self.skill_dict[current_combo])
             skill_counter += 1
 
+    def do_skill(self,skill_slot_to_do):
+        skill_key_to_do = self.skill_dict[skill_slot_to_do]
+        if isinstance(skill_key_to_do, list):
+            self.keyboard.press(skill_key_to_do[0])
+            self.keyboard.press(skill_key_to_do[1])
+            if skill_slot_to_do in self.skill_charges:
+                time.sleep(self.skill_charges_hold_time)
+            self.keyboard.release(skill_key_to_do[0])
+            self.keyboard.release(skill_key_to_do[1])
+        else:
+            self.keyboard.press(skill_key_to_do)
+            if skill_slot_to_do in self.skill_charges:
+                time.sleep(self.skill_charges_hold_time)
+            self.keyboard.release(skill_key_to_do)
 
     def check_available_skill_list(self, ss,sst): # skill check for combo
         temp_time = time.time()
@@ -363,6 +435,7 @@ class throne_script:
             [[7,1,6,5,2,3,9],[],[],[8]], # manual auto-fire
             [[4,5,6,7,8,9],[10,11,12],[],[1,2,3]], # nebula manual solo
             [[9, 1, 2, 3, 6, 7, 5],[],[4, 10, 11, 12],[8]], # full-auto-farm
+            [[7,8,6,9,10],[1,2,3,4,5],[],[12,11]], # saurodoma island full-auto-farm
         ]
         attacks_p1, attacks_p2, distances, buffs = skill_sets[selected_skill_set]
 
@@ -421,7 +494,7 @@ class throne_script:
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # print(f'health time check {time.time()-temp_time}')
-        return gray[0]
+        return gray[0][0] > 20
 
     def start_assist(self):
         print("started throne script")

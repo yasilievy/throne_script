@@ -20,6 +20,19 @@ class throne_script:
         self.target_check_values = 21
         self.config_file = None
         self.initialize_config()
+        self.timer_start = None
+        self.do_transmute = False
+        # self.move_sequence = [['w',8],['a',11],['s',20],['w',20],['d',11],['s',8]]
+        # self.move_sequence = [['w',15],['d',10],['s',15],['a',10]]
+        move_time_one = 25
+        move_time_two = 25
+        move_three = 14
+        # move_time_one = 8
+        # move_time_two = 8
+        self.move_sequence = [
+            ['d',move_three],['a',move_three],
+            ['w', move_time_one], ['s', move_time_one],['w', move_time_two], ['s', move_time_two]]
+
 
 
     def initialize_config(self):
@@ -64,8 +77,39 @@ class throne_script:
                         self.skill_list_available[config_skill_counter] = int(skill_value)
                         config_skill_counter+=1
 
+    def transmute_inventory(self):
+        screen_shot = pyautogui.screenshot(region=(1888, 932, 3, 1))
+        if self.check_full_inventory(screen_shot):
+            time.sleep(1)
+            self.keyboard.press(Key.f6)
+            self.keyboard.release(Key.f6)
+            time.sleep(0.75)
+            self.mouse.position = (760, 250)
+            self.mouse.click(Button.left)
+            time.sleep(0.75)
+            self.mouse.position = (890, 250)
+            self.mouse.click(Button.left)
+            time.sleep(0.75)
+            self.mouse.position = (1030, 250)
+            self.mouse.click(Button.left)
+            time.sleep(0.75)
+            self.mouse.position = (1150, 250)
+            self.mouse.click(Button.left)
+            time.sleep(0.75)
+            self.mouse.position = (960, 760)
+            self.mouse.click(Button.left)
+            time.sleep(0.5)
+            self.keyboard.press('y')
+            self.keyboard.release('y')
+            time.sleep(0.5)
+            self.mouse.position = (1860, 60)
+            self.mouse.click(Button.left)
+            time.sleep(1)
 
-
+    def alter_move_timer(self):
+        time_now = time.time()
+        delta_time = time_now - self.timer_start
+        return int(delta_time)
     def while_loop(self, mouse_c, keyboard_c):
         if self.initial_skill_list_scan:
             time.sleep(0.3)
@@ -89,16 +133,71 @@ class throne_script:
 
         counter = 0
 
+        alter_move_bool = True
+        previous_move = 'w'
+
+        check_rotation_time = True
+
+
         while self.static_bool:
             no_target_counter = 0
             alter_camera_bool = True
             has_target_counter = 0
 
             while self.do_bot:
-                if time.time() - self.timer > 1802:
-                    self.keyboard.press('7')
-                    self.keyboard.release('7')
-                    self.timer = time.time()
+                # print(f'move sequence {self.move_sequence[counter][1]}')
+                # if alter_move_bool or self.alter_move_timer() == self.move_sequence[counter][1]:
+                #
+                #     if alter_move_bool:
+                #         alter_move_bool = False
+                #         previous_move = self.move_sequence[counter][0]
+                #         self.keyboard.press(previous_move)
+                #     else:
+                #         self.keyboard.release(previous_move)
+                #         if counter == len(self.move_sequence) - 1:
+                #             counter = 0
+                #             self.transmute_inventory()
+                #         else:
+                #             counter += 1
+                #         # print('going to press ' + self.move_sequence[counter][0])
+                #         previous_move = self.move_sequence[counter][0]
+                #         self.keyboard.press(previous_move)
+                #     self.timer_start = time.time()
+
+
+
+                    # if check_rotation_time:
+                    #     check_rotation_time = False
+                    #     self.keyboard.release('s')
+                    #     if self.do_transmute:
+                    #         self.keyboard.press(Key.f6)
+                    #         self.keyboard.release(Key.f6)
+                    #         time.sleep(0.75)
+                    #         self.mouse.position = (760, 250)
+                    #         self.mouse.click(Button.left)
+                    #         time.sleep(0.75)
+                    #         self.mouse.position = (960, 760)
+                    #         self.mouse.click(Button.left)
+                    #         time.sleep(0.5)
+                    #         self.keyboard.press('y')
+                    #         self.keyboard.release('y')
+                    #         time.sleep(0.5)
+                    #         self.mouse.position = (1860, 60)
+                    #         self.mouse.click(Button.left)
+                    #         time.sleep(1)
+                    #         self.do_transmute = False
+                    #     self.keyboard.press('w')
+                    # else:
+                    #     check_rotation_time = True
+                    #     self.keyboard.release('w')
+                    #
+                    #     self.keyboard.press('s')
+                    # self.timer_start = time.time()
+
+                # if time.time() - self.timer > 1802:
+                #     self.keyboard.press('7')
+                #     self.keyboard.release('7')
+                #     self.timer = time.time()
 
                 screen_shot = pyautogui.screenshot(region=(0,0,1920,1080))
                 if self.check_self_mana(screen_shot)[0] < 20:
@@ -124,24 +223,29 @@ class throne_script:
                 screen_shot = pyautogui.screenshot(region=(0, 1045, 1920, 1))
                 skill_status_p1, skill_status_p2, distance_status, buff_status = self.initialize_skill_list_check(
                     screen_shot)
-
+                # self.transmute_inventory()
                 if buff_status != 0:
                     # print(f'casting buff {buff_status}')
                     self.keyboard.press(skill_dict[buff_status])
                     self.keyboard.release(skill_dict[buff_status])
+                if has_target_counter == 5:
+                    self.keyboard.press(Key.tab)
+                    self.keyboard.release(Key.tab)
+                    has_target_counter = 0
+
                 if self.check_target(pyautogui.screenshot(region=(1064, 810, 9, 1))):
                     has_target_counter +=1
                 # if check_target[0] == 32 or check_target[0] == 31 and check_target[1] == 20 or check_target[1] == 19:
                     if self.check_target_health(pyautogui.screenshot(region=(1200, 802, 1, 1))) < 20:
-                        print('is full health')
+                        # print('is full health')
                         if skill_status_p2 != 0:
                             skill_to_use = skill_dict[skill_status_p2]
-                            print(f'p2 casting skill {skill_to_use}')
+                            # print(f'p2 casting skill {skill_to_use}')
                             self.keyboard.press(skill_to_use)
                             self.keyboard.release(skill_to_use)
                         elif skill_status_p1 != 0:
                             skill_to_use = skill_dict[skill_status_p1]
-                            print(f'p1 casting skill {skill_to_use}')
+                            # print(f'p1 casting skill {skill_to_use}')
                             if skill_status_p1 == 12:
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
@@ -152,14 +256,14 @@ class throne_script:
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
                         else:
-                            print('auto attacking')
+                            # print('auto attacking')
                             self.keyboard.press(Key.f5)
                             self.keyboard.release(Key.f5)
                     else:
-                        print('is not full health')
+                        # print('is not full health')
                         if skill_status_p1 != 0:
                             skill_to_use = skill_dict[skill_status_p1]
-                            print(f'p1 casting skill {skill_to_use}')
+                            # print(f'p1 casting skill {skill_to_use}')
                             if skill_status_p1 == 12:
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
@@ -170,15 +274,17 @@ class throne_script:
                                 self.keyboard.press(skill_to_use)
                                 self.keyboard.release(skill_to_use)
                         else:
-                            print('auto attacking')
+                            # print('auto attacking')
                             self.keyboard.press(Key.f5)
                             self.keyboard.release(Key.f5)
-                    time.sleep(0.7)
-                else:
-                    no_target_counter +=1
+                    # time.sleep(0.2)
+                # else:
+                no_target_counter +=1
                 self.keyboard.press(Key.tab)
                 self.keyboard.release(Key.tab)
                 time.sleep(0.2)
+                # self.keyboard.press(Key.f5)
+                # self.keyboard.release(Key.f5)
                 if no_target_counter == 2:
                     self.keyboard.press(Key.left)
                     no_target_counter = 0
@@ -223,6 +329,8 @@ class throne_script:
                 #             break
                 #         time.sleep(0.1)
                 # counter += 1
+            alter_move_bool = True
+            counter = 0
 
     def on_press(self,key):
         pass
@@ -238,6 +346,8 @@ class throne_script:
             else:
                 print('turning on script')
                 self.do_bot = True
+        if '<97>' in '{0}'.format(key):
+            self.do_transmute = True
         # if '+' in '{0}'.format(key):
         #     self.check_target(pyautogui.screenshot(region=(0,0,1920,1080)))
 
@@ -279,8 +389,17 @@ class throne_script:
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         # print(f'health time check {time.time()-temp_time}')
-        print(gray[0])
+        # print(gray[0])
         return gray[0]
+    def check_full_inventory(self,ss):
+        temp_time = time.time()
+        img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        for value in gray[0]:
+            print(value)
+            if value != 21:
+                return False
+        return True
     def initialize_skill_list_check(self, ss):
         temp_time = time.time()
         img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
@@ -288,8 +407,11 @@ class throne_script:
 
         attacks_p1 = [3,7,8,12]
         attacks_p2 = [4,5,6]
+        # attacks_p1 = [3,7,8]
+        # attacks_p1 = []
+        # attacks_p2 = []
         distances = []
-        buffs = [2]
+        buffs = [1,2]
         skill_set_list = [attacks_p1,attacks_p2,distances,buffs]
         available_skill_set_list = [0,0,0,0]
         first_inc = [0,58,57,58,58,59]
@@ -315,7 +437,7 @@ class throne_script:
                         available_skill_set_list[skill_set_counter] = skill
                         break
             skill_set_counter += 1
-        print(available_skill_set_list)
+        # print(available_skill_set_list)
         return available_skill_set_list
     # def initialize_skill_list_check(self, ss):
     #     temp_time = time.time()
@@ -401,20 +523,3 @@ if __name__ =="__main__":
 
     assist = throne_script()
     assist.start_script()
-
-
-
-
-    # def read_chat(self):
-    #     loc = "ss\\"
-    #     name = "img_shot.png"
-    #     ss = pyautogui.screenshot()
-    #     # ss.save(loc+name)
-    #     img = cv2.cvtColor(np.array(ss), cv2.COLOR_RGB2BGR)
-    #     party_box_x1 = 30
-    #     party_box_y1 = 962
-    #     party_box_x2 = 195
-    #     party_box_y2 = 983
-    #     img = img[party_box_y1:party_box_y2, party_box_x1:party_box_x2]
-    #     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    #     return pytesseract.image_to_string(gray)

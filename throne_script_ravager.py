@@ -39,9 +39,13 @@ class throne_script:
         self.check_skill_coord = (0, 1045, 1920, 1)
 
         self.initialize_config()
-
-        self.script_to_do = 0
-
+        self.current_do_option = 1
+        self.option_dict = {
+            1:'combo sequence',
+            2:'manual auto-fire',
+            3:'full auto-farm'
+        }
+        self.double_click_bool = False
 
         self.skill_pause_counter = 0
         self.skill_pause_bool = False
@@ -62,7 +66,7 @@ class throne_script:
             14: 'c'
         }
         self.skill_charge = [3]
-        self.skill_charge_hold_time = 1.2
+        self.skill_charge_hold_time = 0.
         self.second_cast_skill = [11]
         # self.second_cast_skill = []
 
@@ -167,15 +171,65 @@ class throne_script:
 
         while self.static_bool:
             while self.do_nav:
+                # self.keyboard.press(Key.caps_lock)
+                # self.keyboard.release(Key.caps_lock)
+                # time.sleep(2)
+                # # self.keyboard.press(Key.shift)
+                # # self.keyboard.release(Key.shift)
+                # # time.sleep(1)
+                # self.keyboard.press('f')
+                # time.sleep(3)
+                # self.keyboard.release('f')
+
+                # time.sleep(0.1)
+                # self.keyboard.press('f')
+                # self.keyboard.release('f')
+                # time_counter = 0
+                # temp_bool = True
+                # while self.do_nav and temp_bool:
+                #     if time_counter < 64:
+                #         time.sleep(1)
+                #         time_counter +=1
+                #     else:
+                #         temp_bool = False
+
+                
+                # self.do_nav = False
                 self.keyboard.press(Key.f10)
                 self.keyboard.release(Key.f10)
-                time.sleep(0.2)
+                time.sleep(0.4)
                 self.mouse.position = (554,132)
                 self.mouse.click(Button.left)
-                time.sleep(0.2)
+                time.sleep(0.4)
                 self.mouse.position = (960,1005)
                 self.mouse.click(Button.left)
                 self.do_nav = False
+
+
+
+
+
+                # self.mouse.position = (1540,530)
+                # self.mouse.position = (1720,440)
+                #
+                # self.mouse.click(Button.left)
+                # time.sleep(0.5)
+                # self.mouse.position = (840,703)
+                # self.mouse.click(Button.left)
+                # time.sleep(0.5)
+                # self.keyboard.press('1')
+                # self.keyboard.release('1')
+                # time.sleep(0.5)
+                # self.keyboard.press('0')
+                # self.keyboard.release('0')
+                # time.sleep(0.5)
+                # self.mouse.position = (930,1000)
+                # self.mouse.click(Button.left)
+                # time.sleep(3)
+                # self.mouse.click(Button.left)
+                # time.sleep(0.5)
+
+
 
             while self.do_option:
 
@@ -331,7 +385,7 @@ class throne_script:
                 #         # print('undamaged, using distance skill')
                 #         # distance_scan = self.check_distance(pyautogui.screenshot(region=(1039, 827, 7, 1)))
                 #         distance_scan = self.check_distancet(pyautogui.screenshot(region=(1026, 821, 3, 1)))
-                #         # distance_scan_two = self.check_distancet(pyautogui.screenshot(region=(1037, 825, 1, 1)))
+                #         # distance_scan_two = self.chD24eck_distancet(pyautogui.screenshot(region=(1037, 825, 1, 1)))
                 #         # print(distance_scan)
                 #
                 #         # print(f'test distance {self.check_distance(pyautogui.screenshot(region=(1024, 830, 15, 1)))}')
@@ -521,31 +575,35 @@ class throne_script:
         pass
 
     def on_release(self,key):
-        # if '4' in '{0}'.format(key):
-        #     if self.button_press:
-        #         self.button_press = False
-        #     else:
-        #         self.button_press = True
-        #         self.keyboard.press('4')
-        #         self.keyboard.release('4')
-        # print('{0}'.format(key))
-        if self.timer_boolean and '{0}'.format(key) in ["'w'","'a'","'s'","'d'","'5'", 'Key.shift',"'q'"]:
-        # if "'5'" == '{0}'.format(key) or "'a'" == '{0}'.format(key) or "'s'" == '{0}'.format(key) or "'d'" == '{0}'.format(key):
-        # if self.timer_boolean:
-            if not self.button_open:
-                self.button_open = True
-                new_time = time.time()
-                if '{0}'.format(key) in ["'w'","'a'","'s'","'d'"]:
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
-                print(f'self.keyboard.release({'{0}'.format(key)})')
-                self.timer = new_time
-            elif not self.button_open_two:
-                self.button_open_two = True
-                new_time = time.time()
-                if '{0}'.format(key) in ["'w'","'a'","'s'","'d'"]:
-                    print(f'time.sleep({round(new_time - self.timer,2)} * time_helper)')
-                print(f'self.keyboard.release({'{0}'.format(key)})')
-                self.timer = new_time
+        if self.double_click_bool and '4' in '{0}'.format(key):
+            if self.button_press:
+                self.button_press = False
+            else:
+                self.button_press = True
+                self.keyboard.press('4')
+                self.keyboard.release('4')
+
+        if self.do_option:
+            if '<97>' in '{0}'.format(key):
+                print(f'switching to {self.option_dict[1]}')
+                self.current_do_option = 1
+                self.do_option = False
+            if '<98>' in '{0}'.format(key):
+                print(f'switching to {self.option_dict[2]}')
+                self.current_do_option = 2
+                self.do_option = False
+            if '<99>' in '{0}'.format(key):
+                print(f'switching to {self.option_dict[3]}')
+                self.current_do_option = 3
+                self.do_option = False
+            if '<100>' in '{0}'.format(key):
+                print('turning on double click target skills')
+                if self.double_click_bool:
+                    self.double_click_bool = False
+                else:
+                    self.double_click_bool = True
+                self.do_option = False
+
         if key == keyboard.Key.esc:
             if self.do_option:
                 print('second esc pressed, halting script')
@@ -553,6 +611,7 @@ class throne_script:
                 self.do_option = False
                 return False
             else:
+                print(f'current option: {self.option_dict[1]}')
                 print('esc pressed, select option below:')
                 self.do_option = True
 
@@ -573,14 +632,14 @@ class throne_script:
             #     self.do_bot = True
 
 
-        if '`' in '{0}'.format(key):
-
-            if self.do_combo:
-                print('turning off bot')
-                self.do_combo = False
-            else:
-                print('turning on bot')
-                self.do_combo = True
+        # if '`' in '{0}'.format(key):
+        #
+        #     if self.do_combo:
+        #         print('turning off bot')
+        #         self.do_combo = False
+        #     else:
+        #         print('turning on bot')
+        #         self.do_combo = True
         if '/' in '{0}'.format(key):
 
             if self.do_nav:
@@ -589,6 +648,29 @@ class throne_script:
             else:
                 print('turning on nav')
                 self.do_nav = True
+
+        if '`' in '{0}'.format(key):
+            if self.current_do_option == 1:
+                if self.do_combo:
+                    print('turning off combo sequence')
+                    self.do_combo = False
+                else:
+                    print('turning on combo sequence')
+                    self.do_combo = True
+            elif self.current_do_option == 2:
+                if self.do_contracts:
+                    print('turning off manual auto-fire')
+                    self.do_contracts = False
+                else:
+                    print('turning on manual auto-fire')
+                    self.do_contracts = True
+            elif self.current_do_option == 3:
+                if self.do_bot:
+                    print('turning off bot')
+                    self.do_bot = False
+                else:
+                    print('turning on bot')
+                    self.do_bot = True
 
 
     # polish crystal farm
@@ -708,10 +790,10 @@ class throne_script:
             buffs = [8]
         elif skill_set == 2:
             # skill set 3 nebula pve manual solo
-            attacks_p1 = [4,5,6,7,8,9]
+            attacks_p1 = [11,12,10,8,9,6,1,7,3]
             attacks_p2 = [10,11,12]
             distances = []
-            buffs = [1,2,3]
+            buffs = []
 
             attacks_p1 = [4,5,6,7,8,9,10,11,12]
             attacks_p2 = []

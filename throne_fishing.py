@@ -40,7 +40,7 @@ class throne_script:
                         thresh, im_bw = cv2.threshold(gray, 128, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)
                         left_counter = Counter(im_bw[0][:75])[255]
                         right_counter = Counter(im_bw[0][125:])[255]
-                        screen_shot = pyautogui.screenshot(region=(1138, 708, 1, 1)) # need config - stamina
+                        screen_shot = pyautogui.screenshot(region=(1169, 708, 1, 1)) # need config - stamina
                         if self.check_stamina(screen_shot)[0] >= 39:
                             # print('stamina ready')
                             if left_counter > right_counter:
@@ -78,10 +78,10 @@ class throne_script:
                                 right_button_hold = False
                                 self.keyboard.release('d')
                             time.sleep(0.2)
-                        screen_shot = pyautogui.screenshot(region=(1138, 593, 1, 1)) # need config - dragging status
+                        screen_shot = pyautogui.screenshot(region=(1172, 593, 1, 1)) # need config - dragging status
                         dragging_status = self.check_dragging_status(screen_shot)[0]
                         print(dragging_status)
-                        if dragging_status != 95:
+                        if dragging_status != 95 and dragging_status != 104:
                             print('done_fishing')
                             drag_bool = False
                             self.keyboard.release('a')

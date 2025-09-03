@@ -2,8 +2,8 @@
 12, umbral spirit
 4, precision dash
 10, willbreaker
-1, mad sword dance
 8, gaia crash
+1, mad sword dance
 6, cruel smite
 4, precision dash
 9, fatal stigmas
